@@ -32,12 +32,14 @@ export default function Home() {
           <Link underline="hover" color="inherit" href="/">
             회원가입
           </Link>
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/accounts/login">
             로그인
           </Link>
         </Breadcrumbs>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <img width={250} src={logo} alt="logo" />
+          <Link href="/">
+            <img width={250} src={logo} alt="logo" />
+          </Link>
         </Box>
         <Box sx={{ my: 3, px: 50, display: "flex", justifyContent: "space-evenly" }}>
           <Link href="#" color="inherit" underline="none">
