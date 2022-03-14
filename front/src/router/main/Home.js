@@ -1,7 +1,29 @@
+import * as React from "react";
 import logo from "../../res/img/logo.png";
-import { Box, Breadcrumbs, Link, Grid, Typography, Card, CardActionArea, CardMedia, CardContent } from "@mui/material/";
+import {
+  Box,
+  Breadcrumbs,
+  Link,
+  Grid,
+  Typography,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  ToggleButtonGroup,
+  ToggleButton,
+} from "@mui/material/";
 
 export default function Home() {
+  const [popular, setPopular] = React.useState("red");
+  const [recommend, setRecommend] = React.useState("red");
+  const handlePopular = (event, newPopular) => {
+    setPopular(newPopular);
+  };
+  const handleRecommend = (event, newRecommend) => {
+    setRecommend(newRecommend);
+  };
+
   return (
     <>
       {/* 상단 구성 */}
@@ -41,9 +63,18 @@ export default function Home() {
           <Grid item xs={8}>
             {/* 인기 와인 */}
             <div style={{ marginBottom: 75 }}>
-              <Typography variant="h5" sx={{ mx: 5 }}>
-                지금 인기 있는 와인은?
-              </Typography>
+              <Box sx={{ display: "flex" }}>
+                <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
+                  지금 인기 있는 와인은?
+                </Typography>
+                <ToggleButtonGroup size="small" color="secondary" exclusive value={popular} onChange={handlePopular}>
+                  <ToggleButton value="red">레드</ToggleButton>
+                  <ToggleButton value="white">화이트</ToggleButton>
+                  <ToggleButton value="rose">로제</ToggleButton>
+                  <ToggleButton value="sparkling">스파클링</ToggleButton>
+                  <ToggleButton value="dessert">디저트</ToggleButton>
+                </ToggleButtonGroup>
+              </Box>
               <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea href="/">
@@ -114,9 +145,18 @@ export default function Home() {
             </div>
             {/* 추천 와인 */}
             <div style={{ marginBottom: 75 }}>
-              <Typography variant="h5" sx={{ mx: 5 }}>
-                당신만을 위한 와인 추천
-              </Typography>
+              <Box sx={{ display: "flex" }}>
+                <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
+                  당신만을 위한 와인 추천
+                </Typography>
+                <ToggleButtonGroup size="small" color="secondary" exclusive value={recommend} onChange={handleRecommend}>
+                  <ToggleButton value="red">레드</ToggleButton>
+                  <ToggleButton value="white">화이트</ToggleButton>
+                  <ToggleButton value="rose">로제</ToggleButton>
+                  <ToggleButton value="sparkling">스파클링</ToggleButton>
+                  <ToggleButton value="dessert">디저트</ToggleButton>
+                </ToggleButtonGroup>
+              </Box>
               <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
