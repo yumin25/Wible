@@ -1,5 +1,5 @@
 import SignupPresenter from "./SignupPresenter";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   checkId,
@@ -7,7 +7,6 @@ import {
   checkNickname,
   checkPhoneNumber,
   checkPhoneDuplicate,
-  checkPassword,
 } from "./ValidCheck";
 
 function SignupContainer() {
@@ -17,7 +16,6 @@ function SignupContainer() {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [checkValid, setCheckValid] = useState(true);
   const url = "";
 
   const onEmailHandler = (event) => {
@@ -51,9 +49,6 @@ function SignupContainer() {
   function CheckNickname() {
     checkNickname(nickname, url);
   }
-  function CheckPassword() {
-    checkPassword(password, email, nickname, name, checkValidHandler);
-  }
 
   function CheckPhoneNumber() {
     checkPhoneNumber(phoneNumber);
@@ -63,19 +58,7 @@ function SignupContainer() {
     checkPhoneDuplicate(phoneNumber, url);
   }
 
-  function checkPasswordConfim(password, passwordConfirm) {
-    if (password !== passwordConfirm) {
-      return false;
-    }
-    return true;
-  }
-
-  function checkValidHandler(param) {
-    setCheckValid(param);
-  }
-
   const onCreate = () => {
-    console.log(email, password, passwordConfirm, name, nickname, phoneNumber);
     if (
       email === "" ||
       password === "" ||
@@ -85,37 +68,37 @@ function SignupContainer() {
       phoneNumber === ""
     ) {
       alert("입력하지 않은 정보가 있습니다. 확인해주세요.");
+    } else if (!/^[a-zA-Z0-9!@#$%\^&*()]{8,12}$/.test(password)) {
+      alert("숫자,영문자,특수문자(!@#$%^&*()) 조합으로 8~12자리");
+      return;
+    } else if (password != passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
     } else {
-      console.log(checkValid);
-      if (checkValid === true) {
-        console.log(email, password, name, nickname, phoneNumber);
-        axios
-          .post(url + `/api/v1/members`, {
-            email: email,
-            password: password,
-            name: name,
-            nickname: nickname,
-            phoneNumber: phoneNumber,
-          })
-          .then(function (response) {
-            console.log(response);
-            if (response.data.status === 201) {
-              alert(response.data.data.msg);
-              setEmail("");
-              setPassword("");
-              setPasswordConfirm("");
-              setName("");
-              setNickname("");
-              setPhoneNumber("");
-              document.location.href = "/login";
-            } else {
-              alert(response.data.data.msg);
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+      console.log(email, password, name, nickname, phoneNumber);
+      axios
+        .post(url + `/user`, {
+          email: email,
+          password: password,
+          nickname: nickname,
+          name: name,
+          phone: phoneNumber,
+        })
+        .then(function (response) {
+          console.log(response);
+          if (response.data.code === 200) {
+            setEmail("");
+            setPassword("");
+            setPasswordConfirm("");
+            setName("");
+            setNickname("");
+            setPhoneNumber("");
+            document.location.href = "/accounts/login";
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
 
@@ -131,7 +114,6 @@ function SignupContainer() {
         onPhoneNumberHandler={onPhoneNumberHandler}
         onNicknameHandler={onNicknameHandler}
         checkNickname={CheckNickname}
-        checkPassword={CheckPassword}
         checkPhoneNumber={CheckPhoneNumber}
         checkPhoneDuplicate={CheckPhoneDuplicate}
         onCreate={onCreate}

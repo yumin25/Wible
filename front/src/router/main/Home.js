@@ -37,7 +37,7 @@ export default function Home() {
           }}
           aria-label="breadcrumb"
         >
-          <Link underline="hover" color="inherit" href="/signup">
+          <Link underline="hover" color="inherit" href="/accounts/signup">
             회원가입
           </Link>
           <Link underline="hover" color="inherit" href="/accounts/login">

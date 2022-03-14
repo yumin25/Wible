@@ -1,12 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import { checkPassword } from "./ValidCheck";
-import { flexbox } from "@mui/system";
 
 function SignupPresenter({
   onEmailHandler,
@@ -45,7 +41,7 @@ function SignupPresenter({
     <Container
       style={{ position: "absolute", left: "20%", right: "20%", width: "60%" }}
     >
-      <div style={{ marginTop: "15vh", marginBottom: "5vh" }}>
+      <div style={{ marginTop: "10vh", marginBottom: "5vh" }}>
         <Typography
           variant="h4"
           gutterBottom
@@ -91,7 +87,7 @@ function SignupPresenter({
           label="비밀번호"
           type="password"
           autoComplete="current-password"
-          placeholder="영어 소문자, 대문자, 숫자, 특수 문자 4종류 중에 2종류를 포함. 8자 이상 12자 이하"
+          placeholder="숫자,영문자,특수문자(!@#$%^&*()) 조합으로 8~12자리"
           onChange={onPasswordHandler}
           style={ContainerStyle}
           size="small"
@@ -121,7 +117,7 @@ function SignupPresenter({
             label="닉네임"
             defaultValue=""
             onChange={onNicknameHandler}
-            placeholder="닉네임은 2자 이상 12자 이하여야 합니다"
+            placeholder="닉네임은 한글로만 혹은 영어로만 이루어져야 합니다"
             style={{ width: "86.9%" }}
             size="small"
           />
