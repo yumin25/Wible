@@ -1,12 +1,12 @@
-package com.ssafy.wible.model.service;
+package com.ssafy.wible.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wible.model.entity.User;
-import com.ssafy.wible.model.repository.UserRepository;
 import com.ssafy.wible.model.request.user.SignupRequest;
+import com.ssafy.wible.repository.UserRepository;
 
 @Service
 public class SignupService {
@@ -21,6 +21,5 @@ public class SignupService {
 		request.setPassword(passwordEncoder.encode(request.getPassword()));
 		User user = request.toEntity();
 		userRepository.save(user);
-
 	}
 }
