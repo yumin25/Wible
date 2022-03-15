@@ -227,6 +227,13 @@ export default function Home() {
                 </Card>
               </Box>
             </div>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Link href="/">
+                <button style={{ borderRadius: 20, backgroundColor: "#F4C6C9", border: 0, color: "white", width: 500, height: 40, marginBottom: 10 }}>
+                  내 와인 취향 찾으러 가기
+                </button>
+              </Link>
+            </Box>
           </Grid>
           <Grid item xs={2}></Grid>
         </Grid>
