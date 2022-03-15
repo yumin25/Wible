@@ -22,4 +22,16 @@ public class SignupService {
 		User user = request.toEntity();
 		userRepository.save(user);
 	}
+	
+	public boolean emailCheck(String email) {
+		return userRepository.existsByEmail(email);
+	}
+
+	public boolean nicknameCheck(String nickname) {
+		return userRepository.existsByNickname(nickname);
+	}
+
+	public boolean phoneCheck(String phone) {
+		return userRepository.existsByPhone(phone);
+	}
 }
