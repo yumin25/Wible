@@ -3,6 +3,7 @@ package com.ssafy.wible.model.entity;
 import com.ssafy.wible.model.enums.Country;
 import com.ssafy.wible.model.enums.Type;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Wine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
