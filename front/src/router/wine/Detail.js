@@ -140,7 +140,7 @@ export default function Home() {
                     <Typography sx={{ fontSize: 20, fontWeight: "bold", mx: 1 }}>평점</Typography>
                     <Typography sx={{ fontSize: 20 }}>8.5</Typography>
                   </Box>
-                  <Box sx={{ ml: 3, mr: 2, display: "flex" }}>
+                  <Box sx={{ ml: 3, display: "flex" }}>
                     <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} />
                     <TextareaAutosize minRows={3} placeholder="리뷰를 입력하세요." style={{ width: 600 }} />
                     <ThemeProvider theme={theme}>
