@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wible.model.entity.Wine;
@@ -44,6 +46,16 @@ public class WineController {
 		wineService.reviewCreate(request);
 	    return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "review delete", notes = "리뷰 삭제, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	@DeleteMapping("/review")
+	public ResponseEntity<String> replyDelete(@RequestParam @ApiParam(value = "삭제할 댓글번호.", required = true) int reviewSeq) {
+		wineService.reviewDelete(reviewSeq);
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		
+	}
+
+	
 
 
 	

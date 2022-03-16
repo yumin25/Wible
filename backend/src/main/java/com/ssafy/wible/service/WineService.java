@@ -25,4 +25,8 @@ public class WineService {
 		Review review = request.toEntity();
 		reviewRepository.save(review);
 	}
+
+	public void reviewDelete(int reviewSeq) {
+		reviewRepository.deleteById(reviewSeq);
+	}
 }
