@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Type {
-    RED, WHITE, SPARKLING, ROSE, DESSERT, FORTIFIED;
+    RED, WHITE, SPARKLING, ROSE, DESSERT, FORTIFIED
 }

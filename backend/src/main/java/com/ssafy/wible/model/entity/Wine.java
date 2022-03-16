@@ -15,17 +15,18 @@ import javax.persistence.*;
 public class Wine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int wine_seq;
+    @Column(name = "wine_seq")
+    private int wineSeq;
     private String kname;
     private String ename;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Type type_seq;
+    private Type type;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Country country_seq;
+    private Country country;
 
     private String winery;
     private String grapes;
@@ -37,7 +38,10 @@ public class Wine {
     private int acidity;
     private String img_path;
     private String food;
-    private int like_cnt;
-    private int review_cnt;
+    @Column(name = "like_cnt")
+    private int likeCnt;
+
+    @Column(name = "review_cnt")
+    private int reviewCnt;
     private double score;
 }

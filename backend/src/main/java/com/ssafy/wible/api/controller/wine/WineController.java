@@ -1,5 +1,9 @@
 package com.ssafy.wible.api.controller.wine;
 
+import com.ssafy.wible.model.response.wine.SimpleWineResponse;
+import com.ssafy.wible.service.BestWineService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +26,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import java.util.List;
+
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
 @RequestMapping("/wine")
 @Api("와인 컨트롤러")
 public class WineController {
-	
+	public static final Logger logger= LoggerFactory.getLogger(WineController.class);
+
 	@Autowired
 	private WineService wineService;
+
+	@Autowired
+	private BestWineService bestWineService;
 	
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
@@ -55,8 +65,32 @@ public class WineController {
 		
 	}
 
-	
+	@GetMapping("/best")
+	public ResponseEntity<String> setBestWine() throws Exception {
+		logger.info("인기 와인 저장");
+		bestWineService.setBestWine();
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	}
 
+	@GetMapping("/best/like/{type}")
+	public ResponseEntity<List<SimpleWineResponse>> getBestLikeWine(@PathVariable("type") String type) throws Exception {
+		return new ResponseEntity<List<SimpleWineResponse>>(bestWineService.getBestLikeWine(type), HttpStatus.OK);
+	}
 
-	
+	@GetMapping("/best/score/{type}")
+	public ResponseEntity<List<SimpleWineResponse>> getBestScoreWine(@PathVariable("type") String type) throws Exception {
+		return new ResponseEntity<List<SimpleWineResponse>>(bestWineService.getBestScoreWine(type), HttpStatus.OK);
+	}
+
+	@GetMapping("/best/review/{type}")
+	public ResponseEntity<List<SimpleWineResponse>> getBestReviewWine(@PathVariable("type") String type) throws Exception {
+		return new ResponseEntity<List<SimpleWineResponse>>(bestWineService.getBestReviewWine(type), HttpStatus.OK);
+	}
+
+	@GetMapping("/add")
+	public ResponseEntity<String> add() throws Exception {
+		logger.info("와인 추가");
+		bestWineService.add();
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	}
 }
