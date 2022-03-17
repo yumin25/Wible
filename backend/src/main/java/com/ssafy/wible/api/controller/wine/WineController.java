@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wible.model.entity.Review;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.request.wine.ReviewCreateRequest;
 import com.ssafy.wible.service.WineService;
@@ -64,6 +65,13 @@ public class WineController {
 		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		
 	}
+	
+	@ApiOperation(value = "review list", notes = "리뷰 목록 조회", response = Review.class)
+	@GetMapping("/review/{wineSeq}")
+	public ResponseEntity<List<Review>> reviewGet(@PathVariable("wineSeq") @ApiParam(value = "와인 번호.", required = true) int wineSeq) {
+		return new ResponseEntity<List<Review>>(wineService.reviewGet(wineSeq), HttpStatus.OK);
+	}
+	
 
 	@GetMapping("/best")
 	public ResponseEntity<String> setBestWine() throws Exception {

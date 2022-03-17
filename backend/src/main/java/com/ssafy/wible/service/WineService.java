@@ -1,5 +1,7 @@
 package com.ssafy.wible.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,9 @@ public class WineService {
 
 	public void reviewDelete(int reviewSeq) {
 		reviewRepository.deleteById(reviewSeq);
+	}
+
+	public List<Review> reviewGet(int wineSeq) {
+		return reviewRepository.findAllByWineSeq(wineSeq);
 	}
 }
