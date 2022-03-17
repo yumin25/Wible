@@ -1,4 +1,4 @@
-package com.ssafy.wible.api.controller;
+package com.ssafy.wible.api.controller.wineInfo;
 
 import java.util.List;
 
