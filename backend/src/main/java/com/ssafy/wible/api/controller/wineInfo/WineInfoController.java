@@ -29,9 +29,15 @@ public class WineInfoController {
 	private WineInfoService wineInfoService;
 	
 	@ApiOperation(value = "wine info", notes = "와인 상식 타입별 조회", response = WineInfo.class)
+	@GetMapping
+	public ResponseEntity<List<WineInfo>> wineInfoGet(){
+		return new ResponseEntity<List<WineInfo>>(wineInfoService.wineInfoGet(), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "wine info", notes = "와인 상식 타입별 조회", response = WineInfo.class)
 	@GetMapping("/{type}")
 	public ResponseEntity<List<WineInfo>> wineInfoTypeGet(@PathVariable("type") @ApiParam(value = "와인 상식 타입.", required = true) String type) {
-		return new ResponseEntity<List<WineInfo>>(wineInfoService.wineInfoGet(type), HttpStatus.OK);
+		return new ResponseEntity<List<WineInfo>>(wineInfoService.wineInfoTypeGet(type), HttpStatus.OK);
 	}
 
 }

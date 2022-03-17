@@ -14,8 +14,12 @@ public class WineInfoService {
 	@Autowired
 	private WineInfoRepository wineInfoRepository;
 	
-	public List<WineInfo> wineInfoGet(String type) {
+	public List<WineInfo> wineInfoTypeGet(String type) {
 		return wineInfoRepository.findByType(type);
+	}
+
+	public List<WineInfo> wineInfoGet() {
+		return wineInfoRepository.findAll();
 	}
 
 }
