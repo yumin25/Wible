@@ -72,7 +72,7 @@ public class BestWineService {
     }
 
     public List<SimpleWineResponse> getBestLikeWine(String type) throws Exception {
-        Type t = getType(type);
+        Type t = Type.valueOf(type.toUpperCase());
         Query query = em.createQuery("select w from Wine as w join LikeOrder as l on w.wineSeq = l.wineSeq where w.type = :t order by w.likeCnt desc").setParameter("t", t);
         List queryList = query.getResultList();
         List<SimpleWineResponse> list = new ArrayList<>();
@@ -90,7 +90,7 @@ public class BestWineService {
     }
 
     public List<SimpleWineResponse> getBestScoreWine(String type) throws Exception {
-        Type t = getType(type);
+        Type t = Type.valueOf(type.toUpperCase());
         Query query = em.createQuery("select w from Wine as w join ScoreOrder as s on w.wineSeq = s.wineSeq where w.type = :t order by w.score desc").setParameter("t", t);
         List queryList = query.getResultList();
         List<SimpleWineResponse> list = new ArrayList<>();
@@ -108,7 +108,7 @@ public class BestWineService {
     }
 
     public List<SimpleWineResponse> getBestReviewWine(String type) throws Exception {
-        Type t = getType(type);
+        Type t = Type.valueOf(type.toUpperCase());
         Query query = em.createQuery("select w from Wine as w join ReviewOrder as r on w.wineSeq = r.wineSeq where w.type = :t order by w.reviewCnt desc").setParameter("t", t);
         List queryList = query.getResultList();
         List<SimpleWineResponse> list = new ArrayList<>();
@@ -123,18 +123,6 @@ public class BestWineService {
             list.add(simple);
         }
         return list;
-    }
-
-    public Type getType(String type) {
-        Type t = Type.RED;
-        if(type.equals("red")) t = Type.RED;
-        else if (type.equals("white")) t = Type.WHITE;
-        else if (type.equals("dessert")) t = Type.DESSERT;
-        else if (type.equals("rose")) t = Type.ROSE;
-        else if (type.equals("fortified")) t = Type.FORTIFIED;
-        else if (type.equals("sparkling")) t = Type.SPARKLING;
-        System.out.println(t);
-        return t;
     }
 
     public void add() throws Exception {

@@ -2,6 +2,9 @@ package com.ssafy.wible.repository;
 
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.enums.Type;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,6 +19,7 @@ public interface WineRepository extends JpaRepository<Wine, Integer>, JpaSpecifi
     List<Wine> findTop5ByTypeEqualsOrderByLikeCntDesc(Type type);
     List<Wine> findTop5ByTypeEqualsOrderByReviewCntDesc(Type type);
     List<Wine> findTop5ByTypeEqualsOrderByScoreDesc(Type type);
+    Page<Wine> findAll(Specification<Wine> spec, Pageable pageable);
     
     @Transactional
     @Modifying
