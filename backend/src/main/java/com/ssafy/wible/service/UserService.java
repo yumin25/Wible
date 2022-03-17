@@ -4,18 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.wible.config.security.JwtTokenProvider;
 import com.ssafy.wible.model.entity.User;
 import com.ssafy.wible.model.request.user.SignupRequest;
 import com.ssafy.wible.repository.UserRepository;
 
 @Service
-public class SignupService {
+public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
 	
 	public void signup(SignupRequest request){
 		request.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -39,5 +43,21 @@ public class SignupService {
 		//해당 유저 관련 좋아요, 리뷰등도 삭제할지
 		User user = userRepository.findByEmail(email);
 		userRepository.delete(user);
+	}
+	
+	public String login(String email, String password){
+		User member = userRepository.findByEmail(email);
+		if(member == null) throw new IllegalArgumentException("가입되지 않은 E-MAIL 입니다.");
+        if (!passwordEncoder.matches(password, member.getPassword())) throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        
+        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+    }
+	
+	public User userInfo(int user_seq) {
+		return userRepository.findById(user_seq).get();
+	}
+
+	public User userInfo(String email) {
+		return userRepository.findByEmail(email);
 	}
 }
