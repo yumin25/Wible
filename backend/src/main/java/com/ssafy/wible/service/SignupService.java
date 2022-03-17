@@ -34,4 +34,10 @@ public class SignupService {
 	public boolean phoneCheck(String phone) {
 		return userRepository.existsByPhone(phone);
 	}
+	
+	public void deleteUser(String email) {
+		//해당 유저 관련 좋아요, 리뷰등도 삭제할지
+		User user = userRepository.findByEmail(email);
+		userRepository.delete(user);
+	}
 }
