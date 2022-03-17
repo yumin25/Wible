@@ -1,5 +1,8 @@
 package com.ssafy.wible.api.controller.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wible.model.request.user.LoginRequest;
 import com.ssafy.wible.model.request.user.SignupRequest;
 import com.ssafy.wible.model.response.user.ValidResponse;
+import com.ssafy.wible.service.LoginService;
 import com.ssafy.wible.service.SignupService;
 
 import io.swagger.annotations.Api;
@@ -24,11 +29,15 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
 @RequestMapping("/user")
-@Api("회원관리 컨트롤러")
-public class SignupController {
+@Api("회원가입 컨트롤러")
+public class UserController {
 	
 	@Autowired
 	private SignupService signupService;
+	
+	@Autowired
+	private LoginService loginService;
+	
 
 	@PostMapping
 	@ApiOperation(value = "가입하기")
@@ -60,5 +69,13 @@ public class SignupController {
 		response.valid = !signupService.phoneCheck(phone);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+	
+    @PostMapping("/login")
+    @ApiOperation(value = "로그인요청")
+    public Object signin(@RequestBody LoginRequest request) {
+    	Map<String, Object> resultMap = new HashMap<>();
+    	resultMap.put("token", loginService.login(request.getEmail(), request.getPassword()));
+    	return new ResponseEntity<>(resultMap, HttpStatus.OK);
+    }
 
 }
