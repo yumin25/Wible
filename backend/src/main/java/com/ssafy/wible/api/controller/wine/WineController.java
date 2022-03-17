@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.wible.model.entity.Review;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.request.wine.ReviewCreateRequest;
+import com.ssafy.wible.model.request.wine.WineLikeRequest;
 import com.ssafy.wible.service.WineService;
 
 import io.swagger.annotations.Api;
@@ -71,6 +72,18 @@ public class WineController {
 	public ResponseEntity<List<Review>> reviewGet(@PathVariable("wineSeq") @ApiParam(value = "와인 번호.", required = true) int wineSeq) {
 		return new ResponseEntity<List<Review>>(wineService.reviewGet(wineSeq), HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "wine like", notes = "와인 좋아요, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	@PostMapping("/like")
+	public ResponseEntity<String> wineLike(@RequestBody @ApiParam(value = "와인 좋아요.", required = true) WineLikeRequest request) {
+		int wineSeq = request.getWineSeq();
+		wineService.wineLikeUpdate(wineSeq);
+		
+		wineService.wineLike(request);
+		
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	}
+
 	
 
 	@GetMapping("/best")
