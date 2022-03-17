@@ -14,6 +14,10 @@ const theme = createTheme({
       main: "#F4C6C9",
       contrastText: "#fff",
     },
+    end: {
+      main: "#C4C4C4",
+      contrastText: "#000000",
+    },
   },
 });
 
@@ -82,7 +86,7 @@ export default function Home() {
           <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row-reverse" }}>
             <ThemeProvider theme={theme}>
               {page === 5 ? (
-                <Button variant="contained" color="neutral">
+                <Button variant="contained" color="end">
                   완료
                 </Button>
               ) : (
