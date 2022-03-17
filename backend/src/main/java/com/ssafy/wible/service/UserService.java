@@ -53,11 +53,24 @@ public class UserService {
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
 	
-	public User userInfo(int user_seq) {
+	public User getUserInfo(int user_seq) {
 		return userRepository.findById(user_seq).get();
 	}
 
-	public User userInfo(String email) {
+	public User getUserInfo(String email) {
 		return userRepository.findByEmail(email);
+	}
+	
+	public void modify(int seq, String nickname, String phone) {
+		User user = userRepository.findById(seq).get();
+		user.setNickname(nickname);
+		user.setPhone(phone);
+		userRepository.save(user);
+	}
+
+	public void modify(int seq, String password) {
+		User user = userRepository.findById(seq).get();
+		user.setPassword(passwordEncoder.encode(password));
+		userRepository.save(user);
 	}
 }
