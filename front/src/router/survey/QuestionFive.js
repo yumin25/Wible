@@ -6,7 +6,6 @@ export default function QuestionFive() {
 
   const handleChange = (event, newCountry) => {
     setCountry(newCountry);
-    console.log(country);
   };
 
   return (
