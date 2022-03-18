@@ -64,4 +64,9 @@ public class WineService {
 		wineRepository.updateReviewCount(wineSeq);
 		
 	}
+
+	public void wineReviewDelete(int reviewSeq) {
+		wineRepository.deleteReviewCount(reviewSeq);
+		
+	}
 }

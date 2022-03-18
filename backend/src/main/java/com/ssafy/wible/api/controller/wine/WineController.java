@@ -64,6 +64,7 @@ public class WineController {
 	@ApiOperation(value = "review delete", notes = "리뷰 삭제, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@DeleteMapping("/review")
 	public ResponseEntity<String> replyDelete(@RequestParam @ApiParam(value = "삭제할 댓글번호.", required = true) int reviewSeq) {
+		wineService.wineReviewDelete(reviewSeq);
 		wineService.reviewDelete(reviewSeq);
 		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		
