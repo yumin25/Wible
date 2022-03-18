@@ -55,6 +55,8 @@ public class WineController {
 	@ApiOperation(value = "review create", notes = "리뷰 작성, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@PostMapping("/review")
 	public ResponseEntity<String> replyContent(@RequestBody @ApiParam(value = "리뷰 내용.", required = true) ReviewCreateRequest request) {
+		int wineSeq = request.getWineSeq();
+		wineService.wineReviewUpdate(wineSeq);
 		wineService.reviewCreate(request);
 	    return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 	}

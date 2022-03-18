@@ -59,4 +59,9 @@ public class WineService {
 	public void wineDislike(int userSeq, int wineSeq) {
 		wineLikeRepository.deleteByuserSeqAndwineSeq(userSeq, wineSeq);
 	}
+
+	public void wineReviewUpdate(int wineSeq) {
+		wineRepository.updateReviewCount(wineSeq);
+		
+	}
 }

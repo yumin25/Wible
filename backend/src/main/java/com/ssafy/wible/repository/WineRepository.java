@@ -30,4 +30,9 @@ public interface WineRepository extends JpaRepository<Wine, Integer>, JpaSpecifi
     @Modifying
 	@Query(value="Update wine set like_cnt = like_cnt - 1 where wine_seq = :wineSeq", nativeQuery=true)
 	void updateDislikeCount(@Param("wineSeq") int wineSeq);
+    
+    @Transactional
+    @Modifying
+	@Query(value="Update wine set review_cnt = review_cnt + 1 where wine_seq = :wineSeq", nativeQuery=true)
+	void updateReviewCount(@Param("wineSeq") int wineSeq);
 }
