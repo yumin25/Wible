@@ -50,4 +50,13 @@ public class WineService {
 		Likes like = request.toEntity();
 		wineLikeRepository.save(like);
 	}
+
+	public void wineDislikeUpdate(int wineSeq) {
+		wineRepository.updateDislikeCount(wineSeq);
+		
+	}
+
+	public void wineDislike(int userSeq, int wineSeq) {
+		wineLikeRepository.deleteByuserSeqAndwineSeq(userSeq, wineSeq);
+	}
 }
