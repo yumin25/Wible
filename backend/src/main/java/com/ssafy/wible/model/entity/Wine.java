@@ -36,7 +36,7 @@ public class Wine {
     private int tannin;
     private int sweet;
     private int acidity;
-    private String img_path;
+    private String imgPath;
     private String food;
     @Column(name = "like_cnt")
     private int likeCnt;

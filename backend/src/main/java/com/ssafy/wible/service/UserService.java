@@ -1,19 +1,39 @@
 package com.ssafy.wible.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wible.config.security.JwtTokenProvider;
+import com.ssafy.wible.model.entity.Likes;
+import com.ssafy.wible.model.entity.Review;
 import com.ssafy.wible.model.entity.User;
+import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.request.user.SignupRequest;
+import com.ssafy.wible.model.response.user.LikeResponse;
+import com.ssafy.wible.model.response.user.ReviewResponse;
+import com.ssafy.wible.repository.ReviewRepository;
 import com.ssafy.wible.repository.UserRepository;
+import com.ssafy.wible.repository.WineLikeRepository;
+import com.ssafy.wible.repository.WineRepository;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
+	
+	@Autowired
+	private WineRepository wineRepository;
+	
+	@Autowired
+	private WineLikeRepository likeRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -72,5 +92,25 @@ public class UserService {
 		User user = userRepository.findById(seq).get();
 		user.setPassword(passwordEncoder.encode(password));
 		userRepository.save(user);
+	}
+	
+	public List<ReviewResponse> getReviewList(int user_seq){
+        List<ReviewResponse> list = new ArrayList<>();
+        List<Review> reviews = reviewRepository.findAllByUserSeq(user_seq);
+        for (Review review: reviews) {
+        	Wine wine = wineRepository.findById(review.getWineSeq()).get();
+            list.add(new ReviewResponse(wine.getKname(), wine.getEname(), wine.getType(), wine.getReviewCnt(),review.getReviewScore(), wine.getCountry(), wine.getImgPath(), review.getReviewText()));
+        }
+        return list;
+	}
+	
+	public List<LikeResponse> getLikeList(int user_seq){
+        List<LikeResponse> list = new ArrayList<>();
+        List<Likes> likes = likeRepository.findAllByUserSeq(user_seq);
+        for (Likes like: likes) {
+        	Wine wine = wineRepository.findById(like.getWineSeq()).get();
+            list.add(new LikeResponse(wine.getKname(), wine.getEname(), wine.getType(), wine.getLikeCnt(),wine.getScore(), wine.getCountry(), wine.getImgPath()));
+        }
+        return list;
 	}
 }

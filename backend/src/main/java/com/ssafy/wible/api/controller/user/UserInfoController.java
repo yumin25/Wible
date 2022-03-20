@@ -56,4 +56,16 @@ public class UserInfoController {
     	userService.modify(request.getUser_seq(), request.getPassword());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+    
+    @ApiOperation(value = "회원이 작성한 리뷰 리스트 조회")
+	@GetMapping("/reviews/{userSeq}")
+	public Object getReviews(@RequestParam("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
+		return new ResponseEntity<>(userService.getReviewList(userSeq), HttpStatus.OK);
+	}
+    
+    @ApiOperation(value = "회원이 좋아요한 와인 리스트 조회")
+	@GetMapping("/likes/{userSeq}")
+	public Object getLikes(@RequestParam("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
+		return new ResponseEntity<>(userService.getLikeList(userSeq), HttpStatus.OK);
+	}
 }

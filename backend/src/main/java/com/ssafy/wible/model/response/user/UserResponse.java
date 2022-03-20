@@ -9,13 +9,13 @@ import lombok.Data;
 public class UserResponse {
 
     @ApiModelProperty(value = "valid")
-    public int user_seq;
+    private int user_seq;
     @ApiModelProperty(value = "email")
-    public String email;
+    private String email;
     @ApiModelProperty(value = "name")
-    public String name;
+    private String name;
     @ApiModelProperty(value = "nickname")
-    public String nickname;
+    private String nickname;
     @ApiModelProperty(value = "phone")
-    public String phone;
+    private String phone;
 }
