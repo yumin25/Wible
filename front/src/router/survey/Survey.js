@@ -86,7 +86,7 @@ export default function Home() {
           <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row-reverse" }}>
             <ThemeProvider theme={theme}>
               {page === 5 ? (
-                <Link href="/survey/result">
+                <Link underline="hover" color="inherit" href="/survey/result">
                   <Button variant="contained" color="end">
                     완료
                   </Button>
