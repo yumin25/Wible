@@ -14,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
 @RequestMapping("/search")
@@ -26,25 +29,32 @@ public class SearchController {
     private static final String FAIL = "fail";
 
     @GetMapping("")
-    public ResponseEntity<Page<Wine>> search(@RequestParam(value="start", defaultValue = "0") int start,
-                                             @RequestParam(value="end", defaultValue = "100") int end,
+    public ResponseEntity<Page<Wine>> search(@RequestParam(value="keyword", defaultValue = "") String keyword,
+                                             @RequestParam(value="price_lower", defaultValue = "0") int price_lower,
+                                             @RequestParam(value="price_upper", defaultValue = "100") int price_upper,
                                              @RequestParam(value="body", defaultValue = "-1") int body,
                                              @RequestParam(value="tannin", defaultValue = "-1") int tannin,
                                              @RequestParam(value="sweet", defaultValue = "-1") int sweet,
                                              @RequestParam(value="acidity", defaultValue = "-1") int acidity,
-                                             @RequestParam(value="type", required = false) String type,
-                                             @RequestParam(value="country", required = false) String country,
+                                             @RequestParam(value="type", required = false) List<String> type,
+                                             @RequestParam(value="country", required = false) List<String> country,
                                              @PageableDefault(size = 10, sort = "likeCnt", direction = Sort.Direction.DESC) Pageable pageRequest
     ) throws Exception {
 
-        Type t;
-        if (type != null)  t = Type.valueOf(type.toUpperCase());
-        else t = null;
+        List<Type> types = new ArrayList<>();
+        if (type != null) {
+            for(String s: type){
+                types.add(Type.valueOf(s.toUpperCase()));
+            }
+        }
 
-        Country c;
-        if (country != null)  c = Country.valueOf(country.toUpperCase());
-        else c = null;
-        //searchService.search(start, end, pageRequest);
-        return new ResponseEntity<Page<Wine>>(searchService.search(start, end, t, body, tannin, sweet, acidity, c, pageRequest), HttpStatus.OK);
+        List<Country> countries = new ArrayList<>();
+        if (country != null) {
+            for(String s: country){
+                countries.add(Country.valueOf(s.toUpperCase()));
+            }
+        }
+        System.out.println(keyword + "  keyword");
+        return new ResponseEntity<Page<Wine>>(searchService.search(keyword, price_lower, price_upper, types, body, tannin, sweet, acidity, countries, pageRequest), HttpStatus.OK);
     }
 }

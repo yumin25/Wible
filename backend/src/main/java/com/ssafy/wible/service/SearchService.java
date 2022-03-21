@@ -12,19 +12,26 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class SearchService {
     @Autowired
     private WineRepository wineRepository;
 
-    public Page<Wine> search(int start, int end, Type type, int body, int tannin, int sweet, int acidity, Country country, Pageable pageRequest){
+    public Page<Wine> search(String keyword, int start, int end, List<Type> types, int body, int tannin, int sweet, int acidity, List<Country> countries, Pageable pageRequest){
         start = start * 10000;
         if(end == 100) end = Integer.MAX_VALUE;
         else end = end * 10000;
+
         Specification<Wine> spec = Specification.where(WineSpecification.betweenPrice(start, end));
-        if(type != null) spec = spec.and(WineSpecification.equalsType(type));
-        if(country != null) spec = spec.and(WineSpecification.equalsCountry(country));
+        if(!keyword.equals("")) {
+            System.out.println(keyword);
+            spec = spec.and(WineSpecification.likeKeyword(keyword));
+        }
+        if(types.size() != 0) spec = spec.and(WineSpecification.equalsType(types));
+        if(countries.size() != 0) spec = spec.and(WineSpecification.equalsCountry(countries));
         if(body != -1) spec = spec.and(WineSpecification.equalsBody(body));
         if(tannin != -1) spec = spec.and(WineSpecification.equalsTannin(tannin));
         if(acidity != -1) spec = spec.and(WineSpecification.equalsAcidity(acidity));

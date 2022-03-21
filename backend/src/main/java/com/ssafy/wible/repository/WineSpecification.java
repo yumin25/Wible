@@ -5,13 +5,24 @@ import com.ssafy.wible.model.enums.Country;
 import com.ssafy.wible.model.enums.Type;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+
 public class WineSpecification {
-    public static Specification<Wine> equalsType(Type type){
-        return (((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("type"), type)));
+
+    public static Specification<Wine> likeKeyword(String keyword){
+        return (((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("kname"), "%"+keyword+"%")));
     }
 
-    public static Specification<Wine> equalsCountry(Country country){
-        return (((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("country"), country)));
+    public static Specification<Wine> equalsType(List<Type> types) {
+        return (root, query, criteriaBuilder) -> {
+            return root.get("type").in(types);
+        };
+    }
+
+    public static Specification<Wine> equalsCountry(List<Country> countries){
+        return (root, query, criteriaBuilder) -> {
+            return root.get("country").in(countries);
+        };
     }
 
     public static Specification<Wine> betweenPrice(int start, int end){
