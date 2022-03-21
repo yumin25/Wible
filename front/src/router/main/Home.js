@@ -24,27 +24,49 @@ function Home({ userSlice }) {
   const handleRecommend = (event, newRecommend) => {
     setRecommend(newRecommend);
   };
+  const Logout = () => {
+    window.localStorage.clear();
+  };
 
   return (
     <>
       {/* 상단 구성 */}
       <div>
-        <Breadcrumbs
-          style={{
-            display: "flex",
-            flexDirection: "row-reverse",
-            marginTop: 10,
-            marginRight: 350,
-          }}
-          aria-label="breadcrumb"
-        >
-          <Link underline="hover" color="inherit" href="/accounts/signup">
-            회원가입
-          </Link>
-          <Link underline="hover" color="inherit" href="/accounts/login">
-            로그인
-          </Link>
-        </Breadcrumbs>
+        {window.localStorage.getItem("idToken") === null ? (
+          <Breadcrumbs
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              marginTop: 10,
+              marginRight: 350,
+            }}
+            aria-label="breadcrumb"
+          >
+            <Link underline="hover" color="inherit" href="/accounts/signup">
+              회원가입
+            </Link>
+            <Link underline="hover" color="inherit" href="/accounts/login">
+              로그인
+            </Link>
+          </Breadcrumbs>
+        ) : (
+          <Breadcrumbs
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              marginTop: 10,
+              marginRight: 350,
+            }}
+            aria-label="breadcrumb"
+          >
+            <Link underline="hover" color="inherit" href="#">
+              마이페이지
+            </Link>
+            <Link underline="hover" color="inherit" href="/" onClick={Logout}>
+              로그아웃
+            </Link>
+          </Breadcrumbs>
+        )}
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Link href="/">
             <img width={250} src={logo} alt="logo" />
@@ -85,13 +107,7 @@ function Home({ userSlice }) {
                 <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
                   지금 인기 있는 와인은?
                 </Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  color="secondary"
-                  exclusive
-                  value={popular}
-                  onChange={handlePopular}
-                >
+                <ToggleButtonGroup size="small" color="secondary" exclusive value={popular} onChange={handlePopular}>
                   <ToggleButton value="red">레드</ToggleButton>
                   <ToggleButton value="white">화이트</ToggleButton>
                   <ToggleButton value="rose">로제</ToggleButton>
@@ -99,17 +115,10 @@ function Home({ userSlice }) {
                   <ToggleButton value="dessert">디저트</ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-              <Box
-                sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}
-              >
+              <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea href="/">
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -122,12 +131,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -140,12 +144,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -158,12 +157,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -176,12 +170,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -200,13 +189,7 @@ function Home({ userSlice }) {
                 <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
                   당신만을 위한 와인 추천
                 </Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  color="secondary"
-                  exclusive
-                  value={recommend}
-                  onChange={handleRecommend}
-                >
+                <ToggleButtonGroup size="small" color="secondary" exclusive value={recommend} onChange={handleRecommend}>
                   <ToggleButton value="red">레드</ToggleButton>
                   <ToggleButton value="white">화이트</ToggleButton>
                   <ToggleButton value="rose">로제</ToggleButton>
@@ -214,17 +197,10 @@ function Home({ userSlice }) {
                   <ToggleButton value="dessert">디저트</ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-              <Box
-                sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}
-              >
+              <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -237,12 +213,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -255,12 +226,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -273,12 +239,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -291,12 +252,7 @@ function Home({ userSlice }) {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
