@@ -86,9 +86,11 @@ export default function Home() {
           <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row-reverse" }}>
             <ThemeProvider theme={theme}>
               {page === 5 ? (
-                <Button variant="contained" color="end">
-                  완료
-                </Button>
+                <Link href="/survey/result">
+                  <Button variant="contained" color="end">
+                    완료
+                  </Button>
+                </Link>
               ) : (
                 <Button variant="contained" color="neutral" onClick={() => handlePage(page + 1)}>
                   다음

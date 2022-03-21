@@ -4,6 +4,7 @@ import Login from "./router/user/Login";
 import SignupContainer from "./router/user/SignupContainer";
 import Detail from "./router/wine/Detail";
 import Survey from "./router/survey/Survey";
+import SurveyResult from "./router/survey/SurveyResult";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/accounts/signup" element={<SignupContainer />} />
           <Route path="/detail" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
+          <Route path="/survey/result" element={<SurveyResult />} />
         </Routes>
       </Router>
     </>
