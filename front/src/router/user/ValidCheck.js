@@ -2,12 +2,13 @@ import axios from "axios";
 const url = "";
 function checkId(email, url) {
   axios
-    .get(url + `/user/email`)
+    .get(url + `/user/email/${email}`)
     .then(function (response) {
-      if (response.data.valid === "1") {
+      console.log(response.data.valid);
+      if (response.data.valid === true) {
         alert("사용 가능한 이메일입니다.");
         return true;
-      } else if (response.data.valid === "0") {
+      } else if (response.data.valid === false) {
         alert("이미 존재하는 이메일입니다.");
         return false;
       }
@@ -50,13 +51,13 @@ function checkNickname(nickname, url) {
     return false;
   } else {
     axios
-      .get(url + `/user/nickname`)
+      .get(url + `/user/nickname/${nickname}`)
       .then(function (response) {
         console.log(response);
-        if (response.data.valid === "0") {
+        if (response.data.valid === false) {
           alert("이미 존재하는 닉네임입니다.");
           return false;
-        } else if (response.data.valid === "1") {
+        } else if (response.data.valid ===true) {
           alert("사용 가능한 닉네임입니다.");
           return true;
         }
@@ -78,12 +79,12 @@ function checkPhoneNumber(phoneNumber) {
 
 function checkPhoneDuplicate(phoneNumber, url) {
   axios
-    .get(url + `/user/phone`)
+    .get(url + `/user/phone/${phoneNumber}`)
     .then(function (response) {
-      if (response.data.valid === "1") {
+      if (response.data.valid === true) {
         alert("사용 가능한 휴대폰 번호입니다.");
         return true;
-      } else if (response.data.valid === "0") {
+      } else if (response.data.valid === false) {
         alert("이미 존재하는 휴대폰 번호입니다.");
         return false;
       }

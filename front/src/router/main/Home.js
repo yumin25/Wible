@@ -57,7 +57,7 @@ export default function Home() {
             justifyContent: "space-evenly",
           }}
         >
-          <Link href="#" color="inherit" underline="none">
+          <Link href="/search" color="inherit" underline="none">
             와인검색
           </Link>
           <Link href="#" color="inherit" underline="none">
@@ -310,7 +310,17 @@ export default function Home() {
             </div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Link href="/">
-                <button style={{ borderRadius: 20, backgroundColor: "#F4C6C9", border: 0, color: "white", width: 500, height: 40, marginBottom: 10 }}>
+                <button
+                  style={{
+                    borderRadius: 20,
+                    backgroundColor: "#F4C6C9",
+                    border: 0,
+                    color: "white",
+                    width: 500,
+                    height: 40,
+                    marginBottom: 10,
+                  }}
+                >
                   내 와인 취향 찾으러 가기
                 </button>
               </Link>

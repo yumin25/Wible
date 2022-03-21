@@ -16,7 +16,7 @@ function SignupContainer() {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const url = "";
+  const url = "http://localhost:8080";
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
@@ -68,8 +68,8 @@ function SignupContainer() {
       phoneNumber === ""
     ) {
       alert("입력하지 않은 정보가 있습니다. 확인해주세요.");
-    } else if (!/^[a-zA-Z0-9!@#$%\^&*()]{8,12}$/.test(password)) {
-      alert("숫자,영문자,특수문자(!@#$%^&*()) 조합으로 8~12자리");
+    } else if (!/^[a-zA-Z0-9]{8,12}$/.test(password)) {
+      alert("숫자,영문자 조합으로 8~12자리");
       return;
     } else if (password != passwordConfirm) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -86,13 +86,14 @@ function SignupContainer() {
         })
         .then(function (response) {
           console.log(response);
-          if (response.data.code === 200) {
+          if (response.status === 200) {
             setEmail("");
             setPassword("");
             setPasswordConfirm("");
             setName("");
             setNickname("");
             setPhoneNumber("");
+            alert("회원가입이 완료되었습니다!")
             document.location.href = "/accounts/login";
           }
         })
