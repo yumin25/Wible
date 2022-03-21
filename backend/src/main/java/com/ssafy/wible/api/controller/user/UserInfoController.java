@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +32,14 @@ public class UserInfoController {
 	
     @ApiOperation(value = "회원 정보조회 by seq")
 	@GetMapping("/seq/{userSeq}")
-	public Object userInfoBySeq(@RequestParam("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
+	public Object userInfoBySeq(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
     	final UserResponse response = userService.getUserInfo(userSeq).toResponse();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
     
     @ApiOperation(value = "회원 정보조회 by email")
 	@GetMapping("/email/{email}")
-	public Object userInfoByEmail(@RequestParam("email") @ApiParam(value = "유저의 email.", required = true) String email) {
+	public Object userInfoByEmail(@PathVariable("email") @ApiParam(value = "유저의 email.", required = true) String email) {
     	final UserResponse response = userService.getUserInfo(email).toResponse();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
@@ -59,13 +60,13 @@ public class UserInfoController {
     
     @ApiOperation(value = "회원이 작성한 리뷰 리스트 조회")
 	@GetMapping("/reviews/{userSeq}")
-	public Object getReviews(@RequestParam("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
+	public Object getReviews(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
 		return new ResponseEntity<>(userService.getReviewList(userSeq), HttpStatus.OK);
 	}
     
     @ApiOperation(value = "회원이 좋아요한 와인 리스트 조회")
 	@GetMapping("/likes/{userSeq}")
-	public Object getLikes(@RequestParam("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
+	public Object getLikes(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
 		return new ResponseEntity<>(userService.getLikeList(userSeq), HttpStatus.OK);
 	}
 }
