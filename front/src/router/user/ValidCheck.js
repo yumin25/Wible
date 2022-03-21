@@ -2,8 +2,9 @@ import axios from "axios";
 const url = "";
 function checkId(email, url) {
   axios
-    .get(url + `/user/email`)
+    .get(url + `/user/email/${email}/`)
     .then(function (response) {
+      console.log(response);
       if (response.data.valid === "1") {
         alert("사용 가능한 이메일입니다.");
         return true;

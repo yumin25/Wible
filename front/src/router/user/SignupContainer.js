@@ -16,8 +16,7 @@ function SignupContainer() {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const url = "";
-
+  const url = "http://localhost:8080";
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
   };
