@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import logo from "../../res/img/logo.png";
 import {
   Box,
@@ -14,7 +15,7 @@ import {
   ToggleButton,
 } from "@mui/material/";
 
-export default function Home() {
+function Home({ userSlice }) {
   const [popular, setPopular] = React.useState("red");
   const [recommend, setRecommend] = React.useState("red");
   const handlePopular = (event, newPopular) => {
@@ -256,3 +257,9 @@ export default function Home() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { userSlice: state.user };
+}
+
+export default connect(mapStateToProps)(Home);
