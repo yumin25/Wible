@@ -4,12 +4,57 @@ import Category from "./Category";
 import List from "./List";
 import logo from "../../../res/img/logo.png";
 import { Box, Link, Container } from "@mui/material/";
+import styled from "styled-components";
+import { TextField } from "@mui/material/";
+import search from "../../../res/img/search.png";
+import { getSwitchUnstyledUtilityClass } from "@mui/base";
+const SearchInput = styled.input`
+  position: relative;
+  width: 630px;
+  height: 35px;
+  margin-left: 70px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  :focus {
+    outline: none;
+  }
+  border: none;
+  border-radius: 5px;
+  font-size: 14 px;
+  padding-left: 20px;
+  background: #f1eded;
+  placeholder: {
+    color: white;
+  }
+`;
 
+const SearchIcon = styled.img.attrs({
+  src: search,
+})`
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 21.6%;
+  left: 82.5%;
+`;
 function Search() {
-  const url = "";
+  const url = "http://localhost:8080";
   const [totalCnt, setTotalCnt] = useState("0");
-  const [wines, setWines] = useState();
-  const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState(1);
+  /////////////wines 수정해야함
+  const [wines, setWines] = useState([
+    {
+      wineSeq: 9,
+      kname: "그랜드 리저브 샤도네이 2014",
+      ename: "Grand Reserve Chardonnay 2014",
+      type: "WHITE",
+      country: "UNITED_STATES",
+      grapes: "100 % 샤도네이",
+      price: 120000,
+      img_path: null,
+      score: 3.8,
+    },
+  ]);
   const [type, setType] = useState({
     redWine: false,
     whiteWine: false,
@@ -17,12 +62,15 @@ function Search() {
     roseWine: false,
     dessertWine: false,
   });
+  // const [type, setType] = useState("0");
   const [temp, setTemp] = useState();
-
+  const [keyword, setKeyword] = useState("");
   const [sweetness, setSweetness] = useState("0");
   const [body, setBody] = useState("0");
   const [acidity, setAcidity] = useState("0");
   const [tanin, setTanin] = useState("0");
+  const [minPrice, setMinPrice] = useState("0");
+  const [maxPrice, setMaxPrice] = useState("0");
   const [price, setPrice] = React.useState([0, 1000000]);
   //최소가격 -> price[0], 최대가격 -> price[1]
   const [country, setCountry] = useState({
@@ -39,57 +87,112 @@ function Search() {
     etc: false,
   });
 
-  function typeHandler(event) {
-    setType(event.target.value);
+  const typeString = JSON.stringify(type);
+  const countryString = JSON.stringify(country);
+
+  useEffect(() => {
+    getWines();
+    console.log("카테고리 변경 일어남");
+  }, [
+    page,
+    type,
+    minPrice,
+    maxPrice,
+    sweetness,
+    body,
+    acidity,
+    tanin,
+    country,
+  ]);
+
+  function keywordHandler(event) {
+    setKeyword(event.target.value);
+  }
+
+  function getWines() {
+    if (keyword !== "" && keyword !== undefined) {
+      console.log(
+        keyword,
+        typeString,
+        minPrice,
+        maxPrice,
+        body,
+        tanin,
+        sweetness,
+        acidity,
+        country
+      );
+      axios
+        .get(url + `/search`, {
+          params: {
+            keyword: keyword,
+            type: typeString,
+            price_lower: minPrice,
+            price_upper: maxPrice,
+            body: body,
+            tannin: tanin,
+            sweet: sweetness,
+            acidity: acidity,
+            country: countryString,
+          },
+        })
+        .then(function (response) {
+          ////이거 데이터 확인해보자
+          setTotalCnt(response.data.totalElements);
+          setWines(response.data.content);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }
+  const onSubmit = (event) => {
+    if (event.key === "Enter") {
+      console.log(keyword);
+      if (keyword !== "" && keyword !== undefined) {
+        getWines();
+      } else {
+        alert("검색어를 입력해주세요.");
+      }
+    }
+  };
+
+  function typeHandler(value) {
+    setType(value);
   }
   function keywordHandler(event) {
     setKeyword(event.target.value);
   }
-  function sweetnessHandler(event) {
-    setSweetness(event.target.value);
+  function sweetnessHandler(value) {
+    setSweetness(value);
   }
-  function bodyHandler(event) {
-    setBody(event.target.value);
+  function bodyHandler(value) {
+    setBody(value);
   }
-  function acidityHandler(event) {
-    setAcidity(event.target.value);
+  function acidityHandler(value) {
+    setAcidity(value);
   }
-  function taninHandler(event) {
-    setTanin(event.target.value);
-  }
-  function priceHandler(event) {
-    setPrice(event.target.value);
-  }
-  function countryHandler(event) {
-    setCountry(event.target.value);
+  function taninHandler(value) {
+    setTanin(value);
   }
 
-  function getWines() {
-    axios
-      .get(url + `/search`, {
-        // params 수정해야함
-        params: {
-          keyword: keyword,
-          type: type,
-          price_lower: price[0],
-          price_upper: price[1],
-          body: body,
-          tannin: tanin,
-          sweet: sweetness,
-          acidity: acidity,
-          country: country,
-        },
-      })
-      .then(function (response) {
-        setTotalCnt(response.data.data.totalCnt);
-        setWines(response.data.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  function countryHandler(value) {
+    setCountry(value);
+  }
+
+  function minPriceHandler(value) {
+    setMinPrice(value);
+  }
+  function maxPriceHandler(value) {
+    setMaxPrice(value);
+  }
+
+  function handlePageChange(event) {
+    setPage(event);
   }
 
   function goDetail() {}
+
   return (
     <>
       {/* 상단아이콘 */}
@@ -111,29 +214,59 @@ function Search() {
       {/* 정렬 및 검색 */}
 
       <Container sx={{ borderTop: 1, borderColor: "#E5E5E5", display: "flex" }}>
-        <Box sx={{ borderRight: 1, borderColor: "#E5E5E5", paddingRight: 5 }}>
-          <Category
-            wines={wines}
-            country={country}
-            countryHandler={countryHandler}
-            type={type}
-            typeHandler={typeHandler}
-            price={price}
-            priceHandler={priceHandler}
-            sweetness={sweetness}
-            sweetnessHandler={sweetnessHandler}
-            body={body}
-            bodyHandler={bodyHandler}
-            acidity={acidity}
-            acidityHandler={acidityHandler}
-            tanin={tanin}
-            taninHandler={taninHandler}
-          ></Category>
-        </Box>
+        <div id="category" style={{ display: "flex" }}>
+          <Box
+            sx={{
+              borderRight: 1,
+              borderColor: "#E5E5E5",
+              paddingRight: 3,
+            }}
+          >
+            <Category
+              url={url}
+              keyword={keyword}
+              type={type}
+              body={body}
+              tanin={tanin}
+              acidity={acidity}
+              sweetness={sweetness}
+              country={country}
+              keywordHandler={keywordHandler}
+              minPriceHandler={minPriceHandler}
+              maxPriceHandler={maxPriceHandler}
+              typeHandler={typeHandler}
+              countryHandler={countryHandler}
+              sweetnessHandler={sweetnessHandler}
+              bodyHandler={bodyHandler}
+              taninHandler={taninHandler}
+              acidityHandler={acidityHandler}
+              totalCnt={totalCnt}
+              wines={wines}
+              getWines={getWines}
+            ></Category>
+          </Box>
+          <div id="right">
+            <div>
+              <SearchInput
+                // keyword수정
+                value={keyword}
+                onChange={keywordHandler}
+                onKeyPress={onSubmit}
+                placeholder="와인 검색"
+              ></SearchInput>
+              <SearchIcon></SearchIcon>
+            </div>
 
-        <Box sx={{}}>
-          <List wines={wines} url={url} goDetail={goDetail}></List>
-        </Box>
+            <List
+              wines={wines}
+              totalCnt={totalCnt}
+              page={page}
+              handlePageChange={handlePageChange}
+              url={url}
+              goDetail={goDetail}
+            ></List>
+          </div>
+        </div>
       </Container>
     </>
   );
