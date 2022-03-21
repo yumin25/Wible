@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import logo from "../../res/img/logo.png";
 import {
   Box,
@@ -14,7 +15,7 @@ import {
   ToggleButton,
 } from "@mui/material/";
 
-export default function Home() {
+function Home({ userSlice }) {
   const [popular, setPopular] = React.useState("red");
   const [recommend, setRecommend] = React.useState("red");
   const handlePopular = (event, newPopular) => {
@@ -84,13 +85,7 @@ export default function Home() {
                 <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
                   지금 인기 있는 와인은?
                 </Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  color="secondary"
-                  exclusive
-                  value={popular}
-                  onChange={handlePopular}
-                >
+                <ToggleButtonGroup size="small" color="secondary" exclusive value={popular} onChange={handlePopular}>
                   <ToggleButton value="red">레드</ToggleButton>
                   <ToggleButton value="white">화이트</ToggleButton>
                   <ToggleButton value="rose">로제</ToggleButton>
@@ -98,17 +93,10 @@ export default function Home() {
                   <ToggleButton value="dessert">디저트</ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-              <Box
-                sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}
-              >
+              <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea href="/">
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -121,12 +109,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -139,12 +122,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -157,12 +135,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -175,12 +148,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -199,13 +167,7 @@ export default function Home() {
                 <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
                   당신만을 위한 와인 추천
                 </Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  color="secondary"
-                  exclusive
-                  value={recommend}
-                  onChange={handleRecommend}
-                >
+                <ToggleButtonGroup size="small" color="secondary" exclusive value={recommend} onChange={handleRecommend}>
                   <ToggleButton value="red">레드</ToggleButton>
                   <ToggleButton value="white">화이트</ToggleButton>
                   <ToggleButton value="rose">로제</ToggleButton>
@@ -213,17 +175,10 @@ export default function Home() {
                   <ToggleButton value="dessert">디저트</ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-              <Box
-                sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}
-              >
+              <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -236,12 +191,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -254,12 +204,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -272,12 +217,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -290,12 +230,7 @@ export default function Home() {
                 </Card>
                 <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
                   <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image=""
-                      alt="와인이미지"
-                    />
+                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         와인이름
@@ -309,6 +244,7 @@ export default function Home() {
               </Box>
             </div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
+
               <Link href="/">
                 <button
                   style={{
@@ -321,6 +257,9 @@ export default function Home() {
                     marginBottom: 10,
                   }}
                 >
+
+              <Link href="/survey">
+                <button style={{ borderRadius: 20, backgroundColor: "#F4C6C9", border: 0, color: "white", width: 500, height: 40, marginBottom: 10 }}>
                   내 와인 취향 찾으러 가기
                 </button>
               </Link>
@@ -332,3 +271,9 @@ export default function Home() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { userSlice: state.user };
+}
+
+export default connect(mapStateToProps)(Home);
