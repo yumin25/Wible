@@ -44,6 +44,11 @@ function Login({ saveUser, userSlice }) {
       })
       .catch((e) => console.log(e));
   };
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  };
 
   return (
     <>
@@ -76,6 +81,7 @@ function Login({ saveUser, userSlice }) {
             variant="outlined"
             sx={{ my: 2, width: 300 }}
             onChange={onPasswordHandler}
+            onKeyPress={handleEnter}
           />
           <button
             style={{ borderRadius: 5, backgroundColor: "#F4C6C9", border: 0, color: "white", width: 300, height: 40, marginBottom: 10 }}
