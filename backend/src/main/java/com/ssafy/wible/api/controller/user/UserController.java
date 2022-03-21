@@ -79,6 +79,7 @@ public class UserController {
     public Object signin(@RequestBody LoginRequest request) {
     	Map<String, Object> resultMap = new HashMap<>();
     	resultMap.put("token", userService.login(request.getEmail(), request.getPassword()));
+    	resultMap.put("userSeq", userService.getUserInfo(request.getEmail()).getUserSeq());
     	return new ResponseEntity<>(resultMap, HttpStatus.OK);
     }
 }
