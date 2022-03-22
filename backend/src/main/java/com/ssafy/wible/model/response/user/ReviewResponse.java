@@ -20,6 +20,8 @@ public class ReviewResponse {
     @ApiModelProperty(value = "type")
     @Enumerated(EnumType.STRING)
     private Type type;
+    @ApiModelProperty(value = "grapes")
+    private String graps;
     @ApiModelProperty(value = "review_cnt")
     private int review_cnt;
     @ApiModelProperty(value = "review_score")
