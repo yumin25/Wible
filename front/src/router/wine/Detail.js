@@ -1,4 +1,7 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import Send from "../../config/Send";
 import logo from "../../res/img/logo.png";
 import { Box, Breadcrumbs, Link, Grid, Typography, Card, CardMedia, Avatar, TextareaAutosize, Button, Rating, Pagination } from "@mui/material/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +9,7 @@ import { faHeart as hs } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as hr } from "@fortawesome/free-regular-svg-icons";
 import { faCircle as cs } from "@fortawesome/free-solid-svg-icons";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { purple } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
@@ -16,7 +20,56 @@ const theme = createTheme({
   },
 });
 
-export default function Home() {
+function Detail(props) {
+  const { wineSeq } = useParams();
+  const [wineProfile, setWineProfile] = useState({});
+  const level = [1, 2, 3, 4, 5];
+
+  //와인정보
+  const getDetail = () => {
+    Send.get(`/wine/${wineSeq}`, {
+      params: {
+        userSeq: props.userSlice.userSeq,
+        wineSeq: wineSeq,
+      },
+    }).then((res) => {
+      setWineProfile(res.data);
+      console.log(res.data);
+    });
+  };
+
+  // 좋아요
+  const postLike = (wineSeq, e) => {
+    e.preventDefault();
+    const data = {
+      userSeq: props.userSlice.userSeq,
+      wineSeq: wineSeq,
+    };
+    Send.post("/wine/like", JSON.stringify(data)).then((res) => {
+      if (res.status === 200) {
+        getDetail();
+      }
+    });
+  };
+
+  // 좋아요 취소
+  const deleteLike = (wineSeq, e) => {
+    e.preventDefault();
+    Send.delete("/wine/like", {
+      params: {
+        userSeq: props.userSlice.userSeq,
+        wineSeq: wineSeq,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        getDetail();
+      }
+    });
+  };
+  useEffect(() => {
+    getDetail();
+  }, []);
+
   return (
     <>
       {/* 상단 구성 */}
@@ -53,12 +106,15 @@ export default function Home() {
           <Grid container spacing={2}>
             <Grid item xs={3}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography sx={{ fontSize: 32, fontWeight: "bold", mb: 1 }}>도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼</Typography>
-                <Typography sx={{ fontSize: 16, mb: 1 }}>DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU</Typography>
+                <Typography sx={{ fontSize: 32, fontWeight: "bold", mb: 1 }}>{wineProfile.kname}</Typography>
+                <Typography sx={{ fontSize: 16, mb: 1 }}>{wineProfile.ename}</Typography>
                 <Box sx={{ display: "flex" }}>
-                  <FontAwesomeIcon icon={hs} size="2xl" style={{ color: "red" }} />
-                  <FontAwesomeIcon icon={hr} size="2xl" />
-                  <Typography sx={{ mx: 1, mt: 0.5, mb: 3 }}>좋아요</Typography>
+                  {wineProfile.like_check ? (
+                    <FontAwesomeIcon icon={hs} size="2xl" style={{ color: "red" }} onClick={(e) => deleteLike(wineProfile.wineSeq, e)} />
+                  ) : (
+                    <FontAwesomeIcon icon={hr} size="2xl" onClick={(e) => postLike(wineProfile.wineSeq, e)} />
+                  )}
+                  <Typography sx={{ mx: 1, mt: 0.5, mb: 3 }}>좋아요 {wineProfile.like_cnt}</Typography>
                 </Box>
                 <Card sx={{ maxWidth: 345 }}>
                   <CardMedia component="img" height="450" image="" alt="wine image" />
@@ -71,66 +127,98 @@ export default function Home() {
                 <Box sx={{ px: 2, display: "flex", justifyContent: "space-between" }}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#C50D0D" }} />
-                    <Typography sx={{ ml: 2, mr: 3, mt: 0.5, fontSize: 24 }}>Red</Typography>
+                    <Typography sx={{ ml: 2, mr: 3, mt: 0.5, fontSize: 24 }}>{wineProfile.type}</Typography>
                     <hr style={{ height: 30 }} />
-                    <Typography sx={{ mx: 3, mt: 0.5, fontSize: 24 }}>프랑스</Typography>
+                    <Typography sx={{ mx: 3, mt: 0.5, fontSize: 24 }}>{wineProfile.country}</Typography>
                   </Box>
-                  <Typography sx={{ mx: 1, mt: 0.5, fontSize: 32, fontWeight: "bold" }}>19000 원</Typography>
+                  <Typography sx={{ mx: 1, mt: 0.5, fontSize: 32, fontWeight: "bold" }}>{wineProfile.price} 원</Typography>
                 </Box>
                 <hr />
                 <Box sx={{ display: "flex", justifyContent: "space-evenly", my: 3 }}>
                   <Box sx={{ mr: 2 }}>
                     <Typography sx={{ fontWeight: "bold" }}>산도</Typography>
                     <Box sx={{ display: "flex" }}>
-                      <Avatar sx={{ mr: 0.2 }}>1</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>2</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>3</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>4</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>5</Avatar>
+                      {level.map((lv, index) => {
+                        return (
+                          <div key={index}>
+                            {wineProfile.acidity >= lv ? (
+                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                            ) : (
+                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                            )}
+                          </div>
+                        );
+                      })}
                     </Box>
                   </Box>
                   <Box sx={{ mr: 2 }}>
                     <Typography sx={{ fontWeight: "bold" }}>당도</Typography>
                     <Box sx={{ display: "flex" }}>
-                      <Avatar sx={{ mr: 0.2 }}>1</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>2</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>3</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>4</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>5</Avatar>
+                      {level.map((lv, index) => {
+                        return (
+                          <div key={index}>
+                            {wineProfile.sweet >= lv ? (
+                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                            ) : (
+                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                            )}
+                          </div>
+                        );
+                      })}
                     </Box>
                   </Box>
                   <Box sx={{ mr: 2 }}>
                     <Typography sx={{ fontWeight: "bold" }}>바디</Typography>
                     <Box sx={{ display: "flex" }}>
-                      <Avatar sx={{ mr: 0.2 }}>1</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>2</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>3</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>4</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>5</Avatar>
+                      {level.map((lv, index) => {
+                        return (
+                          <div key={index}>
+                            {wineProfile.body >= lv ? (
+                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                            ) : (
+                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                            )}
+                          </div>
+                        );
+                      })}
                     </Box>
                   </Box>
                   <Box sx={{ mr: 2 }}>
                     <Typography sx={{ fontWeight: "bold" }}>타닌</Typography>
                     <Box sx={{ display: "flex" }}>
-                      <Avatar sx={{ mr: 0.2 }}>1</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>2</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>3</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>4</Avatar>
-                      <Avatar sx={{ mr: 0.2 }}>5</Avatar>
+                      {level.map((lv, index) => {
+                        return (
+                          <div key={index}>
+                            {wineProfile.tannin >= lv ? (
+                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                            ) : (
+                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                            )}
+                          </div>
+                        );
+                      })}
                     </Box>
                   </Box>
                 </Box>
                 <Box sx={{ mx: 1.5, mb: 3, display: "flex" }}>
                   <Typography sx={{ mr: 5, fontWeight: "bold" }}>도수</Typography>
-                  <Typography sx={{ fontWeight: "bold" }}>13.5</Typography>
+                  <Typography sx={{ fontWeight: "bold" }}>{wineProfile.alcohol}</Typography>
                 </Box>
-                <Box sx={{ mx: 1.5, mb: 3, display: "flex" }}>
+                {/* <Box sx={{ mx: 1.5, mb: 3, display: "flex" }}>
                   <Typography sx={{ mr: 3, fontWeight: "bold" }}>아로마</Typography>
                   <Typography sx={{ fontWeight: "bold" }}>#자두 #체리 #모카</Typography>
-                </Box>
+                </Box> */}
                 <Box sx={{ mx: 1.5, mb: 3, display: "flex" }}>
                   <Typography sx={{ mr: 3, fontWeight: "bold" }}>페어링</Typography>
-                  <Typography sx={{ fontWeight: "bold" }}>#피자 #치즈</Typography>
+                  {wineProfile.food
+                    ? wineProfile.food.split("|").map((tag, index) => {
+                        return (
+                          <Typography sx={{ fontWeight: "bold" }} key={index}>
+                            #{tag}　
+                          </Typography>
+                        );
+                      })
+                    : null}
                 </Box>
                 {/* 와인리뷰 */}
                 <hr />
@@ -138,7 +226,7 @@ export default function Home() {
                   <Box sx={{ my: 3, display: "flex", alignItems: "center" }}>
                     <Typography sx={{ fontSize: 24, fontWeight: "bold", mr: 3 }}>와인리뷰</Typography>
                     <Typography sx={{ fontSize: 20, fontWeight: "bold", mx: 1 }}>평점</Typography>
-                    <Typography sx={{ fontSize: 20 }}>8.5</Typography>
+                    <Typography sx={{ fontSize: 20 }}>{wineProfile.score}</Typography>
                   </Box>
                   <Box sx={{ ml: 3, display: "flex" }}>
                     <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} />
@@ -181,3 +269,9 @@ export default function Home() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { userSlice: state.user };
+}
+
+export default connect(mapStateToProps)(Detail);

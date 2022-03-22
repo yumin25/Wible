@@ -16,7 +16,7 @@ function App() {
           <Route path="/accounts/login" element={<Login />} />
           <Route path="/accounts/signup" element={<SignupContainer />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:wineSeq" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/survey/result" element={<SurveyResult />} />
         </Routes>
