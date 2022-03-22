@@ -1,19 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import logo from "../../res/img/logo.png";
-import {
-  Box,
-  Breadcrumbs,
-  Link,
-  Grid,
-  Typography,
-  Card,
-  CardActionArea,
-  CardMedia,
-  CardContent,
-  ToggleButtonGroup,
-  ToggleButton,
-} from "@mui/material/";
+import TopNav from "./TopNav";
+import WineList from "./WineList";
+import { Box, Link, Grid, Typography, Card, CardActionArea, CardMedia, CardContent, ToggleButtonGroup, ToggleButton } from "@mui/material/";
 
 function Home({ userSlice }) {
   const [popular, setPopular] = React.useState("red");
@@ -24,54 +13,12 @@ function Home({ userSlice }) {
   const handleRecommend = (event, newRecommend) => {
     setRecommend(newRecommend);
   };
-  const Logout = () => {
-    window.localStorage.clear();
-  };
 
   return (
     <>
       {/* 상단 구성 */}
       <div>
-        {window.localStorage.getItem("idToken") === null ? (
-          <Breadcrumbs
-            style={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              marginTop: 10,
-              marginRight: 350,
-            }}
-            aria-label="breadcrumb"
-          >
-            <Link underline="hover" color="inherit" href="/accounts/signup">
-              회원가입
-            </Link>
-            <Link underline="hover" color="inherit" href="/accounts/login">
-              로그인
-            </Link>
-          </Breadcrumbs>
-        ) : (
-          <Breadcrumbs
-            style={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              marginTop: 10,
-              marginRight: 350,
-            }}
-            aria-label="breadcrumb"
-          >
-            <Link underline="hover" color="inherit" href="#">
-              마이페이지
-            </Link>
-            <Link underline="hover" color="inherit" href="/" onClick={Logout}>
-              로그아웃
-            </Link>
-          </Breadcrumbs>
-        )}
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Link href="/">
-            <img width={250} src={logo} alt="logo" />
-          </Link>
-        </Box>
+        <TopNav />
         <Box
           sx={{
             my: 3,
@@ -115,73 +62,7 @@ function Home({ userSlice }) {
                   <ToggleButton value="dessert">디저트</ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-              <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
-                <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
-                  <CardActionArea href="/">
-                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        와인이름
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
-                  <CardActionArea>
-                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        와인이름
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
-                  <CardActionArea>
-                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        와인이름
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
-                  <CardActionArea>
-                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        와인이름
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ maxWidth: 230, maxHeight: 450 }}>
-                  <CardActionArea>
-                    <CardMedia component="img" height="140" image="" alt="와인이미지" />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        와인이름
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구와인설명어쩌구저쩌구
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Box>
+              <WineList />
             </div>
             {/* 추천 와인 */}
             <div style={{ marginBottom: 75 }}>
