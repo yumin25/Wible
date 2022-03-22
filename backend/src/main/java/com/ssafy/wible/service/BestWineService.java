@@ -80,6 +80,7 @@ public class BestWineService {
         for(Object o : queryList){
             Wine w = (Wine) o;
             SimpleWineResponse simple = new SimpleWineResponse();
+            simple.setWineSeq(w.getWineSeq());
             simple.setKname(w.getKname());
             simple.setImg_path(w.getImgPath());
             simple.setPrice(w.getPrice());
@@ -98,6 +99,7 @@ public class BestWineService {
         for(Object o : queryList){
             Wine w = (Wine) o;
             SimpleWineResponse simple = new SimpleWineResponse();
+            simple.setWineSeq(w.getWineSeq());
             simple.setKname(w.getKname());
             simple.setImg_path(w.getImgPath());
             simple.setPrice(w.getPrice());
@@ -116,6 +118,7 @@ public class BestWineService {
         for(Object o : queryList){
             Wine w = (Wine) o;
             SimpleWineResponse simple = new SimpleWineResponse();
+            simple.setWineSeq(w.getWineSeq());
             simple.setKname(w.getKname());
             simple.setImg_path(w.getImgPath());
             simple.setPrice(w.getPrice());
