@@ -1,7 +1,7 @@
 package com.ssafy.wible.api.controller.wine;
 
-import com.ssafy.wible.model.response.wine.SimpleWineResponse;
-import com.ssafy.wible.service.BestWineService;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,15 @@ import com.ssafy.wible.model.entity.Review;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.request.wine.ReviewCreateRequest;
 import com.ssafy.wible.model.request.wine.ReviewUpdateRequest;
+import com.ssafy.wible.model.request.wine.WineDetailRequest;
 import com.ssafy.wible.model.request.wine.WineLikeRequest;
+import com.ssafy.wible.model.response.wine.SimpleWineResponse;
+import com.ssafy.wible.service.BestWineService;
 import com.ssafy.wible.service.WineService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
-import java.util.List;
 
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
@@ -49,9 +50,9 @@ public class WineController {
 	private static final String FAIL = "fail";
 
 	@ApiOperation(value = "wine detail", notes = "와인 상세조회", response = Wine.class)
-	@GetMapping("/{wineSeq}")
-	public ResponseEntity<Wine> wineGet(@PathVariable("wineSeq") @ApiParam(value = "와인 번호.", required = true) int wineSeq) {
-		return new ResponseEntity<Wine>(wineService.wineGet(wineSeq), HttpStatus.OK);
+	@PostMapping
+	public Object wineGet(@RequestBody @ApiParam(value = "와인 번호.", required = true) WineDetailRequest request) {
+		return new ResponseEntity<>(wineService.wineGet(request.getUserSeq(), request.getWineSeq()), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "review create", notes = "리뷰 작성, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)

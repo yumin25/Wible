@@ -20,4 +20,6 @@ public interface WineLikeRepository extends JpaRepository<Likes, Integer>{
 	void deleteByuserSeqAndwineSeq(@Param("userSeq") int userSeq, @Param("wineSeq") int wineSeq);
 	
 	List<Likes> findAllByUserSeq(int userSeq);
+	
+	boolean existsByUserSeqAndWineSeq(int userSeq, int wineSeq);
 }
