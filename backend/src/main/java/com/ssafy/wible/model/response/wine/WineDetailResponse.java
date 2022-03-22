@@ -46,6 +46,6 @@ public class WineDetailResponse {
     private int review_cnt;
     @ApiModelProperty(value = "score")
     private double score;
-    @ApiModelProperty(value = "like_chk")
-    private Boolean like_chk;
+    @ApiModelProperty(value = "like_check")
+    private Boolean like_check;
 }
