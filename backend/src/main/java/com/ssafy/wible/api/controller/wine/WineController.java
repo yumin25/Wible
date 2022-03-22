@@ -23,7 +23,6 @@ import com.ssafy.wible.model.entity.Review;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.request.wine.ReviewCreateRequest;
 import com.ssafy.wible.model.request.wine.ReviewUpdateRequest;
-import com.ssafy.wible.model.request.wine.WineDetailRequest;
 import com.ssafy.wible.model.request.wine.WineLikeRequest;
 import com.ssafy.wible.model.response.wine.SimpleWineResponse;
 import com.ssafy.wible.service.BestWineService;
@@ -50,9 +49,9 @@ public class WineController {
 	private static final String FAIL = "fail";
 
 	@ApiOperation(value = "wine detail", notes = "와인 상세조회", response = Wine.class)
-	@PostMapping
-	public Object wineGet(@RequestBody @ApiParam(value = "와인 번호.", required = true) WineDetailRequest request) {
-		return new ResponseEntity<>(wineService.wineGet(request.getUserSeq(), request.getWineSeq()), HttpStatus.OK);
+	@GetMapping("{wineSeq}")
+	public Object wineGet(@PathVariable @ApiParam(value = "와인 번호.", required = true) int wineSeq, @RequestParam @ApiParam(value = "유저 번호", required = true) int userSeq) {
+		return new ResponseEntity<>(wineService.wineGet(wineSeq, userSeq), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "review create", notes = "리뷰 작성, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
