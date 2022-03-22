@@ -1,7 +1,5 @@
 package com.ssafy.wible.model.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +30,5 @@ public class Likes {
 	private int userSeq;
 	@Column
 	private int wineSeq;
-	@Column
-	private LocalDateTime registerDate;
+	
 }
