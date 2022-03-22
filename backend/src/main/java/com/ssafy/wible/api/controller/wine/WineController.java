@@ -51,7 +51,7 @@ public class WineController {
 	@ApiOperation(value = "wine detail", notes = "와인 상세조회", response = Wine.class)
 	@GetMapping("{wineSeq}")
 	public Object wineGet(@PathVariable @ApiParam(value = "와인 번호.", required = true) int wineSeq, @RequestParam @ApiParam(value = "유저 번호", required = true) int userSeq) {
-		return new ResponseEntity<>(wineService.wineGet(wineSeq, userSeq), HttpStatus.OK);
+		return new ResponseEntity<>(wineService.wineGet(userSeq, wineSeq), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "review create", notes = "리뷰 작성, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
@@ -89,9 +89,6 @@ public class WineController {
 	@ApiOperation(value = "wine like", notes = "와인 좋아요, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@PostMapping("/like")
 	public ResponseEntity<String> wineLike(@RequestBody @ApiParam(value = "와인 좋아요.", required = true) WineLikeRequest request) {
-		int wineSeq = request.getWineSeq();
-		wineService.wineLikeUpdate(wineSeq);
-		
 		wineService.wineLike(request);
 		
 		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -100,8 +97,6 @@ public class WineController {
 	@ApiOperation(value = "wine dislike", notes = "와인 좋아요 취소, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@DeleteMapping("/like")
 	public ResponseEntity<String> wineDislike(@RequestParam @ApiParam(value = "유저 번호.", required = true) int userSeq, @RequestParam @ApiParam(value = "와인 번호.", required = true) int wineSeq) {
-		wineService.wineDislikeUpdate(wineSeq);
-		
 		wineService.wineDislike(userSeq, wineSeq);
 		
 		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

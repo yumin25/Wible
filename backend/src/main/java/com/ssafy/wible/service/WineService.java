@@ -45,22 +45,19 @@ public class WineService {
 		return reviewRepository.findAllByWineSeq(wineSeq);
 	}
 
-	public void wineLikeUpdate(int wineSeq) {
-		wineRepository.updateLikeCount(wineSeq);
-	}
-
 	public void wineLike(WineLikeRequest request) {
 		Likes like = request.toEntity();
-		wineLikeRepository.save(like);
-	}
-
-	public void wineDislikeUpdate(int wineSeq) {
-		wineRepository.updateDislikeCount(wineSeq);
-		
+		if(!wineLikeRepository.existsByUserSeqAndWineSeq(like.getUserSeq(), like.getWineSeq())) {
+			wineRepository.updateLikeCount(request.getWineSeq());
+			wineLikeRepository.save(like);
+		}
 	}
 
 	public void wineDislike(int userSeq, int wineSeq) {
-		wineLikeRepository.deleteByuserSeqAndwineSeq(userSeq, wineSeq);
+		if(wineLikeRepository.existsByUserSeqAndWineSeq(userSeq, wineSeq)) {
+			wineRepository.updateDislikeCount(wineSeq);
+			wineLikeRepository.deleteByuserSeqAndwineSeq(userSeq, wineSeq);
+		}
 	}
 
 	public void wineReviewUpdate(int wineSeq) {
