@@ -28,7 +28,7 @@ function Home({ userSlice }) {
 
   useEffect(() => {
     getBestWine();
-  }, [(popular, criteria)]);
+  }, [popular, criteria]);
 
   return (
     <>
