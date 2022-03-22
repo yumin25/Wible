@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.wible.model.entity.Review;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.request.wine.ReviewCreateRequest;
+import com.ssafy.wible.model.request.wine.ReviewUpdateRequest;
 import com.ssafy.wible.model.request.wine.WineLikeRequest;
 import com.ssafy.wible.service.WineService;
 
@@ -69,6 +71,14 @@ public class WineController {
 		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		
 	}
+	
+	@ApiOperation(value = "review update", notes = "리뷰 수정, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	@PutMapping("/review")
+	public ResponseEntity<String> reviewUpdate(@RequestBody ReviewUpdateRequest request){
+		wineService.reviewUpdate(request.getReviewSeq(), request.getReviewScore(), request.getReviewText());
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	}
+	
 	
 	@ApiOperation(value = "review list", notes = "리뷰 목록 조회", response = Review.class)
 	@GetMapping("/review/{wineSeq}")

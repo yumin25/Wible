@@ -69,4 +69,12 @@ public class WineService {
 		wineRepository.deleteReviewCount(reviewSeq);
 		
 	}
+
+	public void reviewUpdate(int reviewSeq, double reviewScore, String reviewText) {
+		Review review = reviewRepository.findById(reviewSeq).get();
+		review.setReviewScore(reviewScore);
+		review.setReviewText(reviewText);
+		reviewRepository.save(review);
+		
+	}
 }
