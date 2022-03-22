@@ -4,7 +4,6 @@ import { Box, Typography, Card, CardActionArea, CardMedia, CardContent } from "@
 
 function WineList(props) {
   const wines = props.bestWine;
-  console.log(wines);
 
   return (
     <>
@@ -14,7 +13,7 @@ function WineList(props) {
           wines.map((wine, index) => {
             return (
               <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>
-                <CardActionArea href="/">
+                <CardActionArea href={"/detail/" + wine.wineSeq}>
                   <CardMedia component="img" height="250" image="" alt="와인이미지" />
                   <CardContent>
                     <Box sx={{ height: 70 }}>

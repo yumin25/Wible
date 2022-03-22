@@ -34,7 +34,6 @@ function Detail(props) {
       },
     }).then((res) => {
       setWineProfile(res.data);
-      console.log(res.data);
     });
   };
 
