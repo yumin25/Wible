@@ -1,7 +1,5 @@
 package com.ssafy.wible.model.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +34,6 @@ public class Review {
 	private String reviewText;
 	@Column
 	private double reviewScore;
-	@Column
-	private LocalDateTime registerDate;
+	
 	
 }

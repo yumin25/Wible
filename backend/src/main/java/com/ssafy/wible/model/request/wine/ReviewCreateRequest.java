@@ -1,7 +1,5 @@
 package com.ssafy.wible.model.request.wine;
 
-import java.time.LocalDateTime;
-
 import javax.validation.constraints.NotBlank;
 
 import com.ssafy.wible.model.entity.Review;
@@ -27,18 +25,12 @@ public class ReviewCreateRequest {
 	@NotBlank
 	private double reviewScore;
 	
-	@ApiModelProperty(required = true)
-	@NotBlank
-	private LocalDateTime registerDate;
-	
-	
 	public Review toEntity() {
 		return Review.builder()
 					 .userSeq(userSeq)
 					 .wineSeq(wineSeq)
 					 .reviewText(reviewText)
 					 .reviewScore(reviewScore)
-					 .registerDate(registerDate)
 					 .build();
 	}
 }
