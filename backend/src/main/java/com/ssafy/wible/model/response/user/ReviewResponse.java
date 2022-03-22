@@ -13,6 +13,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReviewResponse {
+	
+	@ApiModelProperty(value = "wine_seq")
+	private int wine_seq;
+	@ApiModelProperty(value = "review_seq")
+	private int review_seq;
     @ApiModelProperty(value = "kname")
     private String kname;
     @ApiModelProperty(value = "ename")
@@ -21,7 +26,7 @@ public class ReviewResponse {
     @Enumerated(EnumType.STRING)
     private Type type;
     @ApiModelProperty(value = "grapes")
-    private String graps;
+    private String grapes;
     @ApiModelProperty(value = "review_cnt")
     private int review_cnt;
     @ApiModelProperty(value = "review_score")

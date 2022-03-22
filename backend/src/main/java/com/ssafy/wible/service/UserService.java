@@ -99,7 +99,7 @@ public class UserService {
         List<Review> reviews = reviewRepository.findAllByUserSeq(user_seq);
         for (Review review: reviews) {
         	Wine wine = wineRepository.findById(review.getWineSeq()).get();
-            list.add(new ReviewResponse(wine.getKname(), wine.getEname(), wine.getType(), wine.getGrapes(), wine.getReviewCnt(),review.getReviewScore(), wine.getCountry(), wine.getImgPath(), review.getReviewText()));
+            list.add(new ReviewResponse(wine.getWineSeq(), review.getReviewSeq(), wine.getKname(), wine.getEname(), wine.getType(), wine.getGrapes(), wine.getReviewCnt(),review.getReviewScore(), wine.getCountry(), wine.getImgPath(), review.getReviewText()));
         }
         return list;
 	}
