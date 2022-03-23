@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./router/main/Home";
+import Home from "./router/main/Home/Home";
 import Login from "./router/user/Login";
 import SignupContainer from "./router/user/SignupContainer";
 import Search from "./router/main/Search/Search";
@@ -24,7 +24,7 @@ function App() {
             <Route path="userInfo" />
           </Route>
           <Route path="/search" element={<Search />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:wineSeq" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/survey/result" element={<SurveyResult />} />
         </Routes>
