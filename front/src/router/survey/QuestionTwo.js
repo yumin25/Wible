@@ -1,11 +1,9 @@
-import * as React from "react";
 import { Typography, ToggleButtonGroup, ToggleButton } from "@mui/material/";
 
-export default function QuestionTwo() {
-  const [price, setPrice] = React.useState();
-
-  const handleChange = (event, nextPrice) => {
-    setPrice(nextPrice);
+export default function QuestionTwo(props) {
+  const price = props.price;
+  const handleChange = (event) => {
+    props.setPrice(event.target.value);
   };
 
   return (
