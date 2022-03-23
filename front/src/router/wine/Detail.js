@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Send from "../../config/Send";
 import logo from "../../res/img/logo.png";
+import TopNav from "../main/Home/TopNav";
 import { Box, Breadcrumbs, Link, Grid, Typography, Card, CardMedia, Avatar, TextareaAutosize, Button, Rating, Pagination } from "@mui/material/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as hs } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +25,8 @@ function Detail(props) {
   const { wineSeq } = useParams();
   const [wineProfile, setWineProfile] = useState({});
   const level = [1, 2, 3, 4, 5];
+  const [rate, setRate] = useState(5);
+  const [comment, setComment] = useState();
 
   //와인정보
   const getDetail = () => {
@@ -65,6 +68,29 @@ function Detail(props) {
       }
     });
   };
+
+  // 리뷰정보
+  const handleRate = (event) => {
+    setRate(event.target.value);
+  };
+  const handleComment = (event) => {
+    setComment(event.target.value);
+  };
+
+  // 리뷰작성
+  const postComment = (wineSeq, e) => {
+    e.preventDefault();
+    const data = {
+      reviewScore: rate * 2,
+      reviewText: comment,
+      userSeq: props.userSlice.userSeq,
+      wineSeq: wineSeq,
+    };
+    Send.post("/wine/review", JSON.stringify(data)).then((res) => {
+      setComment("");
+    });
+  };
+
   useEffect(() => {
     getDetail();
   }, []);
@@ -73,34 +99,7 @@ function Detail(props) {
     <>
       {/* 상단 구성 */}
       <div>
-        <Breadcrumbs style={{ display: "flex", flexDirection: "row-reverse", marginTop: 10, marginRight: 350 }} aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
-            회원가입
-          </Link>
-          <Link underline="hover" color="inherit" href="/">
-            로그인
-          </Link>
-        </Breadcrumbs>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Link href="/">
-            <img width={250} src={logo} alt="logo" />
-          </Link>
-        </Box>
-        {/* <Box sx={{ my: 3, px: 50, display: "flex", justifyContent: "space-evenly" }}>
-          <Link href="#" color="inherit" underline="none">
-            와인검색
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            와인사전
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            주제별와인
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            음식추천
-          </Link>
-        </Box> */}
-
+        <TopNav />
         <Box sx={{ mt: 10, mb: 5, mx: 20, display: "flex", alignItems: "center", flexDirection: "column" }}>
           <Grid container spacing={2}>
             <Grid item xs={3}>
@@ -228,10 +227,10 @@ function Detail(props) {
                     <Typography sx={{ fontSize: 20 }}>{wineProfile.score}</Typography>
                   </Box>
                   <Box sx={{ ml: 3, display: "flex" }}>
-                    <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} />
-                    <TextareaAutosize minRows={3} placeholder="리뷰를 입력하세요." style={{ width: 600 }} />
+                    <Rating name="size-medium" value={rate} precision={0.5} sx={{ mx: 2 }} onChange={handleRate} />
+                    <TextareaAutosize minRows={3} placeholder="리뷰를 입력하세요." style={{ width: 600 }} value={comment} onChange={handleComment} />
                     <ThemeProvider theme={theme}>
-                      <Button sx={{ mx: 2, mb: 4 }} variant="contained" color="neutral">
+                      <Button sx={{ mx: 2, mb: 4 }} variant="contained" color="neutral" onClick={(e) => postComment(wineProfile.wineSeq, e)}>
                         리뷰 작성
                       </Button>
                     </ThemeProvider>
