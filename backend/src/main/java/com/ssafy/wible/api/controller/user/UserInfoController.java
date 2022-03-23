@@ -1,6 +1,12 @@
 package com.ssafy.wible.api.controller.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wible.model.request.user.UserInfoRequest;
@@ -60,8 +65,8 @@ public class UserInfoController {
     
     @ApiOperation(value = "회원이 작성한 리뷰 리스트 조회")
 	@GetMapping("/reviews/{userSeq}")
-	public Object getReviews(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
-		return new ResponseEntity<>(userService.getReviewList(userSeq), HttpStatus.OK);
+	public Object getReviews(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq, @PageableDefault(size=5, sort = "reviewSeq", direction = Sort.Direction.DESC) Pageable pageRequest) {
+    	return new ResponseEntity<>(userService.getReviewList(userSeq, pageRequest), HttpStatus.OK);
 	}
     
     @ApiOperation(value = "회원이 좋아요한 와인 리스트 조회")

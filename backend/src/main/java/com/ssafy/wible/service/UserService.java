@@ -1,9 +1,13 @@
 package com.ssafy.wible.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -94,14 +98,21 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public List<ReviewResponse> getReviewList(int user_seq){
+	public Object getReviewList(int user_seq, Pageable pageRequest){
+		Map<String, Object> resultMap = new HashMap<>();
         List<ReviewResponse> list = new ArrayList<>();
-        List<Review> reviews = reviewRepository.findAllByUserSeq(user_seq);
+        Page<Review> reviews = reviewRepository.findAllByUserSeq(user_seq, pageRequest);
         for (Review review: reviews) {
         	Wine wine = wineRepository.findById(review.getWineSeq()).get();
             list.add(new ReviewResponse(wine.getWineSeq(), review.getReviewSeq(), wine.getKname(), wine.getEname(), wine.getType(), wine.getGrapes(), wine.getReviewCnt(),review.getReviewScore(), wine.getCountry(), wine.getImgPath(), review.getReviewText()));
         }
-        return list;
+        resultMap.put("content", list);
+        resultMap.put("totalPages", reviews.getTotalPages());
+        resultMap.put("pageNumber", reviews.getPageable().getPageNumber());
+        resultMap.put("totalElements", reviews.getTotalElements());
+        resultMap.put("last", reviews.getTotalPages()-1 == reviews.getPageable().getPageNumber()?true:false);
+        resultMap.put("first", 0 == reviews.getPageable().getPageNumber()?true:false);
+        return resultMap;
 	}
 	
 	public List<LikeResponse> getLikeList(int user_seq){
