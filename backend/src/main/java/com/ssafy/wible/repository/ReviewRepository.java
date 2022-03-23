@@ -11,5 +11,5 @@ import com.ssafy.wible.model.entity.Review;
 public interface ReviewRepository extends JpaRepository<Review, Integer>{
 
 	List<Review> findAllByUserSeq(int userSeq);
-	Page<List<Review>> findBywineSeq(int wineSeq, Pageable pageable);
+	Page<Review> findBywineSeq(int wineSeq, Pageable pageable);
 }

@@ -1,7 +1,5 @@
 package com.ssafy.wible.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +41,7 @@ public class WineService {
 		reviewRepository.deleteById(reviewSeq);
 	}
 
-	public Page<List<Review>> reviewGet(int wineSeq, Pageable pageRequest) {
+	public Page<Review> reviewGet(int wineSeq, Pageable pageRequest) {
 		return reviewRepository.findBywineSeq(wineSeq, pageRequest);
 	}
 

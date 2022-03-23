@@ -86,8 +86,8 @@ public class WineController {
 	
 	@ApiOperation(value = "review list", notes = "리뷰 목록 조회", response = Review.class)
 	@GetMapping("/review/{wineSeq}")
-	public ResponseEntity<Page<List<Review>>> reviewGet(@PathVariable("wineSeq") @ApiParam(value = "와인 번호.", required = true) int wineSeq, @PageableDefault(size=5, sort = "reviewSeq", direction = Sort.Direction.ASC) Pageable pageRequest) {
-		return new ResponseEntity<Page<List<Review>>>(wineService.reviewGet(wineSeq, pageRequest), HttpStatus.OK);
+	public ResponseEntity<Page<Review>> reviewGet(@PathVariable("wineSeq") @ApiParam(value = "와인 번호.", required = true) int wineSeq, @PageableDefault(size=5, sort = "reviewSeq", direction = Sort.Direction.DESC) Pageable pageRequest) {
+		return new ResponseEntity<Page<Review>>(wineService.reviewGet(wineSeq, pageRequest), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "wine like", notes = "와인 좋아요, DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
