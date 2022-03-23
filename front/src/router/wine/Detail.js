@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Send from "../../config/Send";
 import logo from "../../res/img/logo.png";
+import ReviewList from "./ReviewList";
 import TopNav from "../main/Home/TopNav";
 import { Box, Breadcrumbs, Link, Grid, Typography, Card, CardMedia, Avatar, TextareaAutosize, Button, Rating, Pagination } from "@mui/material/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,6 +28,9 @@ function Detail(props) {
   const level = [1, 2, 3, 4, 5];
   const [rate, setRate] = useState(5);
   const [comment, setComment] = useState();
+  const [comments, setComments] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
   //와인정보
   const getDetail = () => {
@@ -88,12 +92,35 @@ function Detail(props) {
     };
     Send.post("/wine/review", JSON.stringify(data)).then((res) => {
       setComment("");
+      getReview();
     });
+  };
+
+  // 리뷰불러오기
+  const getReview = () => {
+    Send.get(`/wine/review/${wineSeq}`, {
+      params: {
+        wineSeq: wineSeq,
+        page: page - 1,
+      },
+    }).then((res) => {
+      setComments(res.data.content);
+      setTotalPage(res.data.totalPages);
+    });
+  };
+
+  // 리뷰페이지
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
   useEffect(() => {
     getDetail();
   }, []);
+
+  useEffect(() => {
+    getReview();
+  }, [page]);
 
   return (
     <>
@@ -227,37 +254,26 @@ function Detail(props) {
                     <Typography sx={{ fontSize: 20 }}>{wineProfile.score}</Typography>
                   </Box>
                   <Box sx={{ ml: 3, display: "flex" }}>
-                    <Rating name="size-medium" value={rate} precision={0.5} sx={{ mx: 2 }} onChange={handleRate} />
-                    <TextareaAutosize minRows={3} placeholder="리뷰를 입력하세요." style={{ width: 600 }} value={comment} onChange={handleComment} />
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                      <Rating name="size-medium" value={rate} precision={0.5} sx={{ mx: 2, height: 5 }} onChange={handleRate} />
+                      <Typography sx={{ mt: 3 }}>{rate * 2}점</Typography>
+                    </Box>
+                    <TextareaAutosize
+                      minRows={3}
+                      placeholder="리뷰를 입력하세요."
+                      style={{ width: 600 }}
+                      maxLength="44"
+                      value={comment}
+                      onChange={handleComment}
+                    />
                     <ThemeProvider theme={theme}>
                       <Button sx={{ mx: 2, mb: 4 }} variant="contained" color="neutral" onClick={(e) => postComment(wineProfile.wineSeq, e)}>
                         리뷰 작성
                       </Button>
                     </ThemeProvider>
                   </Box>
-                  <Box sx={{ ml: 3, my: 1 }}>
-                    <Box sx={{ mb: 0.5, display: "flex" }}>
-                      <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} readOnly />
-                      <Typography>바디감이 뛰어납니다! 처음 접하시는 분들은 조금 힘드실 수 있을 것 같아요</Typography>
-                    </Box>
-                    <Box sx={{ mb: 0.5, display: "flex" }}>
-                      <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} readOnly />
-                      <Typography>바디감이 뛰어납니다! 처음 접하시는 분들은 조금 힘드실 수 있을 것 같아요</Typography>
-                    </Box>
-                    <Box sx={{ mb: 0.5, display: "flex" }}>
-                      <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} readOnly />
-                      <Typography>바디감이 뛰어납니다! 처음 접하시는 분들은 조금 힘드실 수 있을 것 같아요</Typography>
-                    </Box>
-                    <Box sx={{ mb: 0.5, display: "flex" }}>
-                      <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} readOnly />
-                      <Typography>바디감이 뛰어납니다! 처음 접하시는 분들은 조금 힘드실 수 있을 것 같아요</Typography>
-                    </Box>
-                    <Box sx={{ mb: 0.5, display: "flex" }}>
-                      <Rating name="size-medium" defaultValue={5} precision={0.5} sx={{ mx: 2 }} readOnly />
-                      <Typography>바디감이 뛰어납니다! 처음 접하시는 분들은 조금 힘드실 수 있을 것 같아요</Typography>
-                    </Box>
-                  </Box>
-                  <Pagination sx={{ my: 2, mx: 35 }} count={10} />
+                  <ReviewList comments={comments} />
+                  <Pagination sx={{ my: 2, mx: 35 }} page={page} count={totalPage} onChange={handleChange} />
                 </Box>
               </Box>
             </Grid>
