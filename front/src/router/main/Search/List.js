@@ -6,7 +6,6 @@ import WineItem from "./WineItem";
 import Pagination from "react-js-pagination";
 import "./Paging.css";
 function List({ wines, totalCnt, page, handlePageChange, url, goDetail }) {
-  console.log(totalCnt);
   return (
     <>
       <div>
@@ -14,6 +13,7 @@ function List({ wines, totalCnt, page, handlePageChange, url, goDetail }) {
           wines.map((wine) => (
             ////detail url 바꿔야함. 상진님께 여줘보자!
             <div
+              style={{ cursor: "pointer" }}
               onClick={() =>
                 (document.location.href = `/detail/${wine.wineSeq}`)
               }
