@@ -1,8 +1,5 @@
 package com.ssafy.wible.api.controller.user;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -71,7 +68,7 @@ public class UserInfoController {
     
     @ApiOperation(value = "회원이 좋아요한 와인 리스트 조회")
 	@GetMapping("/likes/{userSeq}")
-	public Object getLikes(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq) {
-		return new ResponseEntity<>(userService.getLikeList(userSeq), HttpStatus.OK);
+	public Object getLikes(@PathVariable("userSeq") @ApiParam(value = "유저의 seq.", required = true) int userSeq, @PageableDefault(size=5, sort = "likeSeq", direction = Sort.Direction.DESC) Pageable pageRequest) {
+		return new ResponseEntity<>(userService.getLikeList(userSeq, pageRequest), HttpStatus.OK);
 	}
 }

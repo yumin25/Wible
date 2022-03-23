@@ -115,13 +115,20 @@ public class UserService {
         return resultMap;
 	}
 	
-	public List<LikeResponse> getLikeList(int user_seq){
+	public Object getLikeList(int user_seq, Pageable pageRequest){
+		Map<String, Object> resultMap = new HashMap<>();
         List<LikeResponse> list = new ArrayList<>();
-        List<Likes> likes = likeRepository.findAllByUserSeq(user_seq);
+        Page<Likes> likes = likeRepository.findAllByUserSeq(user_seq, pageRequest);
         for (Likes like: likes) {
         	Wine wine = wineRepository.findById(like.getWineSeq()).get();
-            list.add(new LikeResponse(wine.getKname(), wine.getEname(), wine.getType(), wine.getLikeCnt(),wine.getScore(), wine.getCountry(), wine.getImgPath()));
+            list.add(new LikeResponse(wine.getWineSeq(), like.getLikeSeq(), wine.getKname(), wine.getEname(), wine.getType(), wine.getLikeCnt(),wine.getScore(), wine.getCountry(), wine.getImgPath()));
         }
-        return list;
+        resultMap.put("content", list);
+        resultMap.put("totalPages", likes.getTotalPages());
+        resultMap.put("pageNumber", likes.getPageable().getPageNumber());
+        resultMap.put("totalElements", likes.getTotalElements());
+        resultMap.put("last", likes.getTotalPages()-1 == likes.getPageable().getPageNumber()?true:false);
+        resultMap.put("first", 0 == likes.getPageable().getPageNumber()?true:false);
+        return resultMap;
 	}
 }

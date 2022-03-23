@@ -13,6 +13,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LikeResponse {
+	@ApiModelProperty(value = "wine_seq")
+	private int wine_seq;
+	@ApiModelProperty(value = "like_seq")
+	private int like_seq;
     @ApiModelProperty(value = "kname")
     private String kname;
     @ApiModelProperty(value = "ename")
