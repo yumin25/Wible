@@ -62,8 +62,7 @@ function Search() {
     roseWine: false,
     dessertWine: false,
   });
-  // const [type, setType] = useState("0");
-  const [temp, setTemp] = useState();
+
   const [keyword, setKeyword] = useState("");
   const [sweetness, setSweetness] = useState("0");
   const [body, setBody] = useState("0");
@@ -71,7 +70,7 @@ function Search() {
   const [tanin, setTanin] = useState("0");
   const [minPrice, setMinPrice] = useState("0");
   const [maxPrice, setMaxPrice] = useState("0");
-  const [price, setPrice] = React.useState([0, 1000000]);
+
   //최소가격 -> price[0], 최대가격 -> price[1]
   const [country, setCountry] = useState({
     france: false,
@@ -90,6 +89,44 @@ function Search() {
   const typeString = JSON.stringify(type);
   const countryString = JSON.stringify(country);
 
+  function typeHandler(value) {
+    setType(value);
+  }
+  function keywordHandler(event) {
+    setKeyword(event.target.value);
+  }
+  function sweetnessHandler(value) {
+    setSweetness(value);
+  }
+  function bodyHandler(value) {
+    setBody(value);
+  }
+  function acidityHandler(value) {
+    setAcidity(value);
+  }
+  function taninHandler(value) {
+    setTanin(value);
+  }
+
+  function countryHandler(value) {
+    setCountry(value);
+  }
+
+  function minPriceHandler(value) {
+    setMinPrice(value);
+  }
+  function maxPriceHandler(value) {
+    setMaxPrice(value);
+  }
+
+  function handlePageChange(event) {
+    setPage(event);
+  }
+
+  function keywordHandler(event) {
+    setKeyword(event.target.value);
+  }
+
   useEffect(() => {
     getWines();
     console.log("카테고리 변경 일어남");
@@ -104,10 +141,6 @@ function Search() {
     tanin,
     country,
   ]);
-
-  function keywordHandler(event) {
-    setKeyword(event.target.value);
-  }
 
   function getWines() {
     if (keyword !== "" && keyword !== undefined) {
@@ -146,6 +179,7 @@ function Search() {
         });
     }
   }
+
   const onSubmit = (event) => {
     if (event.key === "Enter") {
       console.log(keyword);
@@ -156,42 +190,6 @@ function Search() {
       }
     }
   };
-
-  function typeHandler(value) {
-    setType(value);
-  }
-  function keywordHandler(event) {
-    setKeyword(event.target.value);
-  }
-  function sweetnessHandler(value) {
-    setSweetness(value);
-  }
-  function bodyHandler(value) {
-    setBody(value);
-  }
-  function acidityHandler(value) {
-    setAcidity(value);
-  }
-  function taninHandler(value) {
-    setTanin(value);
-  }
-
-  function countryHandler(value) {
-    setCountry(value);
-  }
-
-  function minPriceHandler(value) {
-    setMinPrice(value);
-  }
-  function maxPriceHandler(value) {
-    setMaxPrice(value);
-  }
-
-  function handlePageChange(event) {
-    setPage(event);
-  }
-
-  function goDetail() {}
 
   return (
     <>
@@ -214,8 +212,9 @@ function Search() {
       {/* 정렬 및 검색 */}
 
       <Container sx={{ borderTop: 1, borderColor: "#E5E5E5", display: "flex" }}>
-        <div id="category" style={{ display: "flex" }}>
+        <div style={{ display: "flex" }}>
           <Box
+            id="category"
             sx={{
               borderRight: 1,
               borderColor: "#E5E5E5",
@@ -245,7 +244,7 @@ function Search() {
               getWines={getWines}
             ></Category>
           </Box>
-          <div id="right">
+          <div id="searchInput,list">
             <div>
               <SearchInput
                 // keyword수정
@@ -263,7 +262,6 @@ function Search() {
               page={page}
               handlePageChange={handlePageChange}
               url={url}
-              goDetail={goDetail}
             ></List>
           </div>
         </div>
