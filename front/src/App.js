@@ -6,7 +6,10 @@ import Search from "./router/main/Search/Search";
 import Detail from "./router/wine/Detail";
 import Survey from "./router/survey/Survey";
 import SurveyResult from "./router/survey/SurveyResult";
-
+import MyPage from "./router/user/MyPage/index";
+import UserReview from "./router/user/MyPage/UserReview";
+import UserInfo from "./router/user/MyPage/UserInfo";
+import UserLike from "./router/user/MyPage/UserLike";
 function App() {
   return (
     <>
@@ -15,6 +18,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/accounts/login" element={<Login />} />
           <Route path="/accounts/signup" element={<SignupContainer />} />
+          <Route path="/mypage" element={<MyPage />}>
+            <Route index element={<UserReview />} />
+            <Route path="like" />
+            <Route path="userInfo" />
+          </Route>
           <Route path="/search" element={<Search />} />
           <Route path="/detail/:wineSeq" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
