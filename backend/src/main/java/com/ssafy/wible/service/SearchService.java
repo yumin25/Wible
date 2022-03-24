@@ -20,7 +20,7 @@ public class SearchService {
     @Autowired
     private WineRepository wineRepository;
 
-    public Page<Wine> search(String keyword, int start, int end, List<Type> types, int body, int tannin, int sweet, int acidity, List<Country> countries, Pageable pageRequest){
+    public Page<Wine> search(String keyword, int start, int end, List<Type> types, List<Integer> body, int tannin, List<Integer> sweet, int acidity, List<Country> countries, Pageable pageRequest){
         start = start * 10000;
         if(end == 100) end = Integer.MAX_VALUE;
         else end = end * 10000;
@@ -32,10 +32,10 @@ public class SearchService {
         }
         if(types.size() != 0) spec = spec.and(WineSpecification.equalsType(types));
         if(countries.size() != 0) spec = spec.and(WineSpecification.equalsCountry(countries));
-        if(body != -1) spec = spec.and(WineSpecification.equalsBody(body));
+        if(body != null) spec = spec.and(WineSpecification.equalsBody(body));
         if(tannin != -1) spec = spec.and(WineSpecification.equalsTannin(tannin));
         if(acidity != -1) spec = spec.and(WineSpecification.equalsAcidity(acidity));
-        if(sweet != -1) spec = spec.and(WineSpecification.equalsSweet(sweet));
+        if(sweet != null) spec = spec.and(WineSpecification.equalsSweet(sweet));
         return wineRepository.findAll(spec, pageRequest);
     }
 }

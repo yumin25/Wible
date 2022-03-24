@@ -29,8 +29,10 @@ public class WineSpecification {
         return (((root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("price"), start, end)));
     }
 
-    public static Specification<Wine> equalsBody(int body){
-        return (((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("body"), body)));
+    public static Specification<Wine> equalsBody(List<Integer> body) {
+        return (root, query, criteriaBuilder) -> {
+            return root.get("body").in(body);
+        };
     }
 
     public static Specification<Wine> equalsTannin(int tannin){
@@ -41,7 +43,9 @@ public class WineSpecification {
         return (((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("acidity"), acidity)));
     }
 
-    public static Specification<Wine> equalsSweet(int sweet){
-        return (((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("sweet"), sweet)));
+    public static Specification<Wine> equalsSweet(List<Integer> sweet) {
+        return (root, query, criteriaBuilder) -> {
+            return root.get("sweet").in(sweet);
+        };
     }
 }
