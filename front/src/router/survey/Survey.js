@@ -1,6 +1,8 @@
 import { useState } from "react";
-import logo from "../../res/img/logo.png";
-import { Box, Breadcrumbs, Link, Typography, Button } from "@mui/material/";
+import { connect } from "react-redux";
+import TopNav from "../main/Home/TopNav";
+import { Link } from "react-router-dom";
+import { Box, Typography, Button } from "@mui/material/";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import QuestionOne from "./QuestionOne";
 import QuestionTwo from "./QuestionTwo";
@@ -21,43 +23,39 @@ const theme = createTheme({
   },
 });
 
-export default function Home() {
+function Survey(props) {
   const [page, setPage] = useState(1);
+  const [wine, setWine] = useState("");
+  const [price, setPrice] = useState();
+  const [sweet, setSweet] = useState();
+  const [body, setBody] = useState();
+  const [country, setCountry] = useState(() => []);
+
   const handlePage = (page) => {
     setPage(page);
+    if (wine === "") {
+      setPage(page - 1);
+      alert("와인종류를 선택해주세요.");
+    }
+    if (page === 3 && price === undefined) {
+      setPage(page - 1);
+      alert("가격대를 선택해주세요.");
+    }
+    if (page === 4 && sweet === undefined) {
+      setPage(page - 1);
+      alert("당도를 선택해주세요.");
+    }
+    if (page === 5 && body === undefined) {
+      setPage(page - 1);
+      alert("바디감을 선택해주세요.");
+    }
   };
 
   return (
     <>
       {/* 상단 구성 */}
       <div>
-        <Breadcrumbs style={{ display: "flex", flexDirection: "row-reverse", marginTop: 10, marginRight: 350 }} aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/accounts/signup">
-            회원가입
-          </Link>
-          <Link underline="hover" color="inherit" href="/accounts/login">
-            로그인
-          </Link>
-        </Breadcrumbs>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Link href="/">
-            <img width={250} src={logo} alt="logo" />
-          </Link>
-        </Box>
-        {/* <Box sx={{ my: 3, px: 50, display: "flex", justifyContent: "space-evenly" }}>
-          <Link href="#" color="inherit" underline="none">
-            와인검색
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            와인사전
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            주제별와인
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            음식추천
-          </Link>
-        </Box> */}
+        <TopNav />
         <Box sx={{ mt: 10, mb: 5, mx: 20, display: "flex", alignItems: "center", flexDirection: "column" }}>
           <Typography variant="h5" sx={{ mb: 5, fontWeight: "bold" }}>
             당신을 위한 wible 와인 추천
@@ -71,22 +69,32 @@ export default function Home() {
           {/* 질문 */}
           <Box sx={{ height: 350 }}>
             {page === 1 ? (
-              <QuestionOne></QuestionOne>
+              <QuestionOne wine={wine} setWine={setWine}></QuestionOne>
             ) : page === 2 ? (
-              <QuestionTwo></QuestionTwo>
+              <QuestionTwo price={price} setPrice={setPrice}></QuestionTwo>
             ) : page === 3 ? (
-              <QuestionThree></QuestionThree>
+              <QuestionThree sweet={sweet} setSweet={setSweet}></QuestionThree>
             ) : page === 4 ? (
-              <QuestionFour></QuestionFour>
+              <QuestionFour body={body} setBody={setBody}></QuestionFour>
             ) : page === 5 ? (
-              <QuestionFive></QuestionFive>
+              <QuestionFive country={country} setCountry={setCountry}></QuestionFive>
             ) : null}
           </Box>
           {/* 버튼 */}
           <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row-reverse" }}>
             <ThemeProvider theme={theme}>
               {page === 5 ? (
-                <Link underline="hover" color="inherit" href="/survey/result">
+                <Link
+                  to={"/survey/result"}
+                  state={{
+                    wine: wine,
+                    price: price,
+                    sweet: sweet,
+                    body: body,
+                    country: country,
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
                   <Button variant="contained" color="end">
                     완료
                   </Button>
@@ -110,3 +118,9 @@ export default function Home() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { userSlice: state.user };
+}
+
+export default connect(mapStateToProps)(Survey);
