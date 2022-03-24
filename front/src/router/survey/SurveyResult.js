@@ -9,49 +9,52 @@ export default function SurveyResult() {
   const { state } = useLocation();
   const [results, setResults] = useState([]);
 
-  // const country = {
-  //   france: false,
-  //   italy: false,
-  //   portugal: false,
-  //   spain: false,
-  //   germany: false,
-  //   america: false,
-  //   canada: false,
-  //   chile: false,
-  //   australia: false,
-  //   newZealand: false,
-  //   etc: false,
-  // };
-  // const countryString = JSON.stringify(country);
+  let country;
+  if (state.country.length === 0) {
+    country = "FRANCE,UNITED_STATES,ITALY,CHILE,PORTUGAL,AUSTRALIA,SPAIN,NEW_ZEALAND";
+  } else {
+    country = state.country.join(",");
+  }
+
   let minPrice;
   let maxPrice;
-  if (state.price === 1) {
+  if (state.price === "1") {
     minPrice = 0;
-    maxPrice = 19999;
-  } else if (state.price === 2) {
-    minPrice = 20000;
-    maxPrice = 39999;
-  } else if (state.price === 3) {
-    minPrice = 40000;
-    maxPrice = 69999;
-  } else if (state.price === 4) {
-    minPrice = 70000;
-    maxPrice = 199999;
-  } else {
+    maxPrice = 2;
+  } else if (state.price === "2") {
+    minPrice = 2;
+    maxPrice = 4;
+  } else if (state.price === "3") {
+    minPrice = 4;
+    maxPrice = 7;
+  } else if (state.price === "4") {
+    minPrice = 7;
+    maxPrice = 20;
+  } else if (state.price === "0") {
     minPrice = 0;
-    maxPrice = 9999999;
+    maxPrice = 999;
   }
-  let body;
-  if (state.body === 0) {
-    body = null;
-  } else {
-    body = state.body;
-  }
+
   let sweet;
-  if (state.sweet === 0) {
-    sweet = "";
-  } else {
-    sweet = state.sweet;
+  if (state.sweet === "0") {
+    sweet = "1,2,3,4,5";
+  } else if (state.sweet === "2") {
+    sweet = "1,2";
+  } else if (state.sweet === "3") {
+    sweet = "3";
+  } else if (state.sweet === "4") {
+    sweet = "4,5";
+  }
+
+  let body;
+  if (state.body === "0") {
+    body = "1,2,3,4,5";
+  } else if (state.body === "2") {
+    body = "1,2";
+  } else if (state.body === "3") {
+    body = "3";
+  } else if (state.body === "4") {
+    body = "4,5";
   }
 
   const getResult = () => {
@@ -63,18 +66,16 @@ export default function SurveyResult() {
           price_upper: maxPrice,
           sweet: sweet,
           body: body,
-          country: "FRANCE",
+          country: country,
         },
       })
       .then((res) => {
-        console.log(res.data.content);
         setResults(res.data.content);
       });
   };
 
   useEffect(() => {
     getResult();
-    console.log(results);
   }, []);
 
   return (

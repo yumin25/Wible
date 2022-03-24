@@ -33,8 +33,23 @@ function Survey(props) {
 
   const handlePage = (page) => {
     setPage(page);
+    if (wine === "") {
+      setPage(page - 1);
+      alert("와인종류를 선택해주세요.");
+    }
+    if (page === 3 && price === undefined) {
+      setPage(page - 1);
+      alert("가격대를 선택해주세요.");
+    }
+    if (page === 4 && sweet === undefined) {
+      setPage(page - 1);
+      alert("당도를 선택해주세요.");
+    }
+    if (page === 5 && body === undefined) {
+      setPage(page - 1);
+      alert("바디감을 선택해주세요.");
+    }
   };
-  console.log(wine, price, sweet, body, country);
 
   return (
     <>
