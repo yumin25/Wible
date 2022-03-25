@@ -43,26 +43,17 @@ function Search() {
   const [page, setPage] = useState(1);
   /////////////wines 수정해야함
   const [wines, setWines] = useState([
-    {
-      wineSeq: 9,
-      kname: "그랜드 리저브 샤도네이 2014",
-      ename: "Grand Reserve Chardonnay 2014",
-      type: "WHITE",
-      country: "UNITED_STATES",
-      grapes: "100 % 샤도네이",
-      price: 120000,
-      img_path: null,
-      score: 3.8,
-    },
-  ]);
-  const [type, setType] = useState({
-    redWine: false,
-    whiteWine: false,
-    sparklingWine: false,
-    roseWine: false,
-    dessertWine: false,
-  });
 
+  ]);
+  // const [type, setType] = useState({
+  //   redWine: false,
+  //   whiteWine: false,
+  //   sparklingWine: false,
+  //   roseWine: false,
+  //   dessertWine: false,
+  // });
+
+  const [type, setType]= useState([]);
   const [keyword, setKeyword] = useState("");
   const [sweetness, setSweetness] = useState("0");
   const [body, setBody] = useState("0");
@@ -72,22 +63,21 @@ function Search() {
   const [maxPrice, setMaxPrice] = useState("0");
 
   //최소가격 -> price[0], 최대가격 -> price[1]
-  const [country, setCountry] = useState({
-    france: false,
-    italy: false,
-    portugal: false,
-    spain: false,
-    germany: false,
-    america: false,
-    canada: false,
-    chile: false,
-    australia: false,
-    newZealand: false,
-    etc: false,
-  });
+  // const [country, setCountry] = useState({
+  //   france: false,
+  //   italy: false,
+  //   portugal: false,
+  //   spain: false,
+  //   germany: false,
+  //   america: false,
+  //   canada: false,
+  //   chile: false,
+  //   australia: false,
+  //   newZealand: false,
+  //   etc: false,
+  // });
 
-  const typeString = JSON.stringify(type);
-  const countryString = JSON.stringify(country);
+  const [country, setCountry]= useState([]);
 
   function typeHandler(value) {
     setType(value);
@@ -143,6 +133,9 @@ function Search() {
   ]);
 
   function getWines() {
+    const typeString = JSON.stringify(type);
+    const countryString = JSON.stringify(country);
+  
     if (keyword !== "" && keyword !== undefined) {
       console.log(
         keyword,
@@ -153,7 +146,7 @@ function Search() {
         tanin,
         sweetness,
         acidity,
-        country
+        countryString
       );
       axios
         .get(url + `/search`, {
@@ -167,10 +160,12 @@ function Search() {
             sweet: sweetness,
             acidity: acidity,
             country: countryString,
+            page:page
           },
+
         })
         .then(function (response) {
-          ////이거 데이터 확인해보자
+          console.log(response);
           setTotalCnt(response.data.totalElements);
           setWines(response.data.content);
         })

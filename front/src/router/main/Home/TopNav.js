@@ -39,7 +39,7 @@ function TopNav({ userSlice }) {
             }}
             aria-label="breadcrumb"
           >
-            <Link underline="hover" color="inherit" href="#">
+            <Link underline="hover" color="inherit" href="/mypage">
               마이페이지
             </Link>
             <Link underline="hover" color="inherit" href="/" onClick={Logout}>

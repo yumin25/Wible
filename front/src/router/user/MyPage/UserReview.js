@@ -12,19 +12,7 @@ function UserReview({ userSlice }) {
   const [totalCnt, setTotalCnt] = useState(0);
 
   const [reviews, setReviews] = useState([
-    {
-      wine_seq: 1,
-      review_seq: 2,
-      kname: "와인한글이름",
-      ename: "와인영어이름",
-      type: "레드",
-      grapes: "포도품종",
-      review_cnt: 100,
-      review_score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-      review_text: "맛있어요!",
-    },
+  
   ]);
 
   useEffect(() => {
@@ -47,7 +35,8 @@ function UserReview({ userSlice }) {
         },
       })
       .then(function (response) {
-        setReviews(response.data);
+        console.log(response.data.content);
+        setReviews(response.data.content);
       })
       .catch(function (error) {
         console.log(error);
