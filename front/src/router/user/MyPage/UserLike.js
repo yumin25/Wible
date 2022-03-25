@@ -6,9 +6,12 @@ import LikeItem from "./LikeItem";
 
 function UserLike({ userSlice }) {
   const url = "http://localhost:8080";
+
   const [page, setPage] = useState(1);
   const [likes, setLikes] = useState([
     {
+      wine_seq: 0,
+      like_seq: 1,
       kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
       ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
       type: "레드",
@@ -18,113 +21,32 @@ function UserLike({ userSlice }) {
       img_path: "사진경로",
     },
     {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
+      wine_seq: 5,
+      like_seq: 1,
+      kname: "와인한글이름",
+      ename: "와인영어이름",
+      type: "화이트",
+      like_cnt: 130,
+      score: 3.3,
       country: "프랑스",
       img_path: "사진경로",
     },
   ]);
+
   const [userSeq, setUserSeq] = useState(userSlice.userSeq);
+
   function handlePageChange(event) {
     setPage(event);
   }
 
   function getUserLike() {
     axios
-      .get(url + `/userinfo/likes/${userSeq}`)
+      .get(url + `/userinfo/likes/${userSeq}`, {
+        params: {
+          page: page - 1,
+          size: 12,
+        },
+      })
       .then(function (response) {
         setLikes(response.data);
       })
@@ -167,7 +89,7 @@ function UserLike({ userSlice }) {
           >
             {likes &&
               likes.map((like) => (
-                <div style={{ cursor: "pointer" }}>
+                <div>
                   <LikeItem url={url} like={like} userSeq={userSeq}></LikeItem>
                 </div>
               ))}

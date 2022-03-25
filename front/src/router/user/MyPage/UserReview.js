@@ -11,7 +11,21 @@ function UserReview({ userSlice }) {
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
 
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([
+    {
+      wine_seq: 1,
+      review_seq: 2,
+      kname: "와인한글이름",
+      ename: "와인영어이름",
+      type: "레드",
+      grapes: "포도품종",
+      review_cnt: 100,
+      review_score: 4.8,
+      country: "프랑스",
+      img_path: "사진경로",
+      review_text: "맛있어요!",
+    },
+  ]);
 
   useEffect(() => {
     getUserReview();
@@ -26,7 +40,12 @@ function UserReview({ userSlice }) {
   function getUserReview() {
     ////userSeq 어케 처리??
     axios
-      .get(url + `/userinfo/reviews/${userSeq}`)
+      .get(url + `/userinfo/reviews/${userSeq}`, {
+        params: {
+          page: page - 1,
+          size: 10,
+        },
+      })
       .then(function (response) {
         setReviews(response.data);
       })
