@@ -26,7 +26,6 @@ function UserReview({ userSlice }) {
   //userSeq 어케 처리?
   const [userSeq, setUserSeq] = useState(userSlice.userSeq);
   function getUserReview() {
-    ////userSeq 어케 처리??
     axios
       .get(url + `/userinfo/reviews/${userSeq}`, {
         params: {
@@ -35,6 +34,7 @@ function UserReview({ userSlice }) {
         },
       })
       .then(function (response) {
+        console.log(response)
         console.log(response.data.content);
         setReviews(response.data.content);
       })
@@ -68,6 +68,7 @@ function UserReview({ userSlice }) {
               url={url}
               review={review}
               userSeq={userSeq}
+              getUserReview={getUserReview}
             ></ReviewItem>
           ))}
       </div>

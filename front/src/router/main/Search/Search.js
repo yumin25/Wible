@@ -119,6 +119,18 @@ function Search() {
 
   useEffect(() => {
     getWines();
+    console.log(wines);
+    console.log('컴포넌트가 화면에 나타남');
+    return () => {
+      console.log('컴포넌트가 화면에서 사라짐');
+    };
+  }, []);
+
+
+
+
+  useEffect(() => {
+    getWines();
     console.log("카테고리 변경 일어남");
   }, [
     page,
@@ -133,8 +145,11 @@ function Search() {
   ]);
 
   function getWines() {
-    const typeString = JSON.stringify(type);
-    const countryString = JSON.stringify(country);
+    // const typeString = JSON.stringify(type);
+    const typeString = type.toString();
+    const countryString = country.toString();
+
+    // const countryString = JSON.stringify(country);
   
     if (keyword !== "" && keyword !== undefined) {
       console.log(
@@ -165,6 +180,7 @@ function Search() {
 
         })
         .then(function (response) {
+
           console.log(response);
           setTotalCnt(response.data.totalElements);
           setWines(response.data.content);

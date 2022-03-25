@@ -9,7 +9,6 @@ function Category({
   url,
   keyword,
   type,
-  // price,
   body,
   sweetness,
   tanin,
@@ -127,6 +126,7 @@ function Category({
     },
   });
 
+  console.log(country);
   return (
     <>
       <div>
@@ -135,13 +135,13 @@ function Category({
           <div style={CategoryStyle}>종류</div>
           <Button
             variant="contained"
-            style={type.redWine ? WineClickedStyle : WineTypeStyle}
+            style={type.includes("RED")===true ? WineClickedStyle : WineTypeStyle}
             onClick={() => {
-              if (type.redWine === true) {
-                typeHandler({ ...type, redWine: false });
+              if (type.includes("RED")===true) {
+                typeHandler(type.filter(word=> word!=="RED"));
                 //setType({ ...type, redWine: false });
               } else {
-                typeHandler({ ...type, redWine: true });
+                typeHandler([ ...type,"RED" ]);
                 //setType({ ...type, redWine: true });
               }
             }}
@@ -151,14 +151,14 @@ function Category({
 
           <Button
             variant="contained"
-            style={type.whiteWine ? WineClickedStyle : WineTypeStyle}
+            style={type.includes("WHITE")===true ? WineClickedStyle : WineTypeStyle}
             onClick={() => {
-              if (type.whiteWine === true) {
-                typeHandler({ ...type, whiteWine: false });
-                //setType({ ...type, whiteWine: false });
+              if (type.includes("WHITE")===true) {
+                typeHandler(type.filter(word=> word!=="WHITE"));
+                //setType({ ...type, redWine: false });
               } else {
-                typeHandler({ ...type, whiteWine: true });
-                //setType({ ...type, whiteWine: true });
+                typeHandler([ ...type,"WHITE" ]);
+                //setType({ ...type, redWine: true });
               }
             }}
           >
@@ -166,14 +166,14 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={type.sparklingWine ? WineClickedStyle : WineTypeStyle}
+            style={type.includes("SPARKLING")===true ? WineClickedStyle : WineTypeStyle}
             onClick={() => {
-              if (type.sparklingWine === true) {
-                typeHandler({ ...type, sparklingWine: false });
-                //setType({ ...type, sparklingWine: false });
+              if (type.includes("SPARKLING")===true) {
+                typeHandler(type.filter(word=> word!=="SPARKLING"));
+                //setType({ ...type, redWine: false });
               } else {
-                typeHandler({ ...type, sparklingWine: true });
-                //setType({ ...type, sparklingWine: true });
+                typeHandler([ ...type,"SPARKLING" ]);
+                //setType({ ...type, redWine: true });
               }
             }}
           >
@@ -182,14 +182,14 @@ function Category({
           <br></br>
           <Button
             variant="contained"
-            style={type.roseWine ? WineClickedStyle : WineTypeStyle}
+            style={type.includes("ROSE")===true ? WineClickedStyle : WineTypeStyle}
             onClick={() => {
-              if (type.roseWine === true) {
-                typeHandler({ ...type, roseWine: false });
-                //setType({ ...type, roseWine: false });
+              if (type.includes("ROSE")===true) {
+                typeHandler(type.filter(word=> word!=="ROSE"));
+                //setType({ ...type, redWine: false });
               } else {
-                typeHandler({ ...type, roseWine: true });
-                // setType({ ...type, roseWine: true });
+                typeHandler([ ...type,"ROSE" ]);
+                //setType({ ...type, redWine: true });
               }
             }}
           >
@@ -197,14 +197,14 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={type.dessertWine ? WineClickedStyle : WineTypeStyle}
+            style={type.includes("DESSERT")===true ? WineClickedStyle : WineTypeStyle}
             onClick={() => {
-              if (type.dessertWine === true) {
-                typeHandler({ ...type, dessertWine: false });
-                //setType({ ...type, dessertWine: false });
+              if (type.includes("DESSERT")===true) {
+                typeHandler(type.filter(word=> word!=="DESSERT"));
+                //setType({ ...type, redWine: false });
               } else {
-                typeHandler({ ...type, dessertWine: true });
-                //setType({ ...type, dessertWine: true });
+                typeHandler([ ...type,"DESSERT" ]);
+                //setType({ ...type, redWine: true });
               }
             }}
           >
@@ -367,13 +367,13 @@ function Category({
 
           <Button
             variant="contained"
-            style={country.france ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("FRANCE")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.france === true) {
-                countryHandler({ ...country, france: false });
+              if (country.includes("FRANCE")===true) {
+                countryHandler(country.filter(word=> word!=="FRANCE"));
                 //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, france: true });
+                countryHandler([ ...country,"FRANCE" ]);   
                 //setCountry({ ...country, france: true });
               }
             }}
@@ -382,29 +382,30 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={country.italy ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("ITALY")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.italy === true) {
-                countryHandler({ ...country, italy: false });
-                //setCountry({ ...country, italy: false });
+              if (country.includes("ITALY")===true) {
+                countryHandler(country.filter(word=> word!=="ITALY"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, italy: true });
-                //setCountry({ ...country, italy: true });
+                countryHandler([ ...country,"ITALY" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
+
           >
             이탈리아
           </Button>
           <Button
             variant="contained"
-            style={country.portugal ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("PORTUGAL")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.portugal === true) {
-                countryHandler({ ...country, portugal: false });
-                //setCountry({ ...country, portugal: false });
+              if (country.includes("PORTUGAL")===true) {
+                countryHandler(country.filter(word=> word!=="PORTUGAL"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, portugal: true });
-                //setCountry({ ...country, portugal: true });
+                countryHandler([ ...country,"PORTUGAL" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -412,14 +413,14 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={country.spain ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("SPAIN")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.spain === true) {
-                countryHandler({ ...country, spain: false });
-                // setCountry({ ...country, spain: false });
+              if (country.includes("SPAIN")===true) {
+                countryHandler(country.filter(word=> word!=="SPAIN"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, spain: true });
-                // setCountry({ ...country, spain: true });
+                countryHandler([ ...country,"SPAIN" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -428,14 +429,14 @@ function Category({
           <br></br>
           <Button
             variant="contained"
-            style={country.germany ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("GERMANY")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.germany === true) {
-                countryHandler({ ...country, germany: false });
-                //setCountry({ ...country, germany: false });
+              if (country.includes("GERMANY")===true) {
+                countryHandler(country.filter(word=> word!=="GERMANY"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, germany: true });
-                //setCountry({ ...country, germany: true });
+                countryHandler([ ...country,"GERMANY" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -443,14 +444,14 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={country.america ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("UNITED_STATES")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.america === true) {
-                countryHandler({ ...country, america: false });
-                //setCountry({ ...country, america: false });
+              if (country.includes("UNITED_STATES")===true) {
+                countryHandler(country.filter(word=> word!=="UNITED_STATES"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, america: true });
-                //setCountry({ ...country, america: true });
+                countryHandler([ ...country,"UNITED_STATES" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -458,14 +459,14 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={country.canada ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("CANADA")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.canada === true) {
-                countryHandler({ ...country, canada: false });
-                //setCountry({ ...country, canada: false });
+              if (country.includes("CANADA")===true) {
+                countryHandler(country.filter(word=> word!=="CANADA"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, canada: true });
-                //setCountry({ ...country, canada: true });
+                countryHandler([ ...country,"CANADA" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -473,14 +474,14 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={country.chile ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("CHILE")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.chile === true) {
-                countryHandler({ ...country, chile: false });
-                //setCountry({ ...country, chile: false });
+              if (country.includes("CHILE")===true) {
+                countryHandler(country.filter(word=> word!=="CHILE"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, chile: true });
-                //setCountry({ ...country, chile: true });
+                countryHandler([ ...country,"CHILE" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -489,14 +490,14 @@ function Category({
           <br></br>
           <Button
             variant="contained"
-            style={country.australia ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("AUSTRALIA")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.australia === true) {
-                countryHandler({ ...country, australia: false });
-                //setCountry({ ...country, australia: false });
+              if (country.includes("AUSTRALIA")===true) {
+                countryHandler(country.filter(word=> word!=="AUSTRALIA"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, australia: true });
-                //setCountry({ ...country, australia: true });
+                countryHandler([ ...country,"AUSTRALIA" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
@@ -504,34 +505,20 @@ function Category({
           </Button>
           <Button
             variant="contained"
-            style={country.newZealand ? CountryClickedStyle : CountryTypeStyle}
+            style={country.includes("NEW_ZEALAND")===true  ? CountryClickedStyle : CountryTypeStyle}
             onClick={() => {
-              if (country.newZealand === true) {
-                countryHandler({ ...country, newZealand: false });
-                //setCountry({ ...country, newZealand: false });
+              if (country.includes("NEW_ZEALAND")===true) {
+                countryHandler(country.filter(word=> word!=="NEW_ZEALAND"));
+                //setCountry({ ...country, france: false });
               } else {
-                countryHandler({ ...country, newZealand: true });
-                //setCountry({ ...country, newZealand: true });
+                countryHandler([ ...country,"NEW_ZEALAND" ]);   
+                //setCountry({ ...country, france: true });
               }
             }}
           >
             뉴질랜드
           </Button>
-          <Button
-            variant="contained"
-            style={country.etc ? CountryClickedStyle : CountryTypeStyle}
-            onClick={() => {
-              if (country.etc === true) {
-                countryHandler({ ...country, etc: false });
-                //setCountry({ ...country, etc: false });
-              } else {
-                countryHandler({ ...country, etc: true });
-                //setCountry({ ...country, etc: true });
-              }
-            }}
-          >
-            기타
-          </Button>
+         
         </div>
       </div>
     </>
