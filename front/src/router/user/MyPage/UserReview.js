@@ -7,7 +7,7 @@ import "../../main/Search/Paging.css";
 import { connect } from "react-redux";
 
 function UserReview({ userSlice }) {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io";
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
 
