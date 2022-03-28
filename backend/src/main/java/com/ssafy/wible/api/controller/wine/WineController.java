@@ -38,7 +38,7 @@ import io.swagger.annotations.ApiParam;
 
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
-@RequestMapping("/wine")
+@RequestMapping("api/wine")
 @Api("와인 컨트롤러")
 public class WineController {
 	public static final Logger logger= LoggerFactory.getLogger(WineController.class);

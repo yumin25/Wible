@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiParam;
 
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
-@RequestMapping("/wineinfo")
+@RequestMapping("api/wineinfo")
 @Api("와인 상식 컨트롤러")
 public class WineInfoController {
 	
