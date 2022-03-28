@@ -150,8 +150,7 @@ function Search() {
     const countryString = country.toString();
 
     // const countryString = JSON.stringify(country);
-  
-    if (keyword !== "" && keyword !== undefined) {
+
       console.log(
         keyword,
         typeString,
@@ -187,7 +186,7 @@ function Search() {
         .catch(function (error) {
           console.log(error);
         });
-    }
+
   }
 
   const onSubmit = (event) => {
