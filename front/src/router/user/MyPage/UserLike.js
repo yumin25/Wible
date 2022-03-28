@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
@@ -8,31 +8,10 @@ function UserLike({ userSlice }) {
   const url = "http://localhost:8080";
 
   const [page, setPage] = useState(1);
-  const [likes, setLikes] = useState([
-    {
-      wine_seq: 0,
-      like_seq: 1,
-      kname: "도멘 마르샹 그리요 후쇼트 샹베르땡 그랑 크뤼",
-      ename: "DOMANE MARCHAND GRILLOT RUCHOTTES-CHANBERTIN GRAND GRU",
-      type: "레드",
-      like_cnt: 100,
-      score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-    {
-      wine_seq: 5,
-      like_seq: 1,
-      kname: "와인한글이름",
-      ename: "와인영어이름",
-      type: "화이트",
-      like_cnt: 130,
-      score: 3.3,
-      country: "프랑스",
-      img_path: "사진경로",
-    },
-  ]);
-
+  const [likes, setLikes] = useState([]);
+  useEffect(() => {
+    getUserLike();
+  }, []);
   const [userSeq, setUserSeq] = useState(userSlice.userSeq);
 
   function handlePageChange(event) {
@@ -48,7 +27,9 @@ function UserLike({ userSlice }) {
         },
       })
       .then(function (response) {
-        setLikes(response.data);
+
+        setLikes(response.data.content);
+        console.log(response)
       })
       .catch(function (error) {
         console.log(error);
@@ -89,9 +70,7 @@ function UserLike({ userSlice }) {
           >
             {likes &&
               likes.map((like) => (
-                <div>
-                  <LikeItem url={url} like={like} userSeq={userSeq}></LikeItem>
-                </div>
+                  <LikeItem url={url} like={like} userSeq={userSeq} getUserLike={getUserLike}></LikeItem>
               ))}
           </div>
         </div>

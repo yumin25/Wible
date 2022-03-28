@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { update } from "../../../store/user"; 
 import Button from "@mui/material/Button";
 import axios from "axios";
 import {
@@ -7,7 +8,8 @@ import {
   checkPhoneNumber,
   checkPhoneDuplicate,
 } from "../ValidCheck";
-function UserInfo({ userSlice }) {
+function UserInfo({ userSlice,updateUser }) {
+  console.log(userSlice)
   const url = "http://localhost:8080";
   const [userName, setUsername] = useState(userSlice.userName);
   const [nickname, setNickname] = useState(userSlice.userNickname);
@@ -37,6 +39,13 @@ function UserInfo({ userSlice }) {
   function handlePasswordConfirm(event) {
     setPasswordConfirm(event.target.value);
   }
+
+  const Logout = () => {
+    window.localStorage.clear();
+    document.location.href = `/login`
+  };
+
+
   function ModifyUserInfo() {
     axios
       .put(url + `/userinfo`, {
@@ -46,6 +55,7 @@ function UserInfo({ userSlice }) {
       })
       .then((response) => {
         console.log(response);
+        updateUser({nickname,phone});
         alert("수정되었습니다.");
       })
       .catch((error) => {});
@@ -248,4 +258,9 @@ function UserInfo({ userSlice }) {
 function mapStateToProps(state) {
   return { userSlice: state.user };
 }
-export default connect(mapStateToProps)(UserInfo);
+
+function mapDispatchToProps(dispatch) {
+  return { updateUser: (user) => dispatch(update(user)) };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo); 
