@@ -25,7 +25,7 @@ public class WineDetailResponse {
     @ApiModelProperty(value = "grapes")
     private String grapes;
     @ApiModelProperty(value = "alcohol")
-    private int alcohol;
+    private String alcohol;
     @ApiModelProperty(value = "price")
     private int price;
     @ApiModelProperty(value = "body")

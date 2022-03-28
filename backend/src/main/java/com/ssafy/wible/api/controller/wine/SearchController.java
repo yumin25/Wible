@@ -19,7 +19,7 @@ import java.util.List;
 
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
-@RequestMapping("/search")
+@RequestMapping("api/search")
 @Api("검색 컨트롤러")
 public class SearchController {
     @Autowired
