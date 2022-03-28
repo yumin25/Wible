@@ -19,6 +19,10 @@ function Home({ userSlice }) {
     setCriteria(event.target.value);
   };
 
+  const getData = () => {
+    Send.get(`/wine/best`);
+  };
+
   const [bestWine, setBestWine] = useState([]);
   const getBestWine = () => {
     Send.get(`/wine/best/${criteria}/${popular}`).then((res) => {
@@ -29,6 +33,10 @@ function Home({ userSlice }) {
   useEffect(() => {
     getBestWine();
   }, [popular, criteria]);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
