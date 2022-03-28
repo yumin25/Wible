@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiParam;
 
 @CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 @RestController
-@RequestMapping("/user")
+@RequestMapping("api/user")
 @Api("회원가입 컨트롤러")
 public class UserController {
 	
