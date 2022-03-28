@@ -30,7 +30,7 @@ public class Wine {
 
     private String winery;
     private String grapes;
-    private int alcohol;
+    private String alcohol;
     private int price;
     private int body;
     private int tannin;
