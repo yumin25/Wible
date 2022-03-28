@@ -38,7 +38,7 @@ const SearchIcon = styled.img.attrs({
   left: 82.5%;
 `;
 function Search() {
-  const url = "http://j6a303.p.ssafy.io";
+  const url = "http://j6a303.p.ssafy.io/api";
   const [totalCnt, setTotalCnt] = useState("0");
   const [page, setPage] = useState(1);
   /////////////wines 수정해야함
