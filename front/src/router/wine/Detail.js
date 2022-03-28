@@ -150,13 +150,23 @@ function Detail(props) {
                 {/* 와인정보 */}
                 <Box sx={{ px: 2, display: "flex", justifyContent: "space-between" }}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#C50D0D" }} />
+                    {wineProfile.type === "RED" ? (
+                      <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#C50D0D" }} />
+                    ) : wineProfile.type === "WHITE" ? (
+                      <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#FFF5EE" }} />
+                    ) : wineProfile.type === "ROSE" ? (
+                      <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#FFE4E1" }} />
+                    ) : wineProfile.type === "SPARKLING" ? (
+                      <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#FFFACD" }} />
+                    ) : (
+                      <FontAwesomeIcon icon={cs} size="2xl" style={{ color: "#D2691E" }} />
+                    )}
                     <Typography sx={{ ml: 2, mr: 3, mt: 0.5, fontSize: 24 }}>{wineProfile.type}</Typography>
                     <hr style={{ height: 30 }} />
                     <Typography sx={{ ml: 3, mt: 0.5, fontSize: 24 }}>{wineProfile.country}</Typography>
                     {wineProfile.winery ? <Typography sx={{ mt: 0.5, fontSize: 24 }}>, {wineProfile.winery}</Typography> : null}
                   </Box>
-                  <Typography sx={{ mx: 1, mt: 0.5, fontSize: 32, fontWeight: "bold" }}>{wineProfile.price} 원</Typography>
+                  <Typography sx={{ mx: 1, mt: 0.5, fontSize: 32, fontWeight: "bold" }}>{Math.ceil(wineProfile.price / 100) * 100} 원</Typography>
                 </Box>
                 <hr />
                 <Box sx={{ display: "flex", justifyContent: "space-evenly", my: 3 }}>
