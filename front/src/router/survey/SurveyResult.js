@@ -5,7 +5,7 @@ import axios from "axios";
 import { Box, Breadcrumbs, Link, Typography, Card, CardActionArea, CardMedia, CardContent } from "@mui/material/";
 
 export default function SurveyResult() {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io/api";
   const { state } = useLocation();
   const [results, setResults] = useState([]);
 
