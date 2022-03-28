@@ -16,7 +16,7 @@ function SignupContainer() {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io/api";
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);

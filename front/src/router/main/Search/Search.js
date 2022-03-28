@@ -38,7 +38,7 @@ const SearchIcon = styled.img.attrs({
   left: 82.5%;
 `;
 function Search() {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io/api";
   const [totalCnt, setTotalCnt] = useState("0");
   const [page, setPage] = useState(1);
   /////////////wines 수정해야함
@@ -60,7 +60,7 @@ function Search() {
   const [acidity, setAcidity] = useState("0");
   const [tanin, setTanin] = useState("0");
   const [minPrice, setMinPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState("0");
+  const [maxPrice, setMaxPrice] = useState("100");
 
   //최소가격 -> price[0], 최대가격 -> price[1]
   // const [country, setCountry] = useState({
@@ -175,12 +175,11 @@ function Search() {
             sweet: sweetness,
             acidity: acidity,
             country: countryString,
-            page:page
-          },
+            page:page-1
+          }
 
         })
         .then(function (response) {
-
           console.log(response);
           setTotalCnt(response.data.totalElements);
           setWines(response.data.content);
