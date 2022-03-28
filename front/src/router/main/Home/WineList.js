@@ -16,13 +16,13 @@ function WineList(props) {
                 <CardActionArea href={"/detail/" + wine.wineSeq}>
                   <CardMedia component="img" height="250" image="" alt="와인이미지" />
                   <CardContent>
-                    <Box sx={{ height: 70 }}>
+                    <Box sx={{ height: 95 }}>
                       <Typography gutterBottom sx={{ fontSize: 20, fontWeight: "bold" }} component="div">
                         {wine.kname}
                       </Typography>
                     </Box>
                     <Typography sx={{ fontSize: 12, fontWeight: "bold" }} color="text.secondary">
-                      {wine.price} 원
+                      {Math.ceil(wine.price / 100) * 100} 원
                     </Typography>
                   </CardContent>
                 </CardActionArea>
