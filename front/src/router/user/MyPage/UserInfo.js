@@ -10,7 +10,7 @@ import {
 } from "../ValidCheck";
 function UserInfo({ userSlice,updateUser }) {
   console.log(userSlice)
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io";
   const [userName, setUsername] = useState(userSlice.userName);
   const [nickname, setNickname] = useState(userSlice.userNickname);
   const [phone, setPhone] = useState(userSlice.userPhone);

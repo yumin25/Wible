@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import LikeItem from "./LikeItem";
 
 function UserLike({ userSlice }) {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io";
 
   const [page, setPage] = useState(1);
   const [likes, setLikes] = useState([]);

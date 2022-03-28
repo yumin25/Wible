@@ -3,7 +3,7 @@ import { Box, Link, Container } from "@mui/material/";
 import logo from "../../../res/img/logo.png";
 
 function Bar() {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io";
 
   const menus = [
     { name: "리뷰목록", path: "/mypage" },
