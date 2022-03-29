@@ -6,6 +6,9 @@ import Rating from "@mui/material/Rating";
 import no_image from "../../../res/img/no_image.jpg";
 
 function WineItem(wine, url) {
+  const handleImgError = (e) => {
+    e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
+  };
   return (
     <>
       <div
@@ -19,15 +22,24 @@ function WineItem(wine, url) {
       >
         <div
           id="front"
-          style={{ marginRight: 40, paddingBottom: 20, paddingLeft: 30 }}
+          style={{
+            width: "8%",
+            marginRight: 40,
+            paddingBottom: 20,
+            paddingLeft: 30,
+          }}
         >
-          <img src={`img/${wine.wine.ename}.jpg`} height="140" width="40"></img>
-          {/* <img
+          <img
+            style={{
+              minHeight: 140,
+              maxHeight: 140,
+              maxWidth: 50,
+              minWidth: 40,
+              objectFit: "cover",
+            }}
             src={`img/${wine.wine.ename}.jpg`}
-            height="140"
-            width="40"
-            onerror="this.src='../../../res/img/no_image.jpg';"
-          ></img> */}
+            onError={handleImgError}
+          ></img>
         </div>
 
         <div id="middle" style={{ marginTop: 13, width: 420 }}>

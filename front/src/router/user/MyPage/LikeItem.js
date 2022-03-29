@@ -43,6 +43,9 @@ function LikeItem({ url, like, userSeq, getUserLike }) {
         console.log(error);
       });
   }
+  const handleImgError = (e) => {
+    e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
+  };
   return (
     <div
       style={{
@@ -58,11 +61,16 @@ function LikeItem({ url, like, userSeq, getUserLike }) {
       }}
     >
       <div id="image" style={{ marginLeft: 65, height: 140 }}>
-        {/* <img src={`img/${like.ename}.jpg`} height="140" width="40"></img> */}
         <img
+          style={{
+            minHeight: 140,
+            maxHeight: 140,
+            maxWidth: 50,
+            minWidth: 40,
+            objectFit: "cover",
+          }}
           src={`http://j6a303.p.ssafy.io/img/${like.ename}.jpg`}
-          height="140"
-          width="40"
+          onError={handleImgError}
         ></img>
       </div>
       <div

@@ -12,6 +12,9 @@ function ReviewItem({ url, review, userSeq, getUserReview }) {
   const [modify, setModify] = useState(false);
   const [content, setContent] = useState(review.review_text);
   const [score, setScore] = useState(review.review_score);
+  const handleImgError = (e) => {
+    e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
+  };
   console.log(content);
   function ModifyReview() {
     axios
@@ -64,7 +67,17 @@ function ReviewItem({ url, review, userSeq, getUserReview }) {
         id="img"
         style={{ width: "8%", marginTop: 25, marginLeft: 50, marginRight: 40 }}
       >
-        <img src={`img/${review.ename}.jpg`} height="150" width="40"></img>
+        <img
+          style={{
+            minHeight: 140,
+            maxHeight: 140,
+            maxWidth: 50,
+            minWidth: 40,
+            objectFit: "cover",
+          }}
+          src={`img/${review.ename}.jpg`}
+          onError={handleImgError}
+        ></img>
       </div>
       <div id="infos" style={{ width: "70%", marginTop: 30 }}>
         <div
