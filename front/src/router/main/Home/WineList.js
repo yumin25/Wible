@@ -14,7 +14,21 @@ function WineList(props) {
             return (
               <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>
                 <CardActionArea href={"/detail/" + wine.wineSeq}>
-                  <CardMedia component="img" height="250" image={`/img/${wine.ename}.jpg`} style={{ objectFit: "cover" }} alt="와인이미지" />
+                  {/* <CardMedia component="img" height="250" image={`/img/${wine.ename}.jpg`} style={{ objectFit: "cover" }} alt="와인이미지" /> */}
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                      style={{
+                        minWidth: 50,
+                        maxWidth: 80,
+                        maxHeight: 250,
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
+                      src={`/img/${wine.ename}.jpg`}
+                      alt=""
+                    />
+                  </Box>
                   <CardContent>
                     <Box sx={{ height: 95 }}>
                       <Typography gutterBottom sx={{ fontSize: 20, fontWeight: "bold" }} component="div">

@@ -126,7 +126,7 @@ function Detail(props) {
       {/* 상단 구성 */}
       <div>
         <TopNav />
-        <Box sx={{ mt: 10, mb: 5, mx: 20, display: "flex", alignItems: "center", flexDirection: "column" }}>
+        <Box sx={{ mt: 10, mb: 5, mx: 20, pl: 15, display: "flex", alignItems: "center", flexDirection: "column" }}>
           <Grid container spacing={2}>
             <Grid item xs={3}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -140,8 +140,26 @@ function Detail(props) {
                   )}
                   <Typography sx={{ mx: 1, mt: 0.5, mb: 3 }}>좋아요 {wineProfile.like_cnt}</Typography>
                 </Box>
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia component="img" height="450" image={`/img/${wineProfile.ename}.jpg`} style={{ objectFit: "cover" }} alt="wine image" />
+                <Card sx={{ maxWidth: 400, display: "flex", justifyContent: "center" }}>
+                  {/* <CardMedia
+                    component="img"
+                    width="345"
+                    height="450"
+                    image="http://j6a303.p.ssafy.io/img/Vinha%20da%20Ponte%202016.jpg"
+                    objectFit="cover"
+                    alt="wine image"
+                  /> */}
+                  <img
+                    style={{
+                      maxWidth: 400,
+                      maxHeight: 600,
+                      width: "auto",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
+                    src={`/img/${wineProfile.ename}.jpg`}
+                    alt=""
+                  />
                 </Card>
               </Box>
             </Grid>
