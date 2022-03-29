@@ -8,7 +8,9 @@ export default function SurveyResult() {
   const url = "http://j6a303.p.ssafy.io/api";
   const { state } = useLocation();
   const [results, setResults] = useState([]);
-
+  const handleImgError = (e) => {
+    e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
+  };
   let country;
   if (state.country.length === 0) {
     country = "FRANCE,UNITED_STATES,ITALY,CHILE,PORTUGAL,AUSTRALIA,SPAIN,NEW_ZEALAND";
@@ -113,7 +115,21 @@ export default function SurveyResult() {
                 return (
                   <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>
                     <CardActionArea href={"/detail/" + wine.wineSeq}>
-                      <CardMedia component="img" height="250" image="" alt="와인이미지" />
+                      <Box sx={{ height: 250, display: "flex", justifyContent: "center" }}>
+                        <img
+                          style={{
+                            Width: 50,
+                            minHeight: 250,
+                            maxHeight: 250,
+                            width: "auto",
+                            height: "auto",
+                            objectFit: "cover",
+                          }}
+                          src={`/img/${wine.ename}.jpg`}
+                          onError={handleImgError}
+                          alt=""
+                        />
+                      </Box>
                       <CardContent>
                         <Box sx={{ height: 95 }}>
                           <Typography gutterBottom sx={{ fontSize: 20, fontWeight: "bold" }} component="div">

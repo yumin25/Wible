@@ -31,6 +31,10 @@ function Detail(props) {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
+  const handleImgError = (e) => {
+    e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
+  };
+
   //와인정보
   const getDetail = () => {
     Send.get(`/wine/${wineSeq}`, {
@@ -140,7 +144,7 @@ function Detail(props) {
                   )}
                   <Typography sx={{ mx: 1, mt: 0.5, mb: 3 }}>좋아요 {wineProfile.like_cnt}</Typography>
                 </Box>
-                <Card sx={{ maxWidth: 400, display: "flex", justifyContent: "center" }}>
+                <Card sx={{ maxWidth: 400, height: 600, display: "flex", justifyContent: "center" }}>
                   {/* <CardMedia
                     component="img"
                     width="345"
@@ -152,13 +156,15 @@ function Detail(props) {
                   <img
                     style={{
                       maxWidth: 400,
+                      minHeight: 600,
                       maxHeight: 600,
                       width: "auto",
                       height: "auto",
                       objectFit: "cover",
                     }}
                     src={`/img/${wineProfile.ename}.jpg`}
-                    alt=""
+                    onError={handleImgError}
+                    alt="사진"
                   />
                 </Card>
               </Box>
