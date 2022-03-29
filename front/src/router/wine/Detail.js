@@ -142,19 +142,17 @@ function Detail(props) {
                 </Box>
                 <Card sx={{ maxWidth: 345 }}>
                   {/* <CardMedia component="img" height="450" image="" alt="wine image" > */}
-                  <CardMedia>
-                    <img
-                      style={{
-                        maxWidth: 450,
-                        maxHeight: 450,
-                        width: "auto",
-                        height: "auto",
-                        objectFit: "cover",
-                      }}
-                      src={`j6a303.p.ssafy.io/img/${wineProfile.ename}.jpg`}
-                      alt=""
-                    />
-                  </CardMedia>
+                  <img
+                    style={{
+                      maxWidth: 450,
+                      maxHeight: 450,
+                      width: "auto",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
+                    src={`j6a303.p.ssafy.io/img/${wineProfile.ename}.jpg`}
+                    alt=""
+                  />
                 </Card>
               </Box>
             </Grid>
