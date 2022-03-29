@@ -5,7 +5,7 @@ import axios from "axios";
 import { Box, Breadcrumbs, Link, Typography, Card, CardActionArea, CardMedia, CardContent } from "@mui/material/";
 
 export default function SurveyResult() {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io/api";
   const { state } = useLocation();
   const [results, setResults] = useState([]);
 
@@ -70,7 +70,14 @@ export default function SurveyResult() {
         },
       })
       .then((res) => {
-        setResults(res.data.content);
+        res.data.content.sort((a, b) => {
+          if (a.score < b.score) return 1;
+          if (a.score > b.score) return -1;
+
+          return 0;
+        });
+        setResults(res.data.content.slice(0, 5));
+        console.log(res.data.content.slice(0, 5));
       });
   };
 
@@ -108,13 +115,13 @@ export default function SurveyResult() {
                     <CardActionArea href={"/detail/" + wine.wineSeq}>
                       <CardMedia component="img" height="250" image="" alt="와인이미지" />
                       <CardContent>
-                        <Box sx={{ height: 70 }}>
+                        <Box sx={{ height: 95 }}>
                           <Typography gutterBottom sx={{ fontSize: 20, fontWeight: "bold" }} component="div">
                             {wine.kname}
                           </Typography>
                         </Box>
                         <Typography sx={{ fontSize: 12, fontWeight: "bold" }} color="text.secondary">
-                          {wine.price} 원
+                          {Math.ceil(wine.price / 100) * 100} 원
                         </Typography>
                       </CardContent>
                     </CardActionArea>

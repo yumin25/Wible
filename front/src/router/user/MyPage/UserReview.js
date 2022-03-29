@@ -7,24 +7,12 @@ import "../../main/Search/Paging.css";
 import { connect } from "react-redux";
 
 function UserReview({ userSlice }) {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io/api";
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
 
   const [reviews, setReviews] = useState([
-    {
-      wine_seq: 1,
-      review_seq: 2,
-      kname: "와인한글이름",
-      ename: "와인영어이름",
-      type: "레드",
-      grapes: "포도품종",
-      review_cnt: 100,
-      review_score: 4.8,
-      country: "프랑스",
-      img_path: "사진경로",
-      review_text: "맛있어요!",
-    },
+  
   ]);
 
   useEffect(() => {
@@ -38,7 +26,6 @@ function UserReview({ userSlice }) {
   //userSeq 어케 처리?
   const [userSeq, setUserSeq] = useState(userSlice.userSeq);
   function getUserReview() {
-    ////userSeq 어케 처리??
     axios
       .get(url + `/userinfo/reviews/${userSeq}`, {
         params: {
@@ -47,7 +34,9 @@ function UserReview({ userSlice }) {
         },
       })
       .then(function (response) {
-        setReviews(response.data);
+        console.log(response)
+        console.log(response.data.content);
+        setReviews(response.data.content);
       })
       .catch(function (error) {
         console.log(error);
@@ -79,6 +68,7 @@ function UserReview({ userSlice }) {
               url={url}
               review={review}
               userSeq={userSeq}
+              getUserReview={getUserReview}
             ></ReviewItem>
           ))}
       </div>

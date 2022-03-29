@@ -6,7 +6,7 @@ import React from "react";
 import search from "../../../res/img/search.png";
 import Rating from "@mui/material/Rating";
 
-function ReviewItem({ url, review, userSeq }) {
+function ReviewItem({ url, review, userSeq, getUserReview }) {
   console.log(review);
   const [modify, setModify] = useState(false);
   const [content, setContent] = useState(review.review_text);
@@ -15,33 +15,36 @@ function ReviewItem({ url, review, userSeq }) {
   function ModifyReview() {
     axios
       .put(url + `/wine/review`, {
-        review_text: content,
-        //////////////review_score인지 reviewscore인지 확인하자
-        reviewscore: score,
-        review_seq: review.review_seq,
+        reviewScore: score,
+        reviewSeq: review.review_seq,
+        reviewText: content,
       })
       .then((response) => {
         console.log(response);
+        getUserReview();
       })
       .catch((error) => {});
   }
 
   //user_seq 이거 !!!!!추가해야함
   function DeleteReview() {
+    console.log(review.review_seq);
     axios
-      .delete("/wine/review", {
-        data: {
-          user_seq: userSeq,
-          wine_seq: review.wine_seq,
+      .delete(url + `/wine/review`, {
+        params: {
+          reviewSeq: review.review_seq,
         },
       })
       .then(function (response) {
         console.log(response);
+        document.location.href = "/mypage";
       })
       .catch(function (error) {
         console.log(error);
+        document.location.href = "/mypage";
       });
   }
+
   function contentHandler(event) {
     setContent(event.target.value);
   }
@@ -63,37 +66,37 @@ function ReviewItem({ url, review, userSeq }) {
           width="90"
         ></img>
       </div>
-      <div id="infos" style={{ width: "70%", marginTop: 20 }}>
+      <div id="infos" style={{ width: "70%", marginTop: 30 }}>
         <div
           id="type, country,grapes"
           style={{ fontSize: 15, display: "flex" }}
         >
           <div id="type" style={{ marginRight: 10 }}>
-            {review.type === "레드" && (
+            {review.type === "RED" && (
               <div style={{ display: "flex" }}>
                 <CircleIcon style={{ color: "#C50D0D" }}></CircleIcon>
                 <div style={{ marginLeft: 5 }}>Red</div>
               </div>
             )}
-            {review.type === "화이트" && (
+            {review.type === "WHITE" && (
               <div style={{ display: "flex" }}>
                 <CircleIcon style={{ color: "#C3ECB8" }}></CircleIcon>
                 <div style={{ marginLeft: 5 }}>White</div>
               </div>
             )}
-            {review.type === "스파클링" && (
+            {review.type === "SPARKLING" && (
               <div style={{ display: "flex" }}>
                 <CircleIcon style={{ color: "#CBF9FF" }}></CircleIcon>
                 <div style={{ marginLeft: 5 }}>Sparkling</div>
               </div>
             )}
-            {review.type === "로제" && (
+            {review.type === "ROSE" && (
               <div style={{ display: "flex" }}>
                 <CircleIcon style={{ color: "#FFAEAE" }}></CircleIcon>
                 <div style={{ marginLeft: 5 }}>Rose</div>
               </div>
             )}
-            {review.type === "디저트" && (
+            {review.type === "DESSERT" && (
               <div style={{ display: "flex" }}>
                 <CircleIcon style={{ color: "#FFF4CC" }}></CircleIcon>
                 <div style={{ marginLeft: 5 }}>Dessert</div>
@@ -110,10 +113,19 @@ function ReviewItem({ url, review, userSeq }) {
           </div>
         </div>
 
-        <div style={{ marginTop: 10, fontSize: 20 }}>{review.kname}</div>
-        <div style={{ fontSize: 15, color: "#B2ACAC", marginBottom: 10 }}>
-          {review.ename}
+        <div
+          id="name"
+          style={{ cursor: "pointer" }}
+          onClick={() =>
+            (document.location.href = `/detail/${review.wine_seq}`)
+          }
+        >
+          <div style={{ marginTop: 10, fontSize: 20 }}>{review.kname}</div>
+          <div style={{ fontSize: 15, color: "#B2ACAC", marginBottom: 10 }}>
+            {review.ename}
+          </div>
         </div>
+
         {modify === false ? (
           <div style={{ fontSize: 14 }}>{review.review_text}</div>
         ) : (
@@ -206,7 +218,7 @@ function ReviewItem({ url, review, userSeq }) {
               color: "#891826",
             }}
             name="read-only"
-            value={Math.floor(review.review_score)}
+            value={review.review_score / 2}
             readOnly
             size="small"
           />

@@ -38,56 +38,46 @@ const SearchIcon = styled.img.attrs({
   left: 82.5%;
 `;
 function Search() {
-  const url = "http://localhost:8080";
+  const url = "http://j6a303.p.ssafy.io/api";
   const [totalCnt, setTotalCnt] = useState("0");
   const [page, setPage] = useState(1);
   /////////////wines 수정해야함
   const [wines, setWines] = useState([
-    {
-      wineSeq: 9,
-      kname: "그랜드 리저브 샤도네이 2014",
-      ename: "Grand Reserve Chardonnay 2014",
-      type: "WHITE",
-      country: "UNITED_STATES",
-      grapes: "100 % 샤도네이",
-      price: 120000,
-      img_path: null,
-      score: 3.8,
-    },
-  ]);
-  const [type, setType] = useState({
-    redWine: false,
-    whiteWine: false,
-    sparklingWine: false,
-    roseWine: false,
-    dessertWine: false,
-  });
 
+  ]);
+  // const [type, setType] = useState({
+  //   redWine: false,
+  //   whiteWine: false,
+  //   sparklingWine: false,
+  //   roseWine: false,
+  //   dessertWine: false,
+  // });
+
+  const [type, setType]= useState([]);
   const [keyword, setKeyword] = useState("");
   const [sweetness, setSweetness] = useState("0");
   const [body, setBody] = useState("0");
   const [acidity, setAcidity] = useState("0");
   const [tanin, setTanin] = useState("0");
   const [minPrice, setMinPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState("0");
+  const [maxPrice, setMaxPrice] = useState("100");
 
   //최소가격 -> price[0], 최대가격 -> price[1]
-  const [country, setCountry] = useState({
-    france: false,
-    italy: false,
-    portugal: false,
-    spain: false,
-    germany: false,
-    america: false,
-    canada: false,
-    chile: false,
-    australia: false,
-    newZealand: false,
-    etc: false,
-  });
+  // const [country, setCountry] = useState({
+  //   france: false,
+  //   italy: false,
+  //   portugal: false,
+  //   spain: false,
+  //   germany: false,
+  //   america: false,
+  //   canada: false,
+  //   chile: false,
+  //   australia: false,
+  //   newZealand: false,
+  //   etc: false,
+  // });
 
-  const typeString = JSON.stringify(type);
-  const countryString = JSON.stringify(country);
+  const [country, setCountry]= useState([]);
 
   function typeHandler(value) {
     setType(value);
@@ -129,6 +119,18 @@ function Search() {
 
   useEffect(() => {
     getWines();
+    console.log(wines);
+    console.log('컴포넌트가 화면에 나타남');
+    return () => {
+      console.log('컴포넌트가 화면에서 사라짐');
+    };
+  }, []);
+
+
+
+
+  useEffect(() => {
+    getWines();
     console.log("카테고리 변경 일어남");
   }, [
     page,
@@ -143,7 +145,12 @@ function Search() {
   ]);
 
   function getWines() {
-    if (keyword !== "" && keyword !== undefined) {
+    // const typeString = JSON.stringify(type);
+    const typeString = type.toString();
+    const countryString = country.toString();
+
+    // const countryString = JSON.stringify(country);
+
       console.log(
         keyword,
         typeString,
@@ -153,7 +160,7 @@ function Search() {
         tanin,
         sweetness,
         acidity,
-        country
+        countryString
       );
       axios
         .get(url + `/search`, {
@@ -167,17 +174,19 @@ function Search() {
             sweet: sweetness,
             acidity: acidity,
             country: countryString,
-          },
+            page:page-1
+          }
+
         })
         .then(function (response) {
-          ////이거 데이터 확인해보자
+          console.log(response);
           setTotalCnt(response.data.totalElements);
           setWines(response.data.content);
         })
         .catch(function (error) {
           console.log(error);
         });
-    }
+
   }
 
   const onSubmit = (event) => {

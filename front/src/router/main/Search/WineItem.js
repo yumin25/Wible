@@ -62,7 +62,23 @@ function WineItem(wine, url) {
             id="grapes,country"
             style={{ display: "flex", marginBottom: 10 }}
           >
-            <div
+            {wine.wine.grapes.length>50? (<div
+              id="grapes"
+              style={{
+                width:290,
+                paddingRight: 13,
+                paddingLeft: 13,
+                paddingTop: 3,
+                paddingBottom: 5,
+                color: "#ffffff",
+                fontSize: 13,
+                display: "inline-block",
+                background: "#891826",
+                borderRadius: "15px",
+                marginRight: 10,
+              }}
+            >{wine.wine.grapes}</div>):(
+            wine.wine.grapes===""?(<div></div>):(<div
               id="grapes"
               style={{
                 paddingRight: 13,
@@ -76,12 +92,12 @@ function WineItem(wine, url) {
                 borderRadius: "15px",
                 marginRight: 10,
               }}
-            >
-              {wine.wine.grapes}
-            </div>
+            >{wine.wine.grapes}</div>)
+            )}
             <div
               id="country"
               style={{
+                height:20,  
                 paddingRight: 10,
                 paddingLeft: 10,
                 paddingTop: 3,
@@ -104,6 +120,14 @@ function WineItem(wine, url) {
               {wine.wine.country === "CHILE" && "칠레"}
               {wine.wine.country === "AUSTRALIA" && "호주"}
               {wine.wine.country === "NEW_ZEALAND" && "뉴질랜드"}
+              {wine.wine.country === "ARGENTINA" && "아르헨티나"}
+              {wine.wine.country === "AUSTRIA" && "오스트리아"}
+              {wine.wine.country === "BULGARIA" && "불가리아"}
+              {wine.wine.country === "HUNGARY" && "헝가리"}
+              {wine.wine.country === "MOLDOVA" && "몰도바"}
+              {wine.wine.country === "ROMANIA" && "루마니아"}
+              {wine.wine.country === "SOUTH_AFRICA" && "아프리카"}
+              {wine.wine.country === "URUGUAY" && "우루과이"}
             </div>
           </div>
         </div>

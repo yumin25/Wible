@@ -7,7 +7,7 @@ import search from "../../../res/img/search.png";
 import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-function LikeItem({ url, like, userSeq }) {
+function LikeItem({ url, like, userSeq, getUserLike }) {
   const [likeIcon, setLikeIcon] = useState(true);
   function handleLikeIcon(event) {
     setLikeIcon(event);
@@ -16,8 +16,8 @@ function LikeItem({ url, like, userSeq }) {
   function ClickHeart() {
     axios
       .post(url + `/wine/like`, {
-        user_seq: userSeq,
-        wine_seq: like.wine_seq,
+        userSeq: userSeq,
+        wineSeq: like.wine_seq,
       })
       .then(function (response) {
         console.log(response);
@@ -30,9 +30,9 @@ function LikeItem({ url, like, userSeq }) {
   function RemoveHeart() {
     axios
       .delete(url + `/wine/like`, {
-        data: {
-          user_seq: userSeq,
-          wine_seq: like.wine_seq,
+        params: {
+          userSeq: userSeq,
+          wineSeq: like.wine_seq,
         },
       })
       .then(function (response) {
@@ -46,7 +46,7 @@ function LikeItem({ url, like, userSeq }) {
     <div
       style={{
         width: 180,
-        height: 290,
+        height: 275,
         marginBottom: 10,
         marginTop: 30,
         marginLeft: 18,
@@ -89,7 +89,7 @@ function LikeItem({ url, like, userSeq }) {
       <div
         id="name"
         style={{ height: 80, cursor: "pointer" }}
-        onClick={() => (document.location.href = `/detail/${like.wineSeq}`)}
+        onClick={() => (document.location.href = `/detail/${like.wine_seq}`)}
       >
         <div id="kname" style={{ fontSize: 14, marginTop: 3 }}>
           {like.kname}
@@ -99,7 +99,7 @@ function LikeItem({ url, like, userSeq }) {
         </div>
       </div>
 
-      <div id="score" style={{ height: 30, display: "flex", marginTop: 10 }}>
+      <div id="score" style={{ height: 30, display: "flex" }}>
         <div>{like.score}</div>
         <div style={{ marginTop: 3 }}>
           <Rating
