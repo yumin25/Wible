@@ -3,6 +3,7 @@ package com.ssafy.wible.api.controller.wine;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.enums.Country;
 import com.ssafy.wible.model.enums.Type;
+import com.ssafy.wible.model.response.wine.SearchWineResponse;
 import com.ssafy.wible.service.SearchService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class SearchController {
     private static final String FAIL = "fail";
 
     @GetMapping("")
-    public ResponseEntity<Page<Wine>> search(@RequestParam(value="keyword", defaultValue = "") String keyword,
+    public ResponseEntity<Page<SearchWineResponse>> search(@RequestParam(value="keyword", defaultValue = "") String keyword,
                                              @RequestParam(value="price_lower", defaultValue = "0") int price_lower,
                                              @RequestParam(value="price_upper", defaultValue = "100") int price_upper,
                                              @RequestParam(value="body", required = false) List<Integer> body,
@@ -55,6 +56,6 @@ public class SearchController {
             }
         }
         System.out.println(keyword + "  keyword");
-        return new ResponseEntity<Page<Wine>>(searchService.search(keyword, price_lower, price_upper, types, body, tannin, sweet, acidity, countries, pageRequest), HttpStatus.OK);
+        return new ResponseEntity<Page<SearchWineResponse>>(searchService.search(keyword, price_lower, price_upper, types, body, tannin, sweet, acidity, countries, pageRequest), HttpStatus.OK);
     }
 }

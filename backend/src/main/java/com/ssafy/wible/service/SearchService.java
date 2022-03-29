@@ -3,6 +3,7 @@ package com.ssafy.wible.service;
 import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.enums.Country;
 import com.ssafy.wible.model.enums.Type;
+import com.ssafy.wible.model.response.wine.SearchWineResponse;
 import com.ssafy.wible.repository.WineRepository;
 import com.ssafy.wible.repository.WineSpecification;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class SearchService {
     @Autowired
     private WineRepository wineRepository;
 
-    public Page<Wine> search(String keyword, int start, int end, List<Type> types, List<Integer> body, int tannin, List<Integer> sweet, int acidity, List<Country> countries, Pageable pageRequest){
+    public Page<SearchWineResponse> search(String keyword, int start, int end, List<Type> types, List<Integer> body, int tannin, List<Integer> sweet, int acidity, List<Country> countries, Pageable pageRequest){
         start = start * 10000;
         if(end == 100) end = Integer.MAX_VALUE;
         else end = end * 10000;
@@ -36,6 +37,9 @@ public class SearchService {
         if(tannin != -1) spec = spec.and(WineSpecification.equalsTannin(tannin));
         if(acidity != -1) spec = spec.and(WineSpecification.equalsAcidity(acidity));
         if(sweet != null) spec = spec.and(WineSpecification.equalsSweet(sweet));
-        return wineRepository.findAll(spec, pageRequest);
+        Page<Wine> wines = wineRepository.findAll(spec, pageRequest);
+        Page<SearchWineResponse> result = wines.map(
+                post -> new SearchWineResponse(post.getWineSeq(), post.getKname(), post.getEname(), post.getType(), post.getCountry(), post.getGrapes(), post.getPrice(), post.getImgPath(), post.getScore()));
+        return result;
     }
 }
