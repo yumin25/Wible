@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
 import search from "../../../res/img/search.png";
+import Barolo2015 from "../../../res/img/Barolo2015.jpg";
 import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -56,8 +57,13 @@ function LikeItem({ url, like, userSeq, getUserLike }) {
         padding: 15,
       }}
     >
-      <div id="image" style={{ height: 140 }}>
-        <img src={`img/${like.ename}.jpg`} height="140" width="90"></img>
+      <div id="image" style={{ marginLeft: 65, height: 140 }}>
+        {/* <img src={`img/${like.ename}.jpg`} height="140" width="40"></img> */}
+        <img
+          src={`http://j6a303.p.ssafy.io/img/${like.ename}.jpg`}
+          height="140"
+          width="40"
+        ></img>
       </div>
       <div
         id="heart"

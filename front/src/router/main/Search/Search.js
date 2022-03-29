@@ -42,9 +42,7 @@ function Search() {
   const [totalCnt, setTotalCnt] = useState("0");
   const [page, setPage] = useState(1);
   /////////////wines 수정해야함
-  const [wines, setWines] = useState([
-
-  ]);
+  const [wines, setWines] = useState([]);
   // const [type, setType] = useState({
   //   redWine: false,
   //   whiteWine: false,
@@ -53,7 +51,7 @@ function Search() {
   //   dessertWine: false,
   // });
 
-  const [type, setType]= useState([]);
+  const [type, setType] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [sweetness, setSweetness] = useState("0");
   const [body, setBody] = useState("0");
@@ -77,7 +75,7 @@ function Search() {
   //   etc: false,
   // });
 
-  const [country, setCountry]= useState([]);
+  const [country, setCountry] = useState([]);
 
   function typeHandler(value) {
     setType(value);
@@ -120,14 +118,11 @@ function Search() {
   useEffect(() => {
     getWines();
     console.log(wines);
-    console.log('컴포넌트가 화면에 나타남');
+    console.log("컴포넌트가 화면에 나타남");
     return () => {
-      console.log('컴포넌트가 화면에서 사라짐');
+      console.log("컴포넌트가 화면에서 사라짐");
     };
   }, []);
-
-
-
 
   useEffect(() => {
     getWines();
@@ -149,44 +144,40 @@ function Search() {
     const typeString = type.toString();
     const countryString = country.toString();
 
-    // const countryString = JSON.stringify(country);
-
-      console.log(
-        keyword,
-        typeString,
-        minPrice,
-        maxPrice,
-        body,
-        tanin,
-        sweetness,
-        acidity,
-        countryString
-      );
-      axios
-        .get(url + `/search`, {
-          params: {
-            keyword: keyword,
-            type: typeString,
-            price_lower: minPrice,
-            price_upper: maxPrice,
-            body: body,
-            tannin: tanin,
-            sweet: sweetness,
-            acidity: acidity,
-            country: countryString,
-            page:page-1
-          }
-
-        })
-        .then(function (response) {
-          console.log(response);
-          setTotalCnt(response.data.totalElements);
-          setWines(response.data.content);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+    console.log(
+      keyword,
+      typeString,
+      minPrice,
+      maxPrice,
+      body,
+      tanin,
+      sweetness,
+      acidity,
+      countryString
+    );
+    axios
+      .get(url + `/search`, {
+        params: {
+          keyword: keyword,
+          type: typeString,
+          price_lower: minPrice,
+          price_upper: maxPrice,
+          body: body,
+          tannin: tanin,
+          sweet: sweetness,
+          acidity: acidity,
+          country: countryString,
+          page: page - 1,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        setTotalCnt(response.data.totalElements);
+        setWines(response.data.content);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   const onSubmit = (event) => {
