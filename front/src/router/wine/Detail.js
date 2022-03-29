@@ -120,7 +120,7 @@ function Detail(props) {
   useEffect(() => {
     getReview();
   }, [page]);
-  console.log(wineProfile);
+
   return (
     <>
       {/* 상단 구성 */}
@@ -141,7 +141,7 @@ function Detail(props) {
                   <Typography sx={{ mx: 1, mt: 0.5, mb: 3 }}>좋아요 {wineProfile.like_cnt}</Typography>
                 </Box>
                 <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia component="img" height="450" image={`/img/${wineProfile.ename}.jpg`} alt="wine image" />
+                  <CardMedia component="img" height="450" image={`/img/${wineProfile.ename}.jpg`} style={{ objectFit: "cover" }} alt="wine image" />
                 </Card>
               </Box>
             </Grid>
