@@ -13,17 +13,20 @@ function WineItem(wine, url) {
           display: "flex",
           //background: "#C50D0D",
           marginLeft: 70,
-          marginTop: 30,
+          marginTop: 20,
           borderBottom: "1px solid #C4C4C4",
         }}
       >
-        <div id="front" style={{ marginRight: 10, paddingBottom: 10 }}>
+        <div
+          id="front"
+          style={{ marginRight: 30, paddingBottom: 20, paddingLeft: 15 }}
+        >
           {/* 이거 test용이라서 수정해야함 */}
           {/* <img src={wine.wine.img_path} height="220" width="160"></img> */}
-          <img src={`img/${wine.wine.ename}.jpg`} height="130" width="90"></img>
+          <img src={`img/${wine.wine.ename}.jpg`} height="140" width="70"></img>
         </div>
 
-        <div id="middle" style={{ width: 430 }}>
+        <div id="middle" style={{ marginTop: 13, width: 420 }}>
           <div id="type" style={{ display: "flex", marginBottom: 6 }}>
             {wine.wine.type === "RED" && (
               <CircleIcon style={{ color: "#C50D0D" }}></CircleIcon>
