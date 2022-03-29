@@ -14,7 +14,20 @@ function WineList(props) {
             return (
               <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>
                 <CardActionArea href={"/detail/" + wine.wineSeq}>
-                  <CardMedia component="img" height="250" image="" alt="와인이미지" />
+                  {/* <CardMedia component="img" height="250" image="" alt="와인이미지" /> */}
+                  <CardMedia component="img" height="250" image="" alt="와인이미지">
+                    <img
+                      style={{
+                        maxWidth: 250,
+                        maxHeight: 250,
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
+                      src={`j6a303.p.ssafy.io/img/${wine.ename}.jpg`}
+                      alt=""
+                    />
+                  </CardMedia>
                   <CardContent>
                     <Box sx={{ height: 95 }}>
                       <Typography gutterBottom sx={{ fontSize: 20, fontWeight: "bold" }} component="div">
