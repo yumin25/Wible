@@ -20,11 +20,7 @@ function WineItem(wine, url) {
         <div id="front" style={{ marginRight: 10, paddingBottom: 10 }}>
           {/* 이거 test용이라서 수정해야함 */}
           {/* <img src={wine.wine.img_path} height="220" width="160"></img> */}
-          <img
-            src={`j6a303.p.ssafy.io/img/${wine.wine.ename}.jpg`}
-            height="130"
-            width="90"
-          ></img>
+          <img src={`img/${wine.wine.ename}.jpg`} height="130" width="90"></img>
         </div>
 
         <div id="middle" style={{ width: 430 }}>
@@ -62,42 +58,50 @@ function WineItem(wine, url) {
             id="grapes,country"
             style={{ display: "flex", marginBottom: 10 }}
           >
-            {wine.wine.grapes.length>50? (<div
-              id="grapes"
-              style={{
-                width:290,
-                paddingRight: 13,
-                paddingLeft: 13,
-                paddingTop: 3,
-                paddingBottom: 5,
-                color: "#ffffff",
-                fontSize: 13,
-                display: "inline-block",
-                background: "#891826",
-                borderRadius: "15px",
-                marginRight: 10,
-              }}
-            >{wine.wine.grapes}</div>):(
-            wine.wine.grapes===""?(<div></div>):(<div
-              id="grapes"
-              style={{
-                paddingRight: 13,
-                paddingLeft: 13,
-                paddingTop: 3,
-                paddingBottom: 5,
-                color: "#ffffff",
-                fontSize: 13,
-                display: "inline-block",
-                background: "#891826",
-                borderRadius: "15px",
-                marginRight: 10,
-              }}
-            >{wine.wine.grapes}</div>)
+            {wine.wine.grapes.length > 50 ? (
+              <div
+                id="grapes"
+                style={{
+                  width: 290,
+                  paddingRight: 13,
+                  paddingLeft: 13,
+                  paddingTop: 3,
+                  paddingBottom: 5,
+                  color: "#ffffff",
+                  fontSize: 13,
+                  display: "inline-block",
+                  background: "#891826",
+                  borderRadius: "15px",
+                  marginRight: 10,
+                }}
+              >
+                {wine.wine.grapes}
+              </div>
+            ) : wine.wine.grapes === "" ? (
+              <div></div>
+            ) : (
+              <div
+                id="grapes"
+                style={{
+                  paddingRight: 13,
+                  paddingLeft: 13,
+                  paddingTop: 3,
+                  paddingBottom: 5,
+                  color: "#ffffff",
+                  fontSize: 13,
+                  display: "inline-block",
+                  background: "#891826",
+                  borderRadius: "15px",
+                  marginRight: 10,
+                }}
+              >
+                {wine.wine.grapes}
+              </div>
             )}
             <div
               id="country"
               style={{
-                height:20,  
+                height: 20,
                 paddingRight: 10,
                 paddingLeft: 10,
                 paddingTop: 3,

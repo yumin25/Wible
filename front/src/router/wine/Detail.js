@@ -141,18 +141,7 @@ function Detail(props) {
                   <Typography sx={{ mx: 1, mt: 0.5, mb: 3 }}>좋아요 {wineProfile.like_cnt}</Typography>
                 </Box>
                 <Card sx={{ maxWidth: 345 }}>
-                  {/* <CardMedia component="img" height="450" image="" alt="wine image" > */}
-                  <img
-                    style={{
-                      maxWidth: 450,
-                      maxHeight: 450,
-                      width: "auto",
-                      height: "auto",
-                      objectFit: "cover",
-                    }}
-                    src={`j6a303.p.ssafy.io/img/${wineProfile.ename}.jpg`}
-                    alt=""
-                  />
+                  <CardMedia component="img" height="450" image={`/img/${wineProfile.ename}.jpg`} alt="wine image" />
                 </Card>
               </Box>
             </Grid>
