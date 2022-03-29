@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
 import Rating from "@mui/material/Rating";
-
+import Barolo2015 from "../../../res/img/Barolo2015.jpg";
 function WineItem(wine, url) {
   // console.log(wine);
   return (
@@ -19,11 +19,9 @@ function WineItem(wine, url) {
       >
         <div
           id="front"
-          style={{ marginRight: 30, paddingBottom: 20, paddingLeft: 15 }}
+          style={{ marginRight: 40, paddingBottom: 20, paddingLeft: 30 }}
         >
-          {/* 이거 test용이라서 수정해야함 */}
-          {/* <img src={wine.wine.img_path} height="220" width="160"></img> */}
-          <img src={`img/${wine.wine.ename}.jpg`} height="140" width="70"></img>
+          <img src={`img/${wine.wine.ename}.jpg`} height="140" width="40"></img>
         </div>
 
         <div id="middle" style={{ marginTop: 13, width: 420 }}>
@@ -139,7 +137,7 @@ function WineItem(wine, url) {
           </div>
         </div>
 
-        <div id="back" style={{ width: 100 }}>
+        <div id="back" style={{ marginTop: 13, width: 100 }}>
           <div id="score" style={{ textAlign: "center", fontSize: 30 }}>
             {wine.wine.score}
           </div>

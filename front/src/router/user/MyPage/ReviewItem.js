@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
 import search from "../../../res/img/search.png";
+import Barolo2015 from "../../../res/img/Barolo2015.jpg";
 import Rating from "@mui/material/Rating";
 
 function ReviewItem({ url, review, userSeq, getUserReview }) {
@@ -59,8 +60,11 @@ function ReviewItem({ url, review, userSeq, getUserReview }) {
         display: "flex",
       }}
     >
-      <div id="img" style={{ width: "10%", marginLeft: 20, marginRight: 40 }}>
-        <img src={`img/${review.ename}.jpg`} height="130" width="90"></img>
+      <div
+        id="img"
+        style={{ width: "8%", marginTop: 25, marginLeft: 50, marginRight: 40 }}
+      >
+        <img src={`img/${review.ename}.jpg`} height="150" width="40"></img>
       </div>
       <div id="infos" style={{ width: "70%", marginTop: 30 }}>
         <div
@@ -192,8 +196,8 @@ function ReviewItem({ url, review, userSeq, getUserReview }) {
         </div>
       </div>
 
-      <div id="ratings" style={{ width: "20%" }}>
-        <div style={{ textAlign: "center", marginTop: 50 }}>나의 평점</div>
+      <div id="ratings" style={{ width: "20%", marginRight: 20 }}>
+        <div style={{ textAlign: "center", marginTop: 60 }}>나의 평점</div>
         <div style={{ textAlign: "center", fontSize: 30 }}>
           {modify === false ? (
             <div> {review.review_score}</div>
