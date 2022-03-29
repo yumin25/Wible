@@ -4,7 +4,9 @@ import { Box, Typography, Card, CardActionArea, CardMedia, CardContent } from "@
 
 function WineList(props) {
   const wines = props.bestWine;
-
+  const handleImgError = (e) => {
+    e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
+  };
   return (
     <>
       {/* 와인 */}
@@ -15,17 +17,18 @@ function WineList(props) {
               <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>
                 <CardActionArea href={"/detail/" + wine.wineSeq}>
                   {/* <CardMedia component="img" height="250" image={`/img/${wine.ename}.jpg`} style={{ objectFit: "cover" }} alt="와인이미지" /> */}
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Box sx={{ height: 250, display: "flex", justifyContent: "center" }}>
                     <img
                       style={{
-                        minWidth: 50,
-                        maxWidth: 80,
+                        Width: 50,
+                        minHeight: 250,
                         maxHeight: 250,
                         width: "auto",
                         height: "auto",
                         objectFit: "cover",
                       }}
                       src={`/img/${wine.ename}.jpg`}
+                      onError={handleImgError}
                       alt=""
                     />
                   </Box>
