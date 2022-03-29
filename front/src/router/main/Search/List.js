@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TextField } from "@mui/material/";
-import search from "../../../res/img/search.png";
+
 import WineItem from "./WineItem";
 import Pagination from "react-js-pagination";
 import "./Paging.css";
@@ -18,7 +18,7 @@ function List({ wines, totalCnt, page, handlePageChange, url, goDetail }) {
                 (document.location.href = `/detail/${wine.wineSeq}`)
               }
             >
-              <WineItem wine={wine}></WineItem>
+              <WineItem wine={wine} url={url}></WineItem>
             </div>
           ))}
       </div>

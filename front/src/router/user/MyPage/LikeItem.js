@@ -57,7 +57,11 @@ function LikeItem({ url, like, userSeq }) {
       }}
     >
       <div id="image" style={{ height: 140 }}>
-        <img src={search} height="140" width="90"></img>
+        <img
+          src={`j6a303.p.ssafy.io/img/${like.ename}.jpg`}
+          height="140"
+          width="90"
+        ></img>
       </div>
       <div
         id="heart"

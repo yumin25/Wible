@@ -57,7 +57,11 @@ function ReviewItem({ url, review, userSeq }) {
       }}
     >
       <div id="img" style={{ width: "10%", marginLeft: 20, marginRight: 40 }}>
-        <img src={search} height="130" width="90"></img>
+        <img
+          src={`j6a303.p.ssafy.io/img/${review.ename}.jpg`}
+          height="130"
+          width="90"
+        ></img>
       </div>
       <div id="infos" style={{ width: "70%", marginTop: 20 }}>
         <div
