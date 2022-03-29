@@ -8,6 +8,7 @@ import lombok.Setter;
 public class SimpleWineResponse {
     private int wineSeq;
     private String kname;
+    private String ename;
     private String img_path;
     private int price;
 }

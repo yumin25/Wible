@@ -82,6 +82,7 @@ public class BestWineService {
             SimpleWineResponse simple = new SimpleWineResponse();
             simple.setWineSeq(w.getWineSeq());
             simple.setKname(w.getKname());
+            simple.setEname(w.getEname());
             simple.setImg_path(w.getImgPath());
             simple.setPrice(w.getPrice());
             System.out.println(w.getKname());
@@ -101,6 +102,7 @@ public class BestWineService {
             SimpleWineResponse simple = new SimpleWineResponse();
             simple.setWineSeq(w.getWineSeq());
             simple.setKname(w.getKname());
+            simple.setEname(w.getEname());
             simple.setImg_path(w.getImgPath());
             simple.setPrice(w.getPrice());
             System.out.println(w.getKname());
@@ -120,6 +122,7 @@ public class BestWineService {
             SimpleWineResponse simple = new SimpleWineResponse();
             simple.setWineSeq(w.getWineSeq());
             simple.setKname(w.getKname());
+            simple.setEname(w.getEname());
             simple.setImg_path(w.getImgPath());
             simple.setPrice(w.getPrice());
             System.out.println(w.getKname());
