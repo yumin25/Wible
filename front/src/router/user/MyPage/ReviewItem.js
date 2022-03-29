@@ -6,7 +6,7 @@ import React from "react";
 import search from "../../../res/img/search.png";
 import Rating from "@mui/material/Rating";
 
-function ReviewItem({ url, review, userSeq,getUserReview }) {
+function ReviewItem({ url, review, userSeq, getUserReview }) {
   console.log(review);
   const [modify, setModify] = useState(false);
   const [content, setContent] = useState(review.review_text);
@@ -29,10 +29,11 @@ function ReviewItem({ url, review, userSeq,getUserReview }) {
   //user_seq 이거 !!!!!추가해야함
   function DeleteReview() {
     console.log(review.review_seq);
-    axios.delete(url + `/wine/review`,{
-      params: {
-        reviewSeq: review.review_seq
-      }
+    axios
+      .delete(url + `/wine/review`, {
+        params: {
+          reviewSeq: review.review_seq,
+        },
       })
       .then(function (response) {
         console.log(response);
@@ -43,10 +44,6 @@ function ReviewItem({ url, review, userSeq,getUserReview }) {
         document.location.href = "/mypage";
       });
   }
-
-
-
-
 
   function contentHandler(event) {
     setContent(event.target.value);
@@ -62,8 +59,12 @@ function ReviewItem({ url, review, userSeq,getUserReview }) {
         display: "flex",
       }}
     >
-      <div id="img" style={{ width: "10%", marginLeft: 20, marginRight: 40,background:"red" }}>
-        <img src={review.img_path} ></img>
+      <div id="img" style={{ width: "10%", marginLeft: 20, marginRight: 40 }}>
+        <img
+          src={`j6a303.p.ssafy.io/img/${review.ename}.jpg`}
+          height="130"
+          width="90"
+        ></img>
       </div>
       <div id="infos" style={{ width: "70%", marginTop: 30 }}>
         <div
@@ -112,12 +113,18 @@ function ReviewItem({ url, review, userSeq,getUserReview }) {
           </div>
         </div>
 
-<div id="name" style={{cursor:"pointer"}} onClick={() => (document.location.href = `/detail/${review.wine_seq}`)}>
-<div style={{ marginTop: 10, fontSize: 20 }}>{review.kname}</div>
-        <div style={{ fontSize: 15, color: "#B2ACAC", marginBottom: 10 }}>
-          {review.ename}
+        <div
+          id="name"
+          style={{ cursor: "pointer" }}
+          onClick={() =>
+            (document.location.href = `/detail/${review.wine_seq}`)
+          }
+        >
+          <div style={{ marginTop: 10, fontSize: 20 }}>{review.kname}</div>
+          <div style={{ fontSize: 15, color: "#B2ACAC", marginBottom: 10 }}>
+            {review.ename}
+          </div>
         </div>
-</div>
 
         {modify === false ? (
           <div style={{ fontSize: 14 }}>{review.review_text}</div>
@@ -211,7 +218,7 @@ function ReviewItem({ url, review, userSeq,getUserReview }) {
               color: "#891826",
             }}
             name="read-only"
-            value={review.review_score/2}
+            value={review.review_score / 2}
             readOnly
             size="small"
           />

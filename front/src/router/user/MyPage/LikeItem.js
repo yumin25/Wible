@@ -7,7 +7,7 @@ import search from "../../../res/img/search.png";
 import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-function LikeItem({ url, like, userSeq,getUserLike }) {
+function LikeItem({ url, like, userSeq, getUserLike }) {
   const [likeIcon, setLikeIcon] = useState(true);
   function handleLikeIcon(event) {
     setLikeIcon(event);
@@ -57,7 +57,11 @@ function LikeItem({ url, like, userSeq,getUserLike }) {
       }}
     >
       <div id="image" style={{ height: 140 }}>
-        <img src={like.img_path}></img>
+        <img
+          src={`j6a303.p.ssafy.io/img/${like.ename}.jpg`}
+          height="140"
+          width="90"
+        ></img>
       </div>
       <div
         id="heart"
@@ -66,8 +70,7 @@ function LikeItem({ url, like, userSeq,getUserLike }) {
           if (likeIcon === true) {
             handleLikeIcon(false);
             RemoveHeart();
-          } 
-          else {
+          } else {
             handleLikeIcon(true);
             ClickHeart();
           }

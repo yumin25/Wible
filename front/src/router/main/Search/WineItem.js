@@ -2,10 +2,9 @@ import CircleIcon from "@mui/icons-material/Circle";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
-import search from "../../../res/img/search.png";
 import Rating from "@mui/material/Rating";
 
-function WineItem(wine) {
+function WineItem(wine, url) {
   // console.log(wine);
   return (
     <>
@@ -21,7 +20,11 @@ function WineItem(wine) {
         <div id="front" style={{ marginRight: 10, paddingBottom: 10 }}>
           {/* 이거 test용이라서 수정해야함 */}
           {/* <img src={wine.wine.img_path} height="220" width="160"></img> */}
-          <img src={search} height="130" width="90"></img>
+          <img
+            src={`j6a303.p.ssafy.io/img/${wine.wine.ename}.jpg`}
+            height="130"
+            width="90"
+          ></img>
         </div>
 
         <div id="middle" style={{ width: 430 }}>
