@@ -3,9 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
 import Rating from "@mui/material/Rating";
-import Barolo2015 from "../../../res/img/Barolo2015.jpg";
+import no_image from "../../../res/img/no_image.jpg";
+
 function WineItem(wine, url) {
-  // console.log(wine);
   return (
     <>
       <div
@@ -22,6 +22,12 @@ function WineItem(wine, url) {
           style={{ marginRight: 40, paddingBottom: 20, paddingLeft: 30 }}
         >
           <img src={`img/${wine.wine.ename}.jpg`} height="140" width="40"></img>
+          {/* <img
+            src={`img/${wine.wine.ename}.jpg`}
+            height="140"
+            width="40"
+            onerror="this.src='../../../res/img/no_image.jpg';"
+          ></img> */}
         </div>
 
         <div id="middle" style={{ marginTop: 13, width: 420 }}>
