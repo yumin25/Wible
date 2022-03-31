@@ -6,66 +6,15 @@ import logo from "../../../res/img/logo.png";
 
 import { Box, Link, Container } from "@mui/material/";
 function FoodSearch() {
-  const [wines, setWines] = useState([ 
-//     {
-//     "wineSeq": 2,
-//     "kname": "프로테코 엑스트라 드라이 N.V.",
-//     "ename": "Prosecco Extra Dry N.V.",
-//     "type": "SPARKLING",
-//     "country": "ITALY",
-//     "grapes": "Merlot",
-//     "price": 9404,
-//     "img_path": null,
-//     "score": 3.6
-// },
-// {
-//     "wineSeq": 7,
-//     "kname": "아르젠토 프로데코 트레비소 엑스트라 드라이 N.V.",
-//     "ename": "Argento Prosecco Treviso Extra Dry N.V.",
-//     "type": "SPARKLING",
-//     "country": "ITALY",
-//     "grapes": "Shiraz/Syrah, Grenache, Mourvedre",
-//     "price": 10275,
-//     "img_path": null,
-//     "score": 3.5
-// },{
-//   "wineSeq": 7,
-//   "kname": "아르젠토 프로데코 트레비소 엑스트라 드라이 N.V.",
-//   "ename": "Argento Prosecco Treviso Extra Dry N.V.",
-//   "type": "SPARKLING",
-//   "country": "ITALY",
-//   "grapes": "Shiraz/Syrah, Grenache, Mourvedre",
-//   "price": 10275,
-//   "img_path": null,
-//   "score": 3.5
-// },
-// {
-//   "wineSeq": 7,
-//   "kname": "아르젠토 프로데코 트레비소 엑스트라 드라이 N.V.",
-//   "ename": "Argento Prosecco Treviso Extra Dry N.V.",
-//   "type": "SPARKLING",
-//   "country": "ITALY",
-//   "grapes": "Shiraz/Syrah, Grenache, Mourvedre",
-//   "price": 10275,
-//   "img_path": null,
-//   "score": 3.5
-// },
-// {
-//   "wineSeq": 7,
-//   "kname": "아르젠토 프로데코 트레비소 엑스트라 드라이 N.V.",
-//   "ename": "Argento Prosecco Treviso Extra Dry N.V.",
-//   "type": "SPARKLING",
-//   "country": "ITALY",
-//   "grapes": "Shiraz/Syrah, Grenache, Mourvedre",
-//   "price": 10275,
-//   "img_path": null,
-//   "score": 3.5
-// },
-]);
+  const [wines, setWines] = useState([]);
+  const [clicked, setClicked]= useState(false);
   const url = "http://j6a303.p.ssafy.io/api";
   //const url ="http://localhost:8080"
   function handleWines(event) {
     setWines(event);
+  }
+  function handleClicked(event) {
+    setClicked(true);
   }
   return (
     <>
@@ -101,6 +50,7 @@ function FoodSearch() {
             wines={wines}
             handleWines={handleWines}
             url={url}
+            handleClicked={handleClicked}
           ></Category>
         </div>
         <div
@@ -110,7 +60,7 @@ function FoodSearch() {
             marginLeft: "2%",
           }}
         >
-          <List wines={wines} url={url}></List>
+          <List wines={wines} url={url} clicked={clicked}></List>
         </div>
       </div>
     </>
