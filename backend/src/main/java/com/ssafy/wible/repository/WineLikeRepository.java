@@ -1,5 +1,7 @@
 package com.ssafy.wible.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +21,8 @@ public interface WineLikeRepository extends JpaRepository<Likes, Integer>{
 	void deleteByuserSeqAndwineSeq(@Param("userSeq") int userSeq, @Param("wineSeq") int wineSeq);
 	
 	Page<Likes> findAllByUserSeq(int userSeq, Pageable pageRequest);
+	
+	List<Likes> findAllByUserSeq(int userSeq);
 	
 	boolean existsByUserSeqAndWineSeq(int userSeq, int wineSeq);
 }

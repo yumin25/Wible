@@ -1,6 +1,18 @@
 package com.ssafy.wible.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ssafy.wible.model.entity.LikeOrder;
+import com.ssafy.wible.model.entity.Likes;
 import com.ssafy.wible.model.entity.ReviewOrder;
 import com.ssafy.wible.model.entity.ScoreOrder;
 import com.ssafy.wible.model.entity.Wine;
@@ -8,18 +20,13 @@ import com.ssafy.wible.model.enums.Country;
 import com.ssafy.wible.model.enums.Type;
 import com.ssafy.wible.model.response.wine.SimpleWineResponse;
 import com.ssafy.wible.repository.LikeOrderRepository;
+import com.ssafy.wible.repository.RecommendRepository;
 import com.ssafy.wible.repository.ReviewOrderRepository;
 import com.ssafy.wible.repository.ScoreOrderRepository;
+import com.ssafy.wible.repository.WineLikeRepository;
 import com.ssafy.wible.repository.WineRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -37,6 +44,12 @@ public class BestWineService {
 
     @Autowired
     private ScoreOrderRepository scoreOrderRepository;
+
+    @Autowired
+    private RecommendRepository recommendRepository;
+
+    @Autowired
+    private WineLikeRepository likeRepository;
 
     public void setBestWine() throws Exception {
         likeOrderRepository.deleteAll();
@@ -149,5 +162,26 @@ public class BestWineService {
         wine.setReviewCnt(644);
         wine.setScore(3.8);
         wineRepository.save(wine);
+    }
+    
+    public List<SimpleWineResponse> getRecommendWine(String type, int userSeq) {
+    	List<SimpleWineResponse> list = new ArrayList<>();
+    	Type t = Type.valueOf(type.toUpperCase());
+    	List<Likes> likes = likeRepository.findAllByUserSeq(userSeq);
+    	for (Likes like : likes) {
+			int cluster = wineRepository.findById(like.getWineSeq()).get().getCluster();
+			List<Wine> wines = wineRepository.findAllByTypeAndCluster(t, cluster);
+			for (Wine wine : wines) {
+				list.add(wine.toResponse());
+			}
+		}
+    	Collections.shuffle(list);
+//    	Recommend recommend = recommendRepository.findByUserSeq(userSeq);
+//    	list.add(wineRepository.findById(recommend.getWineSeq1()).get().toResponse());
+//    	list.add(wineRepository.findById(recommend.getWineSeq2()).get().toResponse());
+//    	list.add(wineRepository.findById(recommend.getWineSeq3()).get().toResponse());
+//    	list.add(wineRepository.findById(recommend.getWineSeq4()).get().toResponse());
+//    	list.add(wineRepository.findById(recommend.getWineSeq5()).get().toResponse());
+    	return list.subList(0, 5);
     }
 }
