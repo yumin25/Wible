@@ -10,13 +10,23 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
-function Category(wines, handleWines, url) {
+function Category({wines, handleWines, url}) {
   const [MeatOpen, setMeatOpen] = React.useState(false);
   const [FishOpen, setFishOpen] = React.useState(false);
   const [FoodOpen, setFoodOpen] = React.useState(false);
   const [LightOpen, setLightOpen] = React.useState(false);
   const [DessertOpen, setDessertOpen] = React.useState(false);
-  const [clickedItem, setClickedItem] = React.useState("");
+  const [clickedItem, setClickedItem] = useState("");
+
+  const ClickedStyle = {
+    background:"#891820",
+    color: "white",
+    width:140
+  };
+  
+  const TypeStyle = {
+    width:140
+  };
   const handleMeatClick = () => {
     setMeatOpen(!MeatOpen);
   };
@@ -49,10 +59,14 @@ function Category(wines, handleWines, url) {
 
   function getWines() {
     console.log(clickedItem);
+    console.log(typeof(clickedItem));
+
     axios
-      .get(url + `/food`, {
-        params: { food: clickedItem },
-      })
+    .get(url + `/food`, {
+      params: {
+        food:clickedItem
+      },
+    })
       .then(function (response) {
         console.log(response);
         handleWines(response.data.content);
@@ -60,6 +74,7 @@ function Category(wines, handleWines, url) {
       .catch(function (error) {
         console.log(error);
       });
+
   }
   return (
     <>
@@ -76,64 +91,72 @@ function Category(wines, handleWines, url) {
         <Collapse in={MeatOpen} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItemButton
+            style={clickedItem===1 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("소고기");
+                handleClickedItem(1);
               }}
-              sx={{ pl: 4 }}
+              sx={{ pl: 4}}
             >
               <ListItemText primary="소고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===2 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("돼지고기");
+                handleClickedItem(2);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="돼지고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===3 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("닭고기");
+                handleClickedItem(3);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="닭고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===4 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("오리고기");
+                handleClickedItem(4);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="오리고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===5 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("양고기");
+                handleClickedItem(5);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="양고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===6 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("사슴고기");
+                handleClickedItem(6);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="사슴고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===7 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("송아지고기");
+                handleClickedItem(7);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="송아지고기" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===8 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("절임육");
+                handleClickedItem(8);
               }}
               sx={{ pl: 4 }}
             >
@@ -155,32 +178,36 @@ function Category(wines, handleWines, url) {
         <Collapse in={FishOpen} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItemButton
+            style={clickedItem===9 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("연어");
+                handleClickedItem(9);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="연어" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===10 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("참치");
+                handleClickedItem(10);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="참치" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===11 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("조개류");
+                handleClickedItem(11);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="조개류" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===12 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("생선류   ");
+                handleClickedItem(12);
               }}
               sx={{ pl: 4 }}
             >
@@ -202,24 +229,27 @@ function Category(wines, handleWines, url) {
         <Collapse in={FoodOpen} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItemButton
+            style={clickedItem===13 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("파스타");
+                handleClickedItem(13);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="파스타" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===14 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("매운요리");
+                handleClickedItem(14);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="매운요리" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===15 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("버섯요리");
+                handleClickedItem(15);
               }}
               sx={{ pl: 4 }}
             >
@@ -241,24 +271,27 @@ function Category(wines, handleWines, url) {
         <Collapse in={LightOpen} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItemButton
+            style={clickedItem===16 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("치즈");
+                handleClickedItem(16);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="치즈" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===17 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("과일");
+                handleClickedItem(17);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="과일" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===18 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("샐러드");
+                handleClickedItem(18);
               }}
               sx={{ pl: 4 }}
             >
@@ -280,24 +313,27 @@ function Category(wines, handleWines, url) {
         <Collapse in={DessertOpen} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItemButton
+            style={clickedItem===19 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("디저트");
+                handleClickedItem(19);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="디저트" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===20 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("스낵류");
+                handleClickedItem(20);
               }}
               sx={{ pl: 4 }}
             >
               <ListItemText primary="스낵류" />
             </ListItemButton>
             <ListItemButton
+            style={clickedItem===21 ? ClickedStyle : TypeStyle}
               onClick={() => {
-                handleClickedItem("식전주");
+                handleClickedItem(21);
               }}
               sx={{ pl: 4 }}
             >
