@@ -62,8 +62,8 @@ function FoodSearch() {
 //   "score": 3.5
 // },
 ]);
-  //const url = "http://j6a303.p.ssafy.io/api";
-  const url ="http://localhost:8080"
+  const url = "http://j6a303.p.ssafy.io/api";
+  //const url ="http://localhost:8080"
   function handleWines(event) {
     setWines(event);
   }
