@@ -69,8 +69,9 @@ function WineInfo(props) {
                   return (
                     <Box sx={{ my: 0.5 }} key={index}>
                       <Box sx={{ display: "flex" }}>
-                        <Typography>[{info.type}]</Typography>
-                        <Typography>{info.infoTitle}</Typography>
+                        <Typography sx={{ fontSize: 16, fontWeight: "bold" }}>[{info.type}]</Typography>
+                        <Typography>　</Typography>
+                        <Typography sx={{ fontSize: 16, fontWeight: "bold" }}>{info.infoTitle}</Typography>
                       </Box>
                       <Typography>{info.infoText}</Typography>
                       <ColoredLine color="lightgray" />
