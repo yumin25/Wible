@@ -33,11 +33,9 @@ function Home({ userSlice }) {
 
   const [recomWine, setRecomWine] = useState([]);
   const getRecomWine = () => {
-    if (userSlice.userSeq !== 0) {
-      Send.get(`/wine/${recommend}/${userSlice.userSeq}/`).then((res) => {
-        setRecomWine(res.data);
-      });
-    }
+    Send.get(`/wine/${recommend}/${userSlice.userSeq}/`).then((res) => {
+      setRecomWine(res.data);
+    });
   };
 
   useEffect(() => {

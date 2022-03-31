@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Box, Typography, Card, CardActionArea, CardMedia, CardContent } from "@mui/material/";
+import { Box, Typography, Card, CardActionArea, Link, CardContent } from "@mui/material/";
 
 function WineList(props) {
   const wines = props.recomWine;
@@ -11,7 +11,7 @@ function WineList(props) {
     <>
       {/* 와인 */}
       <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
-        {wines &&
+        {wines ? (
           wines.map((wine, index) => {
             return (
               <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>
@@ -45,7 +45,26 @@ function WineList(props) {
                 </CardActionArea>
               </Card>
             );
-          })}
+          })
+        ) : (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Link href="/survey">
+              <button
+                style={{
+                  borderRadius: 20,
+                  backgroundColor: "#F4C6C9",
+                  border: 0,
+                  color: "white",
+                  width: 500,
+                  height: 40,
+                  marginBottom: 10,
+                }}
+              >
+                내 와인 취향 찾으러 가기
+              </button>
+            </Link>
+          </Box>
+        )}
       </Box>
     </>
   );
