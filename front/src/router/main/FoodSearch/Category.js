@@ -10,7 +10,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
-function Category({wines, handleWines, url}) {
+function Category({wines, handleWines, url,handleClicked}) {
   const [MeatOpen, setMeatOpen] = React.useState(false);
   const [FishOpen, setFishOpen] = React.useState(false);
   const [FoodOpen, setFoodOpen] = React.useState(false);
@@ -45,6 +45,7 @@ function Category({wines, handleWines, url}) {
 
   const handleClickedItem = (name) => {
     setClickedItem(name);
+    handleClicked(true);
   };
   console.log(clickedItem);
 

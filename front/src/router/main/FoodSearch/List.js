@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import WineItem from "./WineItem";
 import food_img from "../../../res/img/food_img.png";
-function List({ wines, url }) {
+function List({ wines, url,clicked }) {
   //   getWines;
   return (
     <>
-    {wines.length===0?(
+    {clicked===false?(
     <div style={{marginTop:30,marginLeft:40}}>
       <img width={990} src={food_img} alt="logo" />
     </div>):(      <div style={{              
