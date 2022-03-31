@@ -56,7 +56,7 @@ function WineInfo(props) {
           <Link href="#" color="inherit" underline="none">
             주제별와인
           </Link>
-          <Link href="#" color="inherit" underline="none">
+          <Link href="/foodSearch" color="inherit" underline="none">
             음식추천
           </Link>
         </Box>
