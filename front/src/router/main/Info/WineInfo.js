@@ -66,10 +66,10 @@ function WineInfo(props) {
           <Grid item xs={10}>
             <Box sx={{ mt: 10, mb: 5, mx: 30, display: "flex", flexDirection: "column" }}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography variant="h4" sx={{ mb: 3, fontWeight: "bold" }}>
+                <Typography variant="h4" sx={{ mb: 3, pt: 1, fontWeight: "bold" }}>
                   와인사전
                 </Typography>
-                <Select size="small" sx={{ mr: 3 }} value={criteria} onChange={handleCriteria}>
+                <Select size="small" sx={{ mr: 3, py: 1.5 }} value={criteria} onChange={handleCriteria}>
                   <MenuItem value={"all"}>전체</MenuItem>
                   <MenuItem value={"기본용어"}>기본용어</MenuItem>
                   <MenuItem value={"와인상식"}>와인상식</MenuItem>
