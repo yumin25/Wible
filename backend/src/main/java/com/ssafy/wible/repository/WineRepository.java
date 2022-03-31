@@ -23,6 +23,8 @@ public interface WineRepository extends JpaRepository<Wine, Integer>, JpaSpecifi
     Page<Wine> findAll(Specification<Wine> spec, Pageable pageable);
     Page<Wine> findWinesByFoodContains(String food, Pageable pageable);
     
+    List<Wine> findAllByTypeAndCluster(Type type, int cluster);
+    
     @Transactional
     @Modifying
 	@Query(value="Update wine set like_cnt = like_cnt + 1 where wine_seq = :wineSeq", nativeQuery=true)

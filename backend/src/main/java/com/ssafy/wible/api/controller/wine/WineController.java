@@ -134,4 +134,9 @@ public class WineController {
 		bestWineService.add();
 		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 	}
+	
+	@GetMapping("/{type}/{userSeq}")
+	public ResponseEntity<List<SimpleWineResponse>> getRecommentWine(@PathVariable("type") String type, @PathVariable("userSeq") int userSeq) throws Exception {
+		return new ResponseEntity<List<SimpleWineResponse>>(bestWineService.getRecommendWine(type, userSeq), HttpStatus.OK);
+	}
 }
