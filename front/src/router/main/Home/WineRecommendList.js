@@ -12,6 +12,7 @@ function WineList(props) {
       {/* 와인 */}
       <Box sx={{ m: 2, display: "flex", justifyContent: "space-evenly" }}>
         {wines ? (
+          wines &&
           wines.map((wine, index) => {
             return (
               <Card sx={{ minWidth: 230, maxWidth: 230, minHeight: 350 }} key={index}>

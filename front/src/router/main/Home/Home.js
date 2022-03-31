@@ -44,7 +44,7 @@ function Home({ userSlice }) {
 
   useEffect(() => {
     getRecomWine();
-  }, [recommend]);
+  }, [recommend, userSlice.userSeq]);
 
   useEffect(() => {
     getData();
