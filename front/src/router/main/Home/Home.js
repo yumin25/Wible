@@ -125,7 +125,7 @@ function Home({ userSlice }) {
                 <WineRecommendList recomWine={recomWine}></WineRecommendList>
               </div>
             ) : (
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Box sx={{ pt: 3, display: "flex", justifyContent: "center" }}>
                 <Link href="/survey">
                   <button
                     style={{

@@ -48,7 +48,8 @@ function WineList(props) {
             );
           })
         ) : (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ pt: 3, display: "flex", justifyContent: "center" }}>
+            <Typography sx={{ fontSize: 16 }}>좋아요 누른 와인이 없습니다.</Typography>
             <Link href="/survey">
               <button
                 style={{

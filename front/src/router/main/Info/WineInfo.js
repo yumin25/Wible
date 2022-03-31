@@ -69,7 +69,7 @@ function WineInfo(props) {
                 <Typography variant="h4" sx={{ mb: 3, pt: 2, fontWeight: "bold" }}>
                   와인사전
                 </Typography>
-                <Box sx={{ py: 1.5 }}>
+                <Box sx={{ py: 2 }}>
                   <Select size="small" sx={{ mr: 3 }} value={criteria} onChange={handleCriteria}>
                     <MenuItem value={"all"}>전체</MenuItem>
                     <MenuItem value={"기본용어"}>기본용어</MenuItem>
@@ -79,7 +79,7 @@ function WineInfo(props) {
                   </Select>
                 </Box>
               </Box>
-              <ColoredLine color="black" />
+              <hr style={{ width: "100%", height: 1, color: "black", backgroundColor: "black" }} />
               {infoData &&
                 infoData.map((info, index) => {
                   return (
