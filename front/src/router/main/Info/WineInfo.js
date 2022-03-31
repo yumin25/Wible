@@ -64,7 +64,7 @@ function WineInfo(props) {
                 </Typography>
                 <ColoredLine color="black" />
               </Box>
-              {infoData &&
+              {/* {infoData &&
                 infoData.map((info, index) => {
                   return (
                     <Box sx={{ my: 1 }} key={index}>
@@ -77,7 +77,7 @@ function WineInfo(props) {
                       <ColoredLine color="lightgray" />
                     </Box>
                   );
-                })}
+                })} */}
             </Box>
           </Grid>
           <Grid item xs={1}></Grid>
