@@ -67,12 +67,13 @@ function WineInfo(props) {
               {infoData &&
                 infoData.map((info, index) => {
                   return (
-                    <Box sx={{ my: 0.5 }} key={index}>
+                    <Box sx={{ my: 1 }} key={index}>
                       <Box sx={{ display: "flex" }}>
-                        <Typography>[{info.type}]</Typography>
-                        <Typography>{info.infoTitle}</Typography>
+                        <Typography sx={{ fontSize: 16, fontWeight: "bold" }}>[{info.type}]</Typography>
+                        <Typography>　</Typography>
+                        <Typography sx={{ fontSize: 16, fontWeight: "bold" }}>{info.infoTitle}</Typography>
                       </Box>
-                      <Typography>{info.infoText}</Typography>
+                      <Typography sx={{ mb: 1 }}>{info.infoText}</Typography>
                       <ColoredLine color="lightgray" />
                     </Box>
                   );
