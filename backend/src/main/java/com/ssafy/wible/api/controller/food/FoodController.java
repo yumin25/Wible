@@ -25,7 +25,7 @@ public class FoodController {
     private static final String FAIL = "fail";
 
     @GetMapping("")
-    public ResponseEntity<Page<SearchWineResponse>> search(@RequestParam(value="food", defaultValue = "") String food,
+    public ResponseEntity<Page<SearchWineResponse>> search(@RequestParam(value="food", defaultValue = "0") int food,
                                                            @PageableDefault(size = 10, sort = "likeCnt", direction = Sort.Direction.DESC) Pageable pageRequest
     ) throws Exception {
         return new ResponseEntity<Page<SearchWineResponse>>(foodService.searchWine(food, pageRequest), HttpStatus.OK);
