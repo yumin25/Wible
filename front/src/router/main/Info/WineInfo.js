@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Send from "../../../config/Send";
 import TopNav from "../../main/Home/TopNav";
-import { Box, Typography, Link, Grid } from "@mui/material/";
+import { Box, Typography, Link, Grid, MenuItem, Select } from "@mui/material/";
 
 const ColoredLine = ({ color }) => (
   <hr
@@ -16,16 +16,23 @@ const ColoredLine = ({ color }) => (
 );
 
 function WineInfo(props) {
+  const [criteria, setCriteria] = useState("all");
+  const handleCriteria = (event) => {
+    setCriteria(event.target.value);
+  };
+
   const [infoData, setInfoData] = useState([]);
   const getInfo = () => {
-    Send.get(`/wineinfo`).then((res) => {
-      setInfoData(res.data);
-    });
+    if (criteria === "all") {
+      Send.get(`/wineinfo`).then((res) => setInfoData(res.data));
+    } else {
+      Send.get(`/wineinfo/${criteria}`).then((res) => setInfoData(res.data));
+    }
   };
 
   useEffect(() => {
     getInfo();
-  }, []);
+  }, [criteria]);
 
   return (
     <>
@@ -58,12 +65,19 @@ function WineInfo(props) {
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
             <Box sx={{ mt: 10, mb: 5, mx: 30, display: "flex", flexDirection: "column" }}>
-              <Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography variant="h4" sx={{ mb: 3, fontWeight: "bold" }}>
                   와인사전
                 </Typography>
-                <ColoredLine color="black" />
+                <Select size="small" sx={{ mr: 3 }} value={criteria} onChange={handleCriteria}>
+                  <MenuItem value={"all"}>전체</MenuItem>
+                  <MenuItem value={"기본용어"}>기본용어</MenuItem>
+                  <MenuItem value={"와인상식"}>와인상식</MenuItem>
+                  <MenuItem value={"포도품종"}>포도품종</MenuItem>
+                  <MenuItem value={"생산지역"}>생산지역</MenuItem>
+                </Select>
               </Box>
+              <ColoredLine color="black" />
               {infoData &&
                 infoData.map((info, index) => {
                   return (
@@ -73,7 +87,7 @@ function WineInfo(props) {
                         <Typography>　</Typography>
                         <Typography sx={{ fontSize: 16, fontWeight: "bold" }}>{info.infoTitle}</Typography>
                       </Box>
-                      <Typography sx={{ mb: 1 }}>{info.infoText}</Typography>
+                      <Typography sx={{ mt: 1, mb: 2 }}>{info.infoText}</Typography>
                       <ColoredLine color="lightgray" />
                     </Box>
                   );
