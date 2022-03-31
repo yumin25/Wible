@@ -3,7 +3,10 @@ package com.ssafy.wible.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -168,13 +171,20 @@ public class BestWineService {
     	List<SimpleWineResponse> list = new ArrayList<>();
     	Type t = Type.valueOf(type.toUpperCase());
     	List<Likes> likes = likeRepository.findAllByUserSeq(userSeq);
+    	Set<Integer> set = new HashSet<>();
     	for (Likes like : likes) {
-			int cluster = wineRepository.findById(like.getWineSeq()).get().getCluster();
-			List<Wine> wines = wineRepository.findAllByTypeAndCluster(t, cluster);
-			for (Wine wine : wines) {
-				list.add(wine.toResponse());
-			}
+    		Wine wine = wineRepository.findById(like.getWineSeq()).get();
+    		if(!wine.getType().equals(t)) continue;
+			set.add(wine.getCluster());
 		}
+    	
+    	Iterator<Integer> iter = set.iterator();
+    	while(iter.hasNext()) {
+    		List<Wine> wines = wineRepository.findAllByTypeAndCluster(t, iter.next());
+    		for (Wine wine : wines) {
+    			list.add(wine.toResponse());
+    		}
+    	}
     	Collections.shuffle(list);
 //    	Recommend recommend = recommendRepository.findByUserSeq(userSeq);
 //    	list.add(wineRepository.findById(recommend.getWineSeq1()).get().toResponse());
@@ -182,6 +192,6 @@ public class BestWineService {
 //    	list.add(wineRepository.findById(recommend.getWineSeq3()).get().toResponse());
 //    	list.add(wineRepository.findById(recommend.getWineSeq4()).get().toResponse());
 //    	list.add(wineRepository.findById(recommend.getWineSeq5()).get().toResponse());
-    	return list.subList(0, 5);
+    	return list.size() >=5 ? list.subList(0, 5) : null;
     }
 }
