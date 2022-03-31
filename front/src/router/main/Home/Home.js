@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import TopNav from "./TopNav";
 import WineList from "./WineList";
-import { Box, Link, Grid, Typography, ToggleButtonGroup, ToggleButton, Select, MenuItem } from "@mui/material/";
+import {
+  Box,
+  Link,
+  Grid,
+  Typography,
+  ToggleButtonGroup,
+  ToggleButton,
+  Select,
+  MenuItem,
+} from "@mui/material/";
 import Send from "../../../config/Send";
 
 function Home({ userSlice }) {
@@ -60,7 +69,7 @@ function Home({ userSlice }) {
           <Link href="#" color="inherit" underline="none">
             주제별와인
           </Link>
-          <Link href="#" color="inherit" underline="none">
+          <Link href="/foodSearch" color="inherit" underline="none">
             음식추천
           </Link>
         </Box>
@@ -79,7 +88,13 @@ function Home({ userSlice }) {
                   <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
                     지금 인기 있는 와인은?
                   </Typography>
-                  <ToggleButtonGroup size="small" color="secondary" exclusive value={popular} onChange={handlePopular}>
+                  <ToggleButtonGroup
+                    size="small"
+                    color="secondary"
+                    exclusive
+                    value={popular}
+                    onChange={handlePopular}
+                  >
                     <ToggleButton value="red">레드</ToggleButton>
                     <ToggleButton value="white">화이트</ToggleButton>
                     <ToggleButton value="rose">로제</ToggleButton>
@@ -87,7 +102,12 @@ function Home({ userSlice }) {
                     <ToggleButton value="dessert">디저트</ToggleButton>
                   </ToggleButtonGroup>
                 </Box>
-                <Select size="small" sx={{ mr: 3 }} value={criteria} onChange={handleCriteria}>
+                <Select
+                  size="small"
+                  sx={{ mr: 3 }}
+                  value={criteria}
+                  onChange={handleCriteria}
+                >
                   <MenuItem value={"score"}>평점순</MenuItem>
                   <MenuItem value={"review"}>리뷰순</MenuItem>
                   <MenuItem value={"like"}>좋아요순</MenuItem>
@@ -101,7 +121,13 @@ function Home({ userSlice }) {
                 <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>
                   당신만을 위한 와인 추천
                 </Typography>
-                <ToggleButtonGroup size="small" color="secondary" exclusive value={recommend} onChange={handleRecommend}>
+                <ToggleButtonGroup
+                  size="small"
+                  color="secondary"
+                  exclusive
+                  value={recommend}
+                  onChange={handleRecommend}
+                >
                   <ToggleButton value="red">레드</ToggleButton>
                   <ToggleButton value="white">화이트</ToggleButton>
                   <ToggleButton value="rose">로제</ToggleButton>
