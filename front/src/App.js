@@ -11,6 +11,8 @@ import UserReview from "./router/user/MyPage/UserReview";
 import UserInfo from "./router/user/MyPage/UserInfo";
 import UserLike from "./router/user/MyPage/UserLike";
 import FoodSearch from "./router/main/FoodSearch/FoodSearch";
+import WineInfo from "./router/main/Info/WineInfo";
+
 function App() {
   return (
     <>
@@ -29,6 +31,7 @@ function App() {
           <Route path="/detail/:wineSeq" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/survey/result" element={<SurveyResult />} />
+          <Route path="/wineinfo" element={<WineInfo />} />
         </Routes>
       </Router>
     </>

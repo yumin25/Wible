@@ -63,7 +63,7 @@ function Home({ userSlice }) {
           <Link href="/search" color="inherit" underline="none">
             와인검색
           </Link>
-          <Link href="#" color="inherit" underline="none">
+          <Link href="/wineinfo" color="inherit" underline="none">
             와인사전
           </Link>
           <Link href="#" color="inherit" underline="none">
