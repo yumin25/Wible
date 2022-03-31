@@ -33,7 +33,7 @@ function Home({ userSlice }) {
 
   const [recomWine, setRecomWine] = useState([]);
   const getRecomWine = () => {
-    if (userSlice) {
+    if (userSlice.userSeq !== 0) {
       Send.get(`/wine/${recommend}/${userSlice.userSeq}/`).then((res) => {
         setRecomWine(res.data);
       });
@@ -110,7 +110,7 @@ function Home({ userSlice }) {
               <WineList bestWine={bestWine}></WineList>
             </div>
             {/* 추천 와인 */}
-            {userSlice ? (
+            {userSlice.userSeq !== 0 ? (
               <div style={{ marginBottom: 75 }}>
                 <Box sx={{ display: "flex" }}>
                   <Typography variant="h5" sx={{ ml: 5, mr: 3, pt: 0.5 }}>

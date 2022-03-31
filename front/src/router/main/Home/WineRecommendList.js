@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Box, Typography, Card, CardActionArea, CardMedia, CardContent } from "@mui/material/";
 
 function WineList(props) {
-  const wines = props.bestWine;
+  const wines = props.recomWine;
   const handleImgError = (e) => {
     e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
   };
