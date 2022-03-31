@@ -10,6 +10,7 @@ import MyPage from "./router/user/MyPage/index";
 import UserReview from "./router/user/MyPage/UserReview";
 import UserInfo from "./router/user/MyPage/UserInfo";
 import UserLike from "./router/user/MyPage/UserLike";
+import FoodSearch from "./router/main/FoodSearch/FoodSearch";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
             <Route path="like" />
             <Route path="userInfo" />
           </Route>
+          <Route path="/foodSearch" element={<FoodSearch />} />
           <Route path="/search" element={<Search />} />
           <Route path="/detail/:wineSeq" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
