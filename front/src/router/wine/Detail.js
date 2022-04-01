@@ -193,69 +193,71 @@ function Detail(props) {
                   <Typography sx={{ mx: 1, mt: 0.5, fontSize: 32, fontWeight: "bold" }}>{Math.ceil(wineProfile.price / 100) * 100} 원</Typography>
                 </Box>
                 <hr />
-                <Box sx={{ display: "flex", justifyContent: "space-evenly", my: 3 }}>
-                  <Box sx={{ mx: 2 }}>
-                    <Typography sx={{ fontWeight: "bold" }}>산도</Typography>
-                    <Box sx={{ display: "flex" }}>
-                      {level.map((lv, index) => {
-                        return (
-                          <div key={index}>
-                            {wineProfile.acidity >= lv ? (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
-                            ) : (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
-                            )}
-                          </div>
-                        );
-                      })}
+                <Box sx={{ display: "flex", justifyContent: "top", my: 3, ml: 1.5 }}>
+                  <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                    <Box sx={{ mr: 2 }}>
+                      <Typography sx={{ fontWeight: "bold" }}>산도</Typography>
+                      <Box sx={{ display: "flex" }}>
+                        {level.map((lv, index) => {
+                          return (
+                            <div key={index}>
+                              {wineProfile.acidity >= lv ? (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              ) : (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </Box>
                     </Box>
-                  </Box>
-                  <Box sx={{ mr: 2 }}>
-                    <Typography sx={{ fontWeight: "bold" }}>당도</Typography>
-                    <Box sx={{ display: "flex" }}>
-                      {level.map((lv, index) => {
-                        return (
-                          <div key={index}>
-                            {wineProfile.sweet >= lv ? (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
-                            ) : (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
-                            )}
-                          </div>
-                        );
-                      })}
+                    <Box sx={{ mr: 2 }}>
+                      <Typography sx={{ fontWeight: "bold" }}>당도</Typography>
+                      <Box sx={{ display: "flex" }}>
+                        {level.map((lv, index) => {
+                          return (
+                            <div key={index}>
+                              {wineProfile.sweet >= lv ? (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              ) : (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </Box>
                     </Box>
-                  </Box>
-                  <Box sx={{ mr: 2 }}>
-                    <Typography sx={{ fontWeight: "bold" }}>바디</Typography>
-                    <Box sx={{ display: "flex" }}>
-                      {level.map((lv, index) => {
-                        return (
-                          <div key={index}>
-                            {wineProfile.body >= lv ? (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
-                            ) : (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
-                            )}
-                          </div>
-                        );
-                      })}
+                    <Box sx={{ mr: 2 }}>
+                      <Typography sx={{ fontWeight: "bold" }}>바디</Typography>
+                      <Box sx={{ display: "flex" }}>
+                        {level.map((lv, index) => {
+                          return (
+                            <div key={index}>
+                              {wineProfile.body >= lv ? (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              ) : (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </Box>
                     </Box>
-                  </Box>
-                  <Box sx={{ mr: 2 }}>
-                    <Typography sx={{ fontWeight: "bold" }}>타닌</Typography>
-                    <Box sx={{ display: "flex" }}>
-                      {level.map((lv, index) => {
-                        return (
-                          <div key={index}>
-                            {wineProfile.tannin >= lv ? (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
-                            ) : (
-                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
-                            )}
-                          </div>
-                        );
-                      })}
+                    <Box sx={{ mr: 2 }}>
+                      <Typography sx={{ fontWeight: "bold" }}>타닌</Typography>
+                      <Box sx={{ display: "flex" }}>
+                        {level.map((lv, index) => {
+                          return (
+                            <div key={index}>
+                              {wineProfile.tannin >= lv ? (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              ) : (
+                                <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
