@@ -44,18 +44,14 @@ public class SearchController {
 
         List<Type> types = new ArrayList<>();
         if (type != null) {
-            for(String s: type){
-                types.add(Type.valueOf(s.toUpperCase()));
-            }
+            for(String s: type) types.add(Type.valueOf(s.toUpperCase()));
         }
 
         List<Country> countries = new ArrayList<>();
         if (country != null) {
-            for(String s: country){
-                countries.add(Country.valueOf(s.toUpperCase()));
-            }
+            for(String s: country) countries.add(Country.valueOf(s.toUpperCase()));
         }
-        System.out.println(keyword + "  keyword");
+
         return new ResponseEntity<Page<SearchWineResponse>>(searchService.search(keyword, price_lower, price_upper, types, body, tannin, sweet, acidity, countries, pageRequest), HttpStatus.OK);
     }
 }
