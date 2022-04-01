@@ -41,7 +41,7 @@ function WineInfo(props) {
         <Grid container spacing={2}>
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
-            <Box sx={{ mt: 10, mb: 5, mx: 30, display: "flex", flexDirection: "column" }}>
+            <Box sx={{ mt: 5, mb: 5, mx: 30, display: "flex", flexDirection: "column" }}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography variant="h4" sx={{ mb: 3, pt: 2, fontWeight: "bold" }}>
                   와인사전
