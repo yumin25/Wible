@@ -55,27 +55,6 @@ function Home({ userSlice }) {
       {/* 상단 구성 */}
       <div>
         <TopNav />
-        <Box
-          sx={{
-            my: 3,
-            px: 50,
-            display: "flex",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <Link href="/search" color="inherit" underline="none">
-            와인검색
-          </Link>
-          <Link href="/wineinfo" color="inherit" underline="none">
-            와인사전
-          </Link>
-          <Link href="#" color="inherit" underline="none">
-            주제별와인
-          </Link>
-          <Link href="/foodSearch" color="inherit" underline="none">
-            음식추천
-          </Link>
-        </Box>
         <Box style={{ backgroundColor: "#F4C6C9", height: 300 }}>　</Box>
       </div>
 

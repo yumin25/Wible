@@ -7,6 +7,7 @@ import { Box, Link, Container } from "@mui/material/";
 import styled from "styled-components";
 import { TextField } from "@mui/material/";
 import search from "../../../res/img/search.png";
+import TopNav from "../Home/TopNav";
 import { getSwitchUnstyledUtilityClass } from "@mui/base";
 const SearchInput = styled.input`
   position: relative;
@@ -127,34 +128,14 @@ function Search() {
   useEffect(() => {
     getWines();
     console.log("카테고리 변경 일어남");
-  }, [
-    page,
-    type,
-    minPrice,
-    maxPrice,
-    sweetness,
-    body,
-    acidity,
-    tanin,
-    country,
-  ]);
+  }, [page, type, minPrice, maxPrice, sweetness, body, acidity, tanin, country]);
 
   function getWines() {
     // const typeString = JSON.stringify(type);
     const typeString = type.toString();
     const countryString = country.toString();
 
-    console.log(
-      keyword,
-      typeString,
-      minPrice,
-      maxPrice,
-      body,
-      tanin,
-      sweetness,
-      acidity,
-      countryString
-    );
+    console.log(keyword, typeString, minPrice, maxPrice, body, tanin, sweetness, acidity, countryString);
     axios
       .get(url + `/search`, {
         params: {
@@ -195,19 +176,7 @@ function Search() {
     <>
       {/* 상단아이콘 */}
       <div>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Link href="/">
-            <img width={250} src={logo} alt="logo" />
-          </Link>
-        </Box>
-        <Box
-          sx={{
-            my: 0,
-            px: 50,
-            display: "flex",
-            justifyContent: "space-evenly",
-          }}
-        ></Box>
+        <TopNav />
       </div>
       {/* 정렬 및 검색 */}
 
@@ -256,13 +225,7 @@ function Search() {
               <SearchIcon></SearchIcon>
             </div>
 
-            <List
-              wines={wines}
-              totalCnt={totalCnt}
-              page={page}
-              handlePageChange={handlePageChange}
-              url={url}
-            ></List>
+            <List wines={wines} totalCnt={totalCnt} page={page} handlePageChange={handlePageChange} url={url}></List>
           </div>
         </div>
       </Container>
