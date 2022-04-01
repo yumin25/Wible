@@ -55,12 +55,12 @@ function Search() {
 
   const [type, setType] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [sweetness, setSweetness] = useState("0");
-  const [body, setBody] = useState("0");
-  const [acidity, setAcidity] = useState("0");
-  const [tanin, setTanin] = useState("0");
-  const [minPrice, setMinPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState("100");
+  const [sweetness, setSweetness] = useState("");
+  const [body, setBody] = useState("");
+  const [acidity, setAcidity] = useState("");
+  const [tanin, setTanin] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   //최소가격 -> price[0], 최대가격 -> price[1]
   // const [country, setCountry] = useState({
@@ -129,14 +129,34 @@ function Search() {
   useEffect(() => {
     getWines();
     console.log("카테고리 변경 일어남");
-  }, [page, type, minPrice, maxPrice, sweetness, body, acidity, tanin, country]);
+  }, [
+    page,
+    type,
+    minPrice,
+    maxPrice,
+    sweetness,
+    body,
+    acidity,
+    tanin,
+    country,
+  ]);
 
   function getWines() {
     // const typeString = JSON.stringify(type);
     const typeString = type.toString();
     const countryString = country.toString();
 
-    console.log(keyword, typeString, minPrice, maxPrice, body, tanin, sweetness, acidity, countryString);
+    console.log(
+      keyword,
+      typeString,
+      minPrice,
+      maxPrice,
+      body,
+      tanin,
+      sweetness,
+      acidity,
+      countryString
+    );
     axios
       .get(url + `/search`, {
         params: {
@@ -226,7 +246,13 @@ function Search() {
               <SearchIcon></SearchIcon>
             </div>
 
-            <List wines={wines} totalCnt={totalCnt} page={page} handlePageChange={handlePageChange} url={url}></List>
+            <List
+              wines={wines}
+              totalCnt={totalCnt}
+              page={page}
+              handlePageChange={handlePageChange}
+              url={url}
+            ></List>
           </div>
         </div>
       </Container>
