@@ -14,21 +14,17 @@ function Bar() {
   return (
     <div>
       <div>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             borderBottom: "1px solid #E5E5E5",
             marginBottom: 5,
           }}
-        >
-          <Link href="/">
-            <img width={250} src={logo} alt="logo" />
-          </Link>
-        </Box>
+        ></Box> */}
         <Box
           sx={{
-            my: 0,
+            mt: 10,
             px: 50,
             display: "flex",
             justifyContent: "space-evenly",

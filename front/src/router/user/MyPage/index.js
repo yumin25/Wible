@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Bar from "./Bar";
-
+import TopNav from "../../main/Home/TopNav";
 import React from "react";
 import UserReview from "./UserReview";
 import UserInfo from "./UserInfo";
@@ -8,6 +8,7 @@ import UserLike from "./UserLike";
 function Mypage() {
   return (
     <div>
+      <TopNav />
       <Bar />
       <Routes>
         <Route index path="/" element={<UserReview />} />

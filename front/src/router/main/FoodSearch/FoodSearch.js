@@ -3,11 +3,11 @@ import axios from "axios";
 import Category from "./Category";
 import List from "./List";
 import logo from "../../../res/img/logo.png";
-
+import TopNav from "../Home/TopNav";
 import { Box, Link, Container } from "@mui/material/";
 function FoodSearch() {
   const [wines, setWines] = useState([]);
-  const [clicked, setClicked]= useState(false);
+  const [clicked, setClicked] = useState(false);
   const url = "http://j6a303.p.ssafy.io/api";
   //const url ="http://localhost:8080"
   function handleWines(event) {
@@ -18,20 +18,7 @@ function FoodSearch() {
   }
   return (
     <>
-      {/* 상단아이콘 */}
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Link href="/">
-          <img width={250} src={logo} alt="logo" />
-        </Link>
-      </Box>
-      <Box
-        sx={{
-          my: 0,
-          px: 50,
-          display: "flex",
-          justifyContent: "space-evenly",
-        }}
-      ></Box>
+      <TopNav />
       {/* <Box
         sx={{
           my: 0,
@@ -46,12 +33,7 @@ function FoodSearch() {
       </Box> */}
       <div style={{ display: "flex" }}>
         <div style={{ marginLeft: "7%", marginTop: 20 }}>
-          <Category
-            wines={wines}
-            handleWines={handleWines}
-            url={url}
-            handleClicked={handleClicked}
-          ></Category>
+          <Category wines={wines} handleWines={handleWines} url={url} handleClicked={handleClicked}></Category>
         </div>
         <div
           style={{
