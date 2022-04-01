@@ -10,7 +10,6 @@ function TopNav({ userSlice }) {
 
   return (
     <>
-      {/* 상단 구성 */}
       <div>
         {window.localStorage.getItem("idToken") === null ? (
           <Breadcrumbs

@@ -38,6 +38,7 @@ const SearchIcon = styled.img.attrs({
   top: 21.6%;
   left: 82.5%;
 `;
+
 function Search() {
   const url = "http://j6a303.p.ssafy.io/api";
   const [totalCnt, setTotalCnt] = useState("0");

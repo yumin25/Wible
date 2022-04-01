@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 import Send from "../../../config/Send";
 import TopNav from "../../main/Home/TopNav";
-import { Box, Typography, Link, Grid, MenuItem, Select } from "@mui/material/";
+import { Box, Typography, Grid, MenuItem, Select } from "@mui/material/";
 
 const ColoredLine = ({ color }) => (
   <hr
