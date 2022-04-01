@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { Box, Link, Container } from "@mui/material/";
-import logo from "../../../res/img/logo.png";
 
 function Bar() {
   const url = "http://j6a303.p.ssafy.io/api";

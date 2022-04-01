@@ -4,6 +4,7 @@ import WineItem from "./WineItem";
 import food_img from "../../../res/img/food_img.png";
 function List({ wines, url, clicked }) {
   //   getWines;
+
   return (
     <>
       {clicked === false ? (

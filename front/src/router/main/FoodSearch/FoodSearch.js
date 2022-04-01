@@ -5,6 +5,7 @@ import List from "./List";
 import logo from "../../../res/img/logo.png";
 import TopNav from "../Home/TopNav";
 import { Box, Link, Container } from "@mui/material/";
+
 function FoodSearch() {
   const [wines, setWines] = useState([]);
   const [clicked, setClicked] = useState(false);
@@ -16,6 +17,7 @@ function FoodSearch() {
   function handleClicked(event) {
     setClicked(true);
   }
+
   return (
     <>
       <TopNav />

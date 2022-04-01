@@ -5,6 +5,7 @@ import React from "react";
 import UserReview from "./UserReview";
 import UserInfo from "./UserInfo";
 import UserLike from "./UserLike";
+
 function Mypage() {
   return (
     <div>

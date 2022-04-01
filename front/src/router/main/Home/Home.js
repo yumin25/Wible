@@ -10,6 +10,7 @@ function Home({ userSlice }) {
   const [popular, setPopular] = useState("red");
   const [recommend, setRecommend] = useState("red");
   const [criteria, setCriteria] = useState("score");
+
   const handlePopular = (event, newPopular) => {
     setPopular(newPopular);
   };
