@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Send from "../../config/Send";
 import ReviewList from "./ReviewList";
 import TopNav from "../main/Home/TopNav";
-import { Box, Grid, Typography, Card, CardMedia, Avatar, TextareaAutosize, Button, Rating, Pagination } from "@mui/material/";
+import { Box, Grid, Typography, Card, Avatar, TextareaAutosize, Button, Rating, Pagination } from "@mui/material/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as hs } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as hr } from "@fortawesome/free-regular-svg-icons";
@@ -30,7 +30,6 @@ function Detail(props) {
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-
   const handleImgError = (e) => {
     e.target.src = "https://wine21.speedgabia.com/no_image2.jpg";
   };
@@ -120,7 +119,6 @@ function Detail(props) {
   useEffect(() => {
     getDetail();
   }, []);
-
   useEffect(() => {
     getReview();
   }, [page]);
