@@ -7,7 +7,7 @@ function TopNav({ userSlice }) {
   const Logout = () => {
     window.localStorage.clear();
   };
-  console.log(userSlice);
+
   return (
     <>
       {/* 상단 구성 */}
