@@ -194,16 +194,16 @@ function Detail(props) {
                 </Box>
                 <hr />
                 <Box sx={{ display: "flex", justifyContent: "space-evenly", my: 3 }}>
-                  <Box sx={{ mr: 2 }}>
+                  <Box sx={{ mx: 2 }}>
                     <Typography sx={{ fontWeight: "bold" }}>산도</Typography>
                     <Box sx={{ display: "flex" }}>
                       {level.map((lv, index) => {
                         return (
                           <div key={index}>
                             {wineProfile.acidity >= lv ? (
-                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
                             ) : (
-                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
                             )}
                           </div>
                         );
@@ -217,9 +217,9 @@ function Detail(props) {
                         return (
                           <div key={index}>
                             {wineProfile.sweet >= lv ? (
-                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
                             ) : (
-                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
                             )}
                           </div>
                         );
@@ -233,9 +233,9 @@ function Detail(props) {
                         return (
                           <div key={index}>
                             {wineProfile.body >= lv ? (
-                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
                             ) : (
-                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
                             )}
                           </div>
                         );
@@ -249,9 +249,9 @@ function Detail(props) {
                         return (
                           <div key={index}>
                             {wineProfile.tannin >= lv ? (
-                              <Avatar sx={{ mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2, bgcolor: purple[100] }}>{lv}</Avatar>
                             ) : (
-                              <Avatar sx={{ mr: 0.2 }}>{lv}</Avatar>
+                              <Avatar sx={{ width: 32, height: 32, mr: 0.2 }}>{lv}</Avatar>
                             )}
                           </div>
                         );
