@@ -2,7 +2,8 @@ import logo from "../../res/img/logo.png";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Box, Breadcrumbs, Link, Typography, Card, CardActionArea, CardMedia, CardContent } from "@mui/material/";
+import { Box, Typography, Card, CardActionArea, CardContent } from "@mui/material/";
+import TopNav from "../main/Home/TopNav";
 
 export default function SurveyResult() {
   const url = "http://j6a303.p.ssafy.io/api";
@@ -91,19 +92,7 @@ export default function SurveyResult() {
     <>
       {/* 상단 구성 */}
       <div>
-        <Breadcrumbs style={{ display: "flex", flexDirection: "row-reverse", marginTop: 10, marginRight: 350 }} aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/accounts/signup">
-            회원가입
-          </Link>
-          <Link underline="hover" color="inherit" href="/accounts/login">
-            로그인
-          </Link>
-        </Breadcrumbs>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Link href="/">
-            <img width={250} src={logo} alt="logo" />
-          </Link>
-        </Box>
+        <TopNav />
         <Box sx={{ mt: 10, mb: 5, mx: 20, display: "flex", alignItems: "center", flexDirection: "column" }}>
           <Typography variant="h5" sx={{ mb: 10, fontWeight: "bold" }}>
             당신을 위한 wible 와인 추천
