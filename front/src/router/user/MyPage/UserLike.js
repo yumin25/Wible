@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
@@ -27,9 +27,8 @@ function UserLike({ userSlice }) {
         },
       })
       .then(function (response) {
-
         setLikes(response.data.content);
-        console.log(response)
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -40,22 +39,18 @@ function UserLike({ userSlice }) {
       <div
         style={{
           marginTop: 60,
-          marginLeft: "8%",
-          marginRight: "8%",
           position: "absolute",
+          left: "8%",
           width: "84%",
           height: "100%",
+          backgroundColor: "black",
         }}
       >
         <div
           style={{
-            // position: "relative",
-            // display: "flex",
-            // flexWrap: "wrap",
-            // alignItems: "flex-start",
-            width: "80%",
-            marginLeft: "10%",
-            marginRight: "10%",
+            position: "relative",
+            margin: "0 auto",
+            justifyContent: "center",
             borderTop: "1px solid black",
           }}
         >
@@ -70,7 +65,12 @@ function UserLike({ userSlice }) {
           >
             {likes &&
               likes.map((like) => (
-                  <LikeItem url={url} like={like} userSeq={userSeq} getUserLike={getUserLike}></LikeItem>
+                <LikeItem
+                  url={url}
+                  like={like}
+                  userSeq={userSeq}
+                  getUserLike={getUserLike}
+                ></LikeItem>
               ))}
           </div>
         </div>
