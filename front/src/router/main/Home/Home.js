@@ -5,6 +5,7 @@ import WineList from "./WineList";
 import WineRecommendList from "./WineRecommendList";
 import { Box, Link, Grid, Typography, ToggleButtonGroup, ToggleButton, Select, MenuItem } from "@mui/material/";
 import Send from "../../../config/Send";
+import banner from "../../../res/img/banner.PNG";
 
 function Home({ userSlice }) {
   const [popular, setPopular] = useState("red");
@@ -56,11 +57,14 @@ function Home({ userSlice }) {
       {/* 상단 구성 */}
       <div>
         <TopNav />
-        <Box style={{ backgroundColor: "#F4C6C9", height: 300 }}>　</Box>
+        <Box>
+          <img src={banner} style={{width:"100%",height:350}}></img>
+        </Box>
+        {/* <Box style={{ backgroundColor: "#F4C6C9", height: 300 }}>　</Box> */}
       </div>
 
       {/* 와인 */}
-      <div style={{ marginTop: 50 }}>
+      <div style={{ marginTop: 20 }}>
         <Grid container spacing={2}>
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
