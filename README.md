@@ -1,4 +1,4 @@
-# 👉[나에게 딱 맞는 와인 추천 서비스, WIBLE](https://J6a303.p.ssafy.io/)👈
+# 👉[나에게 딱 맞는 와인 추천 서비스, WIBLE](http://J6a303.p.ssafy.io/)👈
 
 ## 멤버
 
