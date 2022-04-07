@@ -38,16 +38,9 @@ function SignupPresenter({
   };
 
   return (
-    <Container
-      style={{ position: "absolute", left: "20%", right: "20%", width: "60%" }}
-    >
+    <Container style={{ position: "absolute", left: "20%", right: "20%", width: "60%" }}>
       <div style={{ marginTop: "10vh", marginBottom: "5vh" }}>
-        <Typography
-          variant="h4"
-          gutterBottom
-          component="div"
-          style={{ textAlign: "center" }}
-        >
+        <Typography variant="h4" gutterBottom component="div" style={{ textAlign: "center" }}>
           회원가입
         </Typography>
       </div>
@@ -72,12 +65,7 @@ function SignupPresenter({
             size="small"
             style={{ width: "86.9%" }}
           />
-          <Button
-            variant="outlined"
-            color="error"
-            style={DuplicateBtn}
-            onClick={checkId}
-          >
+          <Button variant="outlined" color="error" style={DuplicateBtn} onClick={checkId}>
             중복확인
           </Button>
         </div>
@@ -87,7 +75,7 @@ function SignupPresenter({
           label="비밀번호"
           type="password"
           autoComplete="current-password"
-          placeholder="숫자,영문자,특수문자(!@#$%^&*()) 조합으로 8~12자리"
+          placeholder="숫자,영문자 조합으로 8~12자리"
           onChange={onPasswordHandler}
           style={ContainerStyle}
           size="small"
@@ -121,12 +109,7 @@ function SignupPresenter({
             style={{ width: "86.9%" }}
             size="small"
           />
-          <Button
-            variant="outlined"
-            color="error"
-            style={DuplicateBtn}
-            onClick={checkNickname}
-          >
+          <Button variant="outlined" color="error" style={DuplicateBtn} onClick={checkNickname}>
             중복확인
           </Button>
         </div>
@@ -142,12 +125,7 @@ function SignupPresenter({
             onChange={onPhoneNumberHandler}
             onBlur={checkPhoneNumber}
           />
-          <Button
-            variant="outlined"
-            color="error"
-            style={DuplicateBtn}
-            onClick={checkPhoneDuplicate}
-          >
+          <Button variant="outlined" color="error" style={DuplicateBtn} onClick={checkPhoneDuplicate}>
             중복확인
           </Button>
         </div>
