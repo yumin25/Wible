@@ -5,7 +5,7 @@ import WineList from "./WineList";
 import WineRecommendList from "./WineRecommendList";
 import { Box, Link, Grid, Typography, ToggleButtonGroup, ToggleButton, Select, MenuItem } from "@mui/material/";
 import Send from "../../../config/Send";
-import banner from "../../../res/img/banner.PNG";
+import banner from "../../../res/img/banner_fix.png";
 
 function Home({ userSlice }) {
   const [popular, setPopular] = useState("red");
