@@ -4,12 +4,18 @@
 
 <!-- ![image](https://user-images.githubusercontent.com/28949166/154533716-08ba1ee2-21e0-417d-a338-5cc6552fcb65.png) -->
 
-| 이름    | 김다영                                                                                                          | 김수민                                                                                                          | 김유민                                                                                                          | 염형덕                                                                                                          | 최상진                                                                                                          |
-| ------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Profile | ![image](https://user-images.githubusercontent.com/28949166/154540445-ac05c003-dc6b-483a-bf05-2f0521535ea2.png) | ![image](https://user-images.githubusercontent.com/28949166/154540445-ac05c003-dc6b-483a-bf05-2f0521535ea2.png) | ![image](https://user-images.githubusercontent.com/28949166/154540445-ac05c003-dc6b-483a-bf05-2f0521535ea2.png) | ![image](https://user-images.githubusercontent.com/28949166/154540445-ac05c003-dc6b-483a-bf05-2f0521535ea2.png) | ![image](https://user-images.githubusercontent.com/28949166/154540445-ac05c003-dc6b-483a-bf05-2f0521535ea2.png) |
-| Stack   | 백엔드 API 개발 & 추천 알고리즘                                                                                 | 프론트엔드 개발 & UI/UX & 추천 알고리즘                                                                         | 백엔드 API 개발 & 추천 알고리즘                                                                                 | 백엔드 API 개발 & 서버 관리 및 배포                                                                             | 프론트엔드 개발 & UI/UX & 추천 알고리즘                                                                         |
+| 이름    | 김다영                                                        | 김수민                                                        | 김유민                                                        | 염형덕                                                        | 최상진                                                        |
+| ------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| Profile | ![image](/uploads/04d6f2e2ac602bdfe2b4f999f3fa5341/image.jpg) | ![image](/uploads/80752591a0286c59aa05fabe2641740c/image.jpg) | ![image](/uploads/47ec546fcf513f93eae9c9ee33aca068/image.jpg) | ![image](/uploads/1ee979d73cbb8c6af211b652442240e8/image.jpg) | ![image](/uploads/0161fd056c36dc4402bc5d04b8d07727/image.jpg) |
+| Stack   | 백엔드 API 개발 & 추천 알고리즘                               | 프론트엔드 개발 & UI/UX & 추천 알고리즘                       | 백엔드 API 개발 & 추천 알고리즘                               | 백엔드 API 개발 & 서버 관리 및 배포                           | 프론트엔드 개발 & UI/UX & 추천 알고리즘                       |
 
 ---
+
+## 서비스 소개
+
+![image](/uploads/2e4cfab457224c87d6a639d6f1512c55/image.png)
+![image](/uploads/df9e6d43a24003c1de99b13d1c26db77/image.png)
+![image](/uploads/2dc2eee3ca105e2ec6895bde27f1b446/image.png)
 
 ## Development Stack
 
@@ -31,65 +37,31 @@
 | :-------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
 |                                                         NGiNX                                                         |                                                               aws                                                                |                                                              docker                                                              |
 
-## 서비스 소개
-
-![image](/uploads/2e4cfab457224c87d6a639d6f1512c55/image.png)
-
 ---
 
-## 설치 및 사용
+## 환경
 
-### Github Clone
+- OS (AWS EC2): Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-1018-aws x86_64)
 
-```
-    git clone
-```
+### 시스템 구성
 
-### Frontend
+- Docker version 20.10.13, build a224086
 
-- 시스템 버전
+- maven 3.6.3
 
-  - node : @16.13.0
-  - npm : @8.1.0
+- nginx 1.18.0 (Ubuntu)
 
-- /frontend 디렉토리로 이동
-- React 모듈 설치
-  ```
-    npm install
-  ```
-- /frontend/src/common/config/key에 reading_group.js 파일 생성해 아래 코드 추가
+- Java
 
-  ```
-  const OPENVIDU_URL = "https://i6a305.p.ssafy.io:7443";
-  const OPENVIDU_SECRET = "MY_SECRET";
+  openjdk version "1.8.0_312"
 
-  export { OPENVIDU_SECRET, OPENVIDU_URL };
+  OpenJDK Runtime Environment (build 1.8.0_312-8u312-b07-0ubuntu1~20.04-b07)
 
-  ```
+  OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
 
-- React 어플리케이션 실행
-  ```
-    npm start
-  ```
-
-### Backend
-
-- 시스템 버전
-
-  - JVM: AWS Corretto 11
-  - mysql: 8.0.28
-
-- 소스코드 pull
-
-  ```
-  git pull origin develop
-  ```
-
-- 빌드, 배포 스크립트 실행
-
-  ```
-  sh ~/S06P12A305/scripts/deploy.sh
-  ```
+- mysql: 8.0.28
+- node : @16.13.0
+- npm : @8.1.0
 
 ---
 
