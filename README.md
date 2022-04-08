@@ -6,7 +6,7 @@
 
 | 이름    | 김다영                                                        | 김수민                                                        | 김유민                                                        | 염형덕                                                        | 최상진                                                        |
 | ------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| Profile | ![image](/uploads/04d6f2e2ac602bdfe2b4f999f3fa5341/image.jpg) | ![image](/uploads/80752591a0286c59aa05fabe2641740c/image.jpg) | ![image](/uploads/47ec546fcf513f93eae9c9ee33aca068/image.jpg) | ![image](/uploads/1ee979d73cbb8c6af211b652442240e8/image.jpg) | ![image](/uploads/0161fd056c36dc4402bc5d04b8d07727/image.jpg) |
+| Profile | ![image](/uploads/706de3327c0904535672ef2a72c34890/image.jpg) | ![image](/uploads/80752591a0286c59aa05fabe2641740c/image.jpg) | ![image](/uploads/47ec546fcf513f93eae9c9ee33aca068/image.jpg) | ![image](/uploads/1ee979d73cbb8c6af211b652442240e8/image.jpg) | ![image](/uploads/0161fd056c36dc4402bc5d04b8d07727/image.jpg) |
 | Stack   | 백엔드 API 개발 & 추천 알고리즘                               | 프론트엔드 개발 & UI/UX & 추천 알고리즘                       | 백엔드 API 개발 & 추천 알고리즘                               | 백엔드 API 개발 & 서버 관리 및 배포                           | 프론트엔드 개발 & UI/UX & 추천 알고리즘                       |
 
 ---
