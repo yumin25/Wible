@@ -1,6 +1,5 @@
 package com.ssafy.wible.api.controller.wine;
 
-import com.ssafy.wible.model.entity.Wine;
 import com.ssafy.wible.model.enums.Country;
 import com.ssafy.wible.model.enums.Type;
 import com.ssafy.wible.model.response.wine.SearchWineResponse;
@@ -29,7 +28,8 @@ public class SearchController {
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
-    @GetMapping("")
+    //JPA Specification 사용
+    @GetMapping("/a")
     public ResponseEntity<Page<SearchWineResponse>> search(@RequestParam(value="keyword", defaultValue = "") String keyword,
                                              @RequestParam(value="price_lower", defaultValue = "0") int price_lower,
                                              @RequestParam(value="price_upper", defaultValue = "100") int price_upper,
@@ -41,7 +41,6 @@ public class SearchController {
                                              @RequestParam(value="country", required = false) List<String> country,
                                              @PageableDefault(size = 10, sort = "likeCnt", direction = Sort.Direction.DESC) Pageable pageRequest
     ) throws Exception {
-
         List<Type> types = new ArrayList<>();
         if (type != null) {
             for(String s: type) types.add(Type.valueOf(s.toUpperCase()));
@@ -53,5 +52,31 @@ public class SearchController {
         }
 
         return new ResponseEntity<Page<SearchWineResponse>>(searchService.search(keyword, price_lower, price_upper, types, body, tannin, sweet, acidity, countries, pageRequest), HttpStatus.OK);
+    }
+
+    //QueryDsl 사용
+    @GetMapping("/b")
+    public ResponseEntity<Page<SearchWineResponse>> searchQueryDsl(@RequestParam(value="keyword", defaultValue = "") String keyword,
+                                                           @RequestParam(value="price_lower", defaultValue = "0") int price_lower,
+                                                           @RequestParam(value="price_upper", defaultValue = "100") int price_upper,
+                                                           @RequestParam(value="body", required = false) List<Integer> body,
+                                                           @RequestParam(value="tannin", defaultValue = "-1") int tannin,
+                                                           @RequestParam(value="sweet", required = false) List<Integer> sweet,
+                                                           @RequestParam(value="acidity", defaultValue = "-1") int acidity,
+                                                           @RequestParam(value="type", required = false) List<String> type,
+                                                           @RequestParam(value="country", required = false) List<String> country,
+                                                           @PageableDefault(size = 10, sort = "likeCnt", direction = Sort.Direction.DESC) Pageable pageRequest
+    ) throws Exception {
+        List<Type> types = new ArrayList<>();
+        if (type != null) {
+            for(String s: type) types.add(Type.valueOf(s.toUpperCase()));
+        }
+
+        List<Country> countries = new ArrayList<>();
+        if (country != null) {
+            for(String s: country) countries.add(Country.valueOf(s.toUpperCase()));
+        }
+
+        return new ResponseEntity<Page<SearchWineResponse>>(searchService.searchQueryDsl(keyword, price_lower, price_upper, types, body, tannin, sweet, acidity, countries, pageRequest), HttpStatus.OK);
     }
 }
